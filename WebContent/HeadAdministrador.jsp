@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <header>
@@ -30,7 +30,19 @@ hr {
 }
 
 a {
+	background-color: rgba(0, 0, 0, 0.0);
 	color: white;
+}
+
+a:active {
+	color: white;
+}
+
+a:hover {
+	color: white;
+	-webkit-box-shadow: 0px 11px 17px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 11px 17px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 11px 17px 0px rgba(0, 0, 0, 0.75);
 }
 
 .topcorner {
@@ -45,21 +57,18 @@ a {
 		<div class="snap-pm-user" style="margin-left: 20px">
 			<h2>Nombre usuario</h2>
 			<div style="margin-left: 20px; margin-top: 10px;">
-				<a href="...">Perfil</a> - <a href="...">Alumnos</a> - <a href="...">Profesores</a> - 
-				<a href="...">Cursos</a> - <a href="...">Reportes</a> - <a
-					id="snap-pm-logout" href="...">Cerrar Session</a>
+				<a href="...">Perfil</a> - <a href="...">Alumnos</a> - <a href="...">Profesores</a>
+				- <a href="...">Cursos</a> - <a href="...">Reportes</a> - <a
+					id="snap-pm-logout" href="...">Salir</a>
 			</div>
 		</div>
 		<div class="topcorner">
 
-			<a href='...'> <img
-				src="/TPINT_GRUPO_2_LAB4/Imagenes/Cabecera.png" width="300px"
-				alt="Responsive image">
+			<a href='...'> <img src="Imagenes/Cabecera.png" width="300px"
+				alt="Logo">
 			</a>
 		</div>
 	</div>
 </div>
 </header>
-</html>
-
 </html>
