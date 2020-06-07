@@ -7,7 +7,6 @@
 <jsp:include page="Librerias.jsp"></jsp:include>
 <link rel="stylesheet" href="Css/Head.css">
 
-
 <div class="Cabecera">
 	<div style="height: 100px;">
 		<div class="snap-pm-user" style="margin-left: 20px">
@@ -19,7 +18,6 @@
 			</div>
 		</div>
 		<div class="topcorner">
-
 			<a class="aHead" href='...'> <img src="Imagenes/Cabecera.png" width="300px"
 				alt="Logo">
 			</a>
