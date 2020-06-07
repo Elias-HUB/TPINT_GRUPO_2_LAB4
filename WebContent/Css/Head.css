@@ -1,0 +1,26 @@
+.Cabecera {
+	background-color: #3C3F42;
+	color: white;
+}
+
+.aHead {
+	background-color: rgba(0, 0, 0, 0.0);
+	color: white;
+}
+
+.aHead:active {
+	color: white;
+}
+
+.aHead:hover {
+	color: white;
+	-webkit-box-shadow: 0px 11px 17px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 11px 17px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 11px 17px 0px rgba(0, 0, 0, 0.75);
+}
+
+.topcorner {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
