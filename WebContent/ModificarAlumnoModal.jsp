@@ -39,13 +39,6 @@
 		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
 		crossorigin="anonymous"></script>
 
-	<!-- Button trigger modal -->
-	<button type="button" class="btn btn-primary" data-toggle="modal"
-		data-target="#exampleModal">Probar</button>
-
-	<!-- Modal -->
-	<div class="modal fade modal-xl" id="exampleModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog  modal-xl" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
