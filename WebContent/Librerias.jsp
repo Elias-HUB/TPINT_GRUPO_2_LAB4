@@ -3,13 +3,14 @@
 <title>Gestión Académica</title>
 
 <!-- Font -->
-<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+	rel="stylesheet">
 
 <!-- Tipo Letra -->
 <style>
-<!--
-font-family: 'Roboto', sans-serif;
--->
+body {
+	font-family: 'Roboto', sans-serif;
+}
 </style>
 
 <!-- Bootstrap -->
