@@ -14,7 +14,7 @@
 
 <title>Person Information</title>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
@@ -49,13 +49,13 @@ $(document).ready(function() {
 <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-		 <th>Curso</th>
-		 <th>Materia</th>
-		 <th>Cuatrimestre</th>
-		  <th>Año</th>
-		  <th>Turno</th>
-		  <th>Alumnos</th>
-		  <th>Estado</th>
+		 <th style="text-align:center">Curso</th>
+		 <th style="text-align:center">Materia</th>
+		 <th style="text-align:center">Cuatrimestre</th>
+		  <th style="text-align:center">Año</th>
+		  <th style="text-align:center">Turno</th>
+		  <th style="text-align:center">Alumnos</th>
+		  <th style="text-align:center">Estado</th>
             </tr>
         </thead>
         <tbody>
