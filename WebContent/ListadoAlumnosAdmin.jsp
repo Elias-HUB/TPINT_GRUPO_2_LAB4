@@ -18,6 +18,7 @@ $(document).ready(function() {
 } );
     </script>
     
+    
 </head>
 <body>
 <table id="example" class="table table-striped table-bordered" style="width:100%">
