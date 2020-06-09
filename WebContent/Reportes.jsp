@@ -6,23 +6,35 @@
 <jsp:include page="HeadAdministrador.jsp"></jsp:include>
 <jsp:include page="ReporteJS.jsp"></jsp:include>
 <jsp:include page="Librerias.jsp"></jsp:include>
+<jsp:include page="CorrectoModal.jsp"></jsp:include>
 <link rel="stylesheet" href="Css/ReporteCss.css">
 
 </head>
 <body>
-	<div>
-  <select class="custom-select" id="inputGroupSelect01">
-    <option selected>Choose...</option>
-    <option value="1">One</option>
-    <option value="2">Two</option>
-    <option value="3">Three</option>
-  </select>
+
+	<div class="row Centrado" style="margin-top: 10px; max-width: 99%;">
+		<div class="col-3">
+			<select class="custom-select Sombra" selectedindex=-1 id="selectGrafico">
+				<option value="1">Grafico de Barras</option>
+				<option value="2">Grafico de Torta</option>
+				<option value="3">Listado</option>
+			</select>
+		</div>
+		<div class="col-7">
+			<select class="custom-select Sombra" selectedindex=-1
+				id="selectTipoReporte ">
+				<option value="1">Porcentaje aprobados por materia</option>
+				<option value="2">Porcentaje Libres, Regularizados y
+					Promocionados por materia</option>
+				<option value="3">Cantidad de alumnos por materia</option>
+			</select>
+		</div>
 	</div>
-<!-- 	<div class="wrapper fadeInDown"> -->
-<!-- 		<div id="formContent"> -->
-<!-- 			<canvas id="myChart"></canvas> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
+	<div class="wrapper fadeInDown">
+		<div id="formContent">
+			<canvas id="myChart"></canvas>
+		</div>
+	</div>
 </body>
 <script>
 	var ctx = document.getElementById("myChart").getContext("2d");

@@ -12,8 +12,15 @@
             justify-content: center;
             width: 100%;
             min-height: 100%;
-            padding: 20px;
+            padding: 10px;
         }
+                .Centrado {
+/*             display: flex; */
+/*             align-items: center; */
+/*             flex-direction: column; */
+            justify-content: center;
+        }
+
 
         #formContent {
             -webkit-border-radius: 10px 10px 10px 10px;
@@ -27,6 +34,11 @@
             -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
             box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
             text-align: center;
+        }
+        
+        .Sombra:hover {
+            box-shadow: 1px 8px 20px #DEDEDE;
+            -webkit-transition: box-shadow 0.35s ease-in;
         }
 
         #formFooter {
