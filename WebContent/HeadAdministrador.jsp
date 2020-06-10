@@ -10,7 +10,7 @@
 <div class="Cabecera">
 	<div style="height: 100px;">
 		<div class="snap-pm-user" style="margin-left: 20px">
-			<h2>Nombre usuario</h2>
+			<h2>Nombre usuario Admin</h2>
 			<div style="margin-left: 20px; margin-top: 10px;">
 				<a class="aHead" href="...">Perfil</a> - <a class="aHead" href="...">Alumnos</a> - <a class="aHead" href="...">Profesores</a>
 				- <a class="aHead" href="...">Cursos</a> - <a class="aHead" href="...">Reportes</a> - <a class="aHead"

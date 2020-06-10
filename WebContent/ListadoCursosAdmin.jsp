@@ -6,9 +6,7 @@
 
 </head>
 <jsp:include page="Librerias.jsp"></jsp:include>
-<link rel="stylesheet" href="Css/Head.css">
-<link rel="stylesheet" href="Css/LoginCss.css">
-<link rel="stylesheet" href="JS/Funciones.js">
+<jsp:include page="HeadAdministrador.jsp"></jsp:include>
 <head>
 
 <title>Person Information</title>
@@ -27,23 +25,6 @@ $(document).ready(function() {
     </script>
 </head>
 <body>
-<div class="Cabecera">
-	<div style="height: 100px;">
-		<div class="snap-pm-user" style="margin-left: 20px">
-			<h2>Nombre usuario</h2>
-			<div style="margin-left: 80px; margin-top: 10px;">
-			<a class="aHead" href="...">Perfil</a> -
-				<a class="aHead" href="...">Mis Cursos</a> - <a
-					class="aHead" id="snap-pm-logout" href="...">Salir</a>
-			</div>
-		</div>
-		<div class="topcorner">
-			<a class="aHead" href='...' class="topcorner"> <img src="Imagenes/Cabecera.png" width="300px"
-				alt="Logo">
-			</a>
-		</div>
-	</div>
-</div>
 
 <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
