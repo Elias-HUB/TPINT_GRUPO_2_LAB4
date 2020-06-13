@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import daoImpl.Conexion;
-
 public class Conexion {
 	public static Conexion instancia;
 	private Connection connection;
