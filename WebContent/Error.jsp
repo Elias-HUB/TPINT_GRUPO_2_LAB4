@@ -7,6 +7,9 @@
 <jsp:include page="HeadAdministrador.jsp"></jsp:include>
 </head>
 <body>
+<div style="background-color:blue;height:33px; width:50%;float:left"> 
+
+ <div style="background-color:red;height:33px; width:50%;float:left">
     <div class="jumbotron">
         <div class="alert alert-danger" role="alert" style="margin-top: 10px">
             <p>
