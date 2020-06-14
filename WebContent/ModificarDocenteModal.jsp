@@ -59,7 +59,7 @@
 				<div class="modal-body">
 
 					<%--Legajo--%>
-					<div >
+					<div   >
 						<label for="Legajo">Legajo</label> 
 						<input type="text" id="txtLegajo" name="Legajo">
 						 
@@ -76,9 +76,7 @@
 						<label for="FechaNac">Fecha Nacimiento</label> 
 						<input type="date" id="txtFechaNac" name="FechaNac">
 						
-						<label for="Email">Email</label> 
-						<input type="Email" id="txtEmail" name="Email">
-						
+					
 						<label for="Telefono">Telefono</label> 
 						<input type="Telefono" id="txtTelefono" name="Telefono">
 					</div>
@@ -91,7 +89,18 @@
 						<input type="text" id="txtLocalidad" name="Localidad">
 						
 						<label for="´Provincia">Provincia</label> 
-						<input type="Provincia" id="txtProvincia" name="Provincia">
+						<input type="text" id="txtProvincia" name="Provincia">
+					</div>
+					<br>
+					<div>
+					<h5  id="exampleModalLabel">Usuario</h5>
+					
+						<label for="Email">Email</label> 
+						<input type="text" id="txtEmail" name="Email">
+						<label for="Contraseña">Contraseña</label> 
+						<input type="password" id="txtContraseña" name="Contraseña">
+						
+						
 					</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
