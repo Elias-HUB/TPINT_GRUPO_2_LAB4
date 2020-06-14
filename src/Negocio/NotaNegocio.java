@@ -1,5 +1,5 @@
 package Negocio;
 
-public class NotaNegocio {
+public interface NotaNegocio {
 
 }

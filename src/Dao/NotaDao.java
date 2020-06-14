@@ -1,5 +1,5 @@
 package Dao;
 
-public class NotaDao {
+public interface NotaDao {
 
 }
