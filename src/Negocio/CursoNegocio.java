@@ -1,5 +1,5 @@
 package Negocio;
 
-public class CursoNegocio {
+public interface CursoNegocio {
 
 }

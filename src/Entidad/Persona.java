@@ -11,14 +11,14 @@ public class Persona {
 	private Date FechaNacimiento;
 	private Domicilio domicilio;
 	private String Email; 
-	private BigInteger Telefono;
+	private Long Telefono;
 	
 	public Persona() {
 	
 	}
 	
 	public Persona(int legajo, int dni, String nombre, String apellido, Date fechaNacimiento, String email,
-			BigInteger telefono, Domicilio domicilio ) {
+			Long telefono, Domicilio domicilio ) {
 		Legajo = legajo;
 		Dni = dni;
 		Nombre = nombre;
@@ -71,10 +71,10 @@ public class Persona {
 	public void setEmail(String email) {
 		Email = email;
 	}
-	public BigInteger getTelefono() {
+	public Long getTelefono() {
 		return Telefono;
 	}
-	public void setTelefono(BigInteger telefono) {
+	public void setTelefono(Long telefono) {
 		Telefono = telefono;
 	}
 
