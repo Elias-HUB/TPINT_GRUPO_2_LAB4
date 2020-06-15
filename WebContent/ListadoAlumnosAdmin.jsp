@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="Entidad.Alumno"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,26 +23,46 @@ $(document).ready(function() {
 <body>
 <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
-            <tr>
-		 <th>Legajo</th>
-		 <th>Nombre</th>
-		 <th>Apellido</th>
-		  <th></th>
-            </tr>
+			<tr>
+						<th style="text-align: center">Legajo</th>
+						<th style="text-align: center">Apellido</th>
+						<th style="text-align: center">Nombre</th>
+						<th style="text-align: center">Email</th>
+						<th style="text-align: center">Acciones</th>
+			</tr>
         </thead>
         <tbody>
-       <tr>
-          <th>21592</th>
-		 <th>Oriana</th>
-		 <th>Garcia</th>
-	 	 <th> <button type="button" class="btn btn-primary">Modificar</button></th>
-       </tr>
-              <tr>
-          <th>22012</th>
-		 <th>Elias</th>
-		 <th>Valenzuela</th>
-	 			 <th> <button type="button" class="btn btn-primary">Modificar</button></th>
-       </tr>
+   								<%
+   								
+						ArrayList<Alumno> lista = null;
+   						if(request.getAttribute("ListaAlumnos")!=null)
+   						{
+   							lista=	(ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
+   						}
+					
+						
+						if (lista != null) {
+							for (Alumno alumno : lista) {
+					%>
+					<tr>
+						<th><%=alumno.getLegajo()%></th>
+						<th><%=alumno.getApellido()%></th>
+						<th><%=alumno.getNombre()%></th>
+						<th><%=alumno.getEmail()%></th>
+						<th>
+							<div class="btn-group" style="text-align: center">
+
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAlumnoVer">Ver</button>
+								<button type="submit" class="btn btn-primary">Modificar</button>
+								<button type="submit" class="btn btn-primary">Eliminar</button>
+							</div>
+						</th>
+					</tr>
+					<%
+						}
+						}
+					%>
         </tbody>
       
     </table>
