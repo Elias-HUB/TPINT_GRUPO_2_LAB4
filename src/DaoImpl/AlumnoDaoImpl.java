@@ -118,6 +118,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 
 	private Alumno GetAlumno(ResultSet resultSet) throws SQLException {
 		Alumno alumno = new Alumno();
+		alumno.setLegajo(resultSet.getInt("Legajo"));
 		alumno.setDni(resultSet.getInt("Dni"));
 		alumno.setNombre(resultSet.getString("Nombre"));
 		alumno.setApellido(resultSet.getString("Apellido"));

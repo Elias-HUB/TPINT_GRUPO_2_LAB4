@@ -145,17 +145,17 @@ $(document).ready(function() {
 		{
 			 %>
 			 <tr>
-			 <th>  <% doc.getLegajo(); %> </th>
-			 <th>  <% doc.getDni(); %> </th>
-			 <th>  <% doc.getNombre(); %> </th>
-			 <th>  <% doc.getApellido(); %> </th>
-			 <th>  <% doc.getFechaNacimiento(); %> </th>
-			 <th>  <% doc.domicilio.getDireccion(); %> </th>
-			 <th>  <% doc.domicilio.getLocalidad(); %> </th>
-			 <th>  <% doc.domicilio.getProvincia(); %> </th>
-			 <th>  <% doc.getEmail(); %> </th>
-			 <th>  <% doc.getTelefono(); %> </th>
-			 <th>  <% doc.getEstado(); %> </th>
+			 <th>  <%= doc.getLegajo() %> </th>
+			 <th>  <%= doc.getDni() %> </th>
+			 <th>  <%= doc.getNombre() %> </th>
+			 <th>  <%= doc.getApellido() %> </th>
+			 <th>  <%= doc.getFechaNacimiento() %> </th>
+			 <th>  <%= doc.domicilio.getDireccion() %> </th>
+			 <th>  <%= doc.domicilio.getLocalidad() %> </th>
+			 <th>  <%= doc.domicilio.getProvincia() %> </th>
+			 <th>  <%= doc.getEmail() %> </th>
+			 <th>  <%= doc.getTelefono() %> </th>
+			 <th>  <%= doc.getEstado() %> </th>
 	</tr>
 	 <%
 		}
