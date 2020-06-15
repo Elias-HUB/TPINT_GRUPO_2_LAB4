@@ -8,7 +8,7 @@ public class Persona {
 	private String Nombre;
 	private String Apellido;
 	private Date FechaNacimiento;
-	private Domicilio domicilio;
+	public Domicilio domicilio;
 	private String Email; 
 	private Long Telefono;
 	
