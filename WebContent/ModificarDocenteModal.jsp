@@ -78,7 +78,7 @@
 						
 					
 						<label for="Telefono">Telefono</label> 
-						<input type="Telefono" id="txtTelefono" name="Telefono">
+						<input type="text" id="txtTelefono" name="Telefono">
 					</div>
 					<br> 
 					<div >

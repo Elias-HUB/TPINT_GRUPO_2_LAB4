@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"  pageEncoding="ISO-8859-1"%>
+<%@ page import =  "java.util.ArrayList" %>
+<%@ page import = "Entidad.Docente" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,6 +29,8 @@ $(document).ready(function() {
     </script>
 </head>
 <body>
+
+
 <div class="Cabecera">
 	<div style="height: 100px;">
 		<div class="snap-pm-user" style="margin-left: 20px">
@@ -63,9 +67,9 @@ $(document).ready(function() {
 		  <th>therrera.utn@gmail.com</th>		  
 		  <th>
 			  <div class="btn-group" style="text-align:center">
-			  <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8020/TPINT_GRUPO_2_LAB4/VerDocenteModal.jsp'">Ver</button>
-			  <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8020/TPINT_GRUPO_2_LAB4/ModificarDocenteModal.jsp'">Modificar</button>
-			  <button type="button" class="btn btn-primary">Eliminar</button>
+			  <button type="submit" class="btn btn-primary" onclick="location.href='http://localhost:8020/TPINT_GRUPO_2_LAB4/VerDocenteModal.jsp'">Ver</button>
+			  <button type="submit" class="btn btn-primary" onclick="location.href='http://localhost:8020/TPINT_GRUPO_2_LAB4/ModificarDocenteModal.jsp'">Modificar</button>
+			  <button type="submit" class="btn btn-primary">Eliminar</button>
 			  </div>
 		  </th>	
 		  
@@ -77,9 +81,9 @@ $(document).ready(function() {
 		 <th>carlosjrodriguezutn@hotmail.com</th>	
 		 <th>
 			  <div class="btn-group" style="text-align:center">
-			  <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8020/TPINT_GRUPO_2_LAB4/VerDocenteModal.jsp'">Ver</button>
-			  <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8020/TPINT_GRUPO_2_LAB4/ModificarDocenteModal.jsp'">Modificar</button>
-			  <button type="button" class="btn btn-primary">Eliminar</button>
+			  <button type="submit" class="btn btn-primary" onclick="location.href='http://localhost:8020/TPINT_GRUPO_2_LAB4/VerDocenteModal.jsp'">Ver</button>
+			  <button type="submit" class="btn btn-primary" onclick="location.href='http://localhost:8020/TPINT_GRUPO_2_LAB4/ModificarDocenteModal.jsp'">Modificar</button>
+			  <button type="submit" class="btn btn-primary">Eliminar</button>
 			  </div>
 		  </th>		  
        </tr>
@@ -90,9 +94,9 @@ $(document).ready(function() {
 		  <th>claudiomarcelofernandez@gmail.com</th>
 		  <th>		  
 			  <div class="btn-group" style="text-align:center">
-			  <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8020/TPINT_GRUPO_2_LAB4/VerDocenteModal.jsp'">Ver</button>
-			  <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8020/TPINT_GRUPO_2_LAB4/ModificarDocenteModal.jsp'">Modificar</button>
-			  <button type="button" class="btn btn-primary">Eliminar</button>
+			  <button type="submit" class="btn btn-primary" onclick="location.href='http://localhost:8020/TPINT_GRUPO_2_LAB4/VerDocenteModal.jsp'">Ver</button>
+			  <button type="submit" class="btn btn-primary" onclick="location.href='http://localhost:8020/TPINT_GRUPO_2_LAB4/ModificarDocenteModal.jsp'">Modificar</button>
+			  <button type="submit" class="btn btn-primary">Eliminar</button>
 			  </div>
 		  </th>
 		  
@@ -100,6 +104,66 @@ $(document).ready(function() {
         </tbody>
       
     </table>
-		<button type="button" class="btn btn-primary"> + Agregar</button>
+    <form action="ServletDocente" id="Form" method="get" >
+	<button id="btnMostrar" value="Agregar" type="submit" class="btn btn-primary" name="btnMostrar">Agregar</button>
+		
+	 </form>
+	
+ <% 
+  	ArrayList<Docente> lista=null;
+ 
+	 if ( request.getAttribute("ListaDoc")!=null) 
+	 {
+		 lista= (ArrayList<Docente>)request.getAttribute("ListaDoc");
+	 }
+ 
+ %>
+ 
+  <table border=1>
+  	<thead>
+         <tr>
+		 <th>Legajo</th>
+		 <th>Dni</th>
+		 <th>Nombre</th>
+		 <th>Apellido</th>
+		 <th>FechaNacimiento</th>
+		 <th>Direccion</th>
+		 <th>Localidad</th>
+		 <th>Provincia</th>
+		 <th>Email</th>
+		 <th>Telefono</th>
+		 <th>Estado</th>
+         </tr>
+     </thead>
+ 
+ 
+ 
+  <% 
+ 	 if (lista!=null) 
+	 {
+		for ( Docente doc : lista)
+		{
+			 %>
+			 <tr>
+			 <th>  <% doc.getLegajo(); %> </th>
+			 <th>  <% doc.getDni(); %> </th>
+			 <th>  <% doc.getNombre(); %> </th>
+			 <th>  <% doc.getApellido(); %> </th>
+			 <th>  <% doc.getFechaNacimiento(); %> </th>
+			 <th>  <% doc.domicilio.getDireccion(); %> </th>
+			 <th>  <% doc.domicilio.getLocalidad(); %> </th>
+			 <th>  <% doc.domicilio.getProvincia(); %> </th>
+			 <th>  <% doc.getEmail(); %> </th>
+			 <th>  <% doc.getTelefono(); %> </th>
+			 <th>  <% doc.getEstado(); %> </th>
+	</tr>
+	 <%
+		}
+	 }
+ 
+ %>
+ 
+ 
+ </table>
 </body>
 </html>
