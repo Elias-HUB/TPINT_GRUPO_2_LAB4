@@ -100,6 +100,12 @@ public class AlumnoDaoImpl implements AlumnoDao {
 
 	@Override
 	public List<Alumno> readAll() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		PreparedStatement statement;
 		ResultSet resultSet; // Guarda el resultado de la query
 		ArrayList<Alumno> Alumnos = new ArrayList<Alumno>();
@@ -117,6 +123,13 @@ public class AlumnoDaoImpl implements AlumnoDao {
 	}
 
 	private Alumno GetAlumno(ResultSet resultSet) throws SQLException {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		Alumno alumno = new Alumno();
 		alumno.setLegajo(resultSet.getInt("Legajo"));
 		alumno.setDni(resultSet.getInt("Dni"));
