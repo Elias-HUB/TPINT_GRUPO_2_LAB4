@@ -11,12 +11,30 @@
 
 <link rel="stylesheet" href="Css/JTable.css">
 
-
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('#example').DataTable();
+$(document).ready(function() {
+    $('#example').DataTable(
+	{
+		//Para cambiar el lenguaje a español
+		"language" : {
+			"lengthMenu" : "Mostrar _MENU_ registros",
+			"zeroRecords" : "No se encontraron resultados",
+			"info" : "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+			"infoEmpty" : "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"infoFilteres" : "(filtrado de un total de _MAX_ registros)",
+			"sSearch" : "Buscar:",
+			"oPaginate" : {
+				"sFirst" : "Primero",
+				"sLast" : "Ultimo",
+				"sNext" : "Siguiente",
+				"sPrevious" : "Anterior"
+			},
+			"sProcessing" : "Procesando...",
+		}
 	});
-</script>
+    
+} );
+    </script>
 </head>
 <body>
 

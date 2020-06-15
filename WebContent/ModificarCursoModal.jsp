@@ -4,51 +4,39 @@
 <html>
 <head>
 <jsp:include page="HeadAdministrador.jsp"></jsp:include>
-
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-	crossorigin="anonymous">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-	crossorigin="anonymous"></script>
-	
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<jsp:include page="LibreriasJtable.jsp"></jsp:include>
+<link rel="stylesheet" href="Css/JTable.css">
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#example').DataTable();
+    $('#example').DataTable(
+	{
+		//Para cambiar el lenguaje a español
+		"language" : {
+			"lengthMenu" : "Mostrar _MENU_ registros",
+			"zeroRecords" : "No se encontraron resultados",
+			"info" : "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+			"infoEmpty" : "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"infoFilteres" : "(filtrado de un total de _MAX_ registros)",
+			"sSearch" : "Buscar:",
+			"oPaginate" : {
+				"sFirst" : "Primero",
+				"sLast" : "Ultimo",
+				"sNext" : "Siguiente",
+				"sPrevious" : "Anterior"
+			},
+			"sProcessing" : "Procesando...",
+		}
+	});
+    
 } );
     </script>
     
-        <style type="text/css">
+ <style type="text/css">
     .modal-lg {
        max-width: 95%;
-}
-    </style>
+} </style>
    
- 
-</head>
+ </head>
 <body>
 	<button type="button" class="btn btn-primary" data-toggle="modal"
 		data-target="#exampleModal">Probar</button>
@@ -109,7 +97,8 @@ $(document).ready(function() {
 					</div>
 					<br>
 					<div>
-					
+					<div class="wrapper">
+		<div id="formContent" class="table-responsive">
 					<table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -135,7 +124,8 @@ $(document).ready(function() {
         </tbody>
       
     </table>
-					
+			</div>	
+			</div>			
 					</div>
 					<br>
 					
