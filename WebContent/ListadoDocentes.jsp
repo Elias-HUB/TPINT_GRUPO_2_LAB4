@@ -8,16 +8,9 @@
 <head>
 
 <jsp:include page="HeadAdministrador.jsp"></jsp:include>
-<script type="text/javascript" charset="utf8"
-	src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" charset="utf8"
-	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+<jsp:include page="LibreriasJtable.jsp"></jsp:include>
 
-
-
-
+<link rel="stylesheet" href="Css/JTable.css">	
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -48,10 +41,10 @@
 
 </head>
 <body>
-	<div style="width: 100%">
-		<div class="table-responsive">
-			<table id="example" class="table table-striped table-bordered"
-				style="width: 100%">
+
+	<div class="wrapper" >
+		<div  id="formContent" class="table-responsive">
+			<table id="example" class="table table-striped table-bordered">
 				<thead>
 					<tr>
 						<th style="text-align: center">Legajo</th>
@@ -80,15 +73,15 @@
 						<th><%=doc.getApellido()%></th>
 						<th><%=doc.getNombre()%></th>
 						<th><%=doc.getEmail()%></th>
-						<th>
-							<div class="btn-group" style="text-align: center">
+						<th style="width: 250px;">
+<!-- 							<div class="btn-group" style="text-align: center"> -->
 
 								<!-- Button trigger modal -->
 								<button type="button" class="btn btn-primary"
 									data-toggle="modal" data-target="#ModalAlumnoVer">Ver</button>
 								<button type="submit" class="btn btn-primary">Modificar</button>
 								<button type="submit" class="btn btn-primary">Eliminar</button>
-							</div>
+<!-- 							</div> -->
 						</th>
 					</tr>
 					<%
