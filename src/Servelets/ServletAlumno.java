@@ -1,4 +1,4 @@
-package Servelest;
+package Servelets;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,8 +25,9 @@ public class ServletAlumno extends HttpServlet {
     
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if(request.getParameter("Param")!=null)
+	
+
+		 if(request.getParameter("Param")!=null )
 		{
 			AlumnoDaoImpl aDao = new AlumnoDaoImpl();
 			List <Alumno> listaAlumnos = (ArrayList<Alumno>)aDao.readAll();
@@ -36,6 +37,7 @@ public class ServletAlumno extends HttpServlet {
 			request.getRequestDispatcher("ListadoAlumnosAdmin.jsp").forward( request, response);
 		}
 		
+		
 	}
 
 	
@@ -44,16 +46,5 @@ public class ServletAlumno extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	protected void ProcessRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		    	AlumnoDaoImpl aDao = new AlumnoDaoImpl();
-				List <Alumno> listaAlumnos = (ArrayList<Alumno>)aDao.readAll();
-				
-				request.setAttribute("ListaAlumnos",listaAlumnos );
-				
-				RequestDispatcher rd = request.getRequestDispatcher("/ListadoAlumnosAdmin.jsp");
-				rd.forward( request, response);
-		
-	}
 
 }

@@ -1,4 +1,4 @@
-package Servelest;
+package Servelets;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,12 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Dao.DocenteDao;
+import DaoImpl.AlumnoDaoImpl;
 import DaoImpl.DocenteDaoImpl;
+import Entidad.Alumno;
 import Entidad.Docente;
 
-/**
- * Servlet implementation class ServletDocente
- */
 @WebServlet("/ServletDocente")
 public class ServletDocente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,31 +28,22 @@ public class ServletDocente extends HttpServlet {
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("btnMostrar")!=null)
+		
+		if(request.getParameter("Param")!=null)
 		{
 			DocenteDaoImpl dDao = new DocenteDaoImpl();
 			List <Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
 			
-			request.setAttribute("ListaDoc",listaDocentes );
+			request.setAttribute("ListaDocentes",listaDocentes );
 			
-			RequestDispatcher rd = request.getRequestDispatcher("ListadoDocentes.jsp");
-			rd.forward( request, response);
+			request.getRequestDispatcher("ListadoDocentes.jsp").forward( request, response);
 		}
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		if(request.getParameter("btnMostrar")!=null)
-		{
-			DocenteDaoImpl dDao = new DocenteDaoImpl();
-			List <Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
-			
-			request.setAttribute("ListaDoc",listaDocentes );
-			
-			RequestDispatcher rd = request.getRequestDispatcher("ListadoDocentes.jsp");
-			rd.forward( request, response);
-		}
-		
+
+		doGet(request, response);
 		
 	}
 

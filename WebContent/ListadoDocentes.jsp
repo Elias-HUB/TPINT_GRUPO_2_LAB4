@@ -59,8 +59,8 @@
 					<%
 						ArrayList<Docente> lista = null;
 
-						if (request.getAttribute("ListaDoc") != null) {
-							lista = (ArrayList<Docente>) request.getAttribute("ListaDoc");
+						if (request.getAttribute("ListaDocentes") != null) {
+							lista = (ArrayList<Docente>) request.getAttribute("ListaDocentes");
 						}
 					%>
 
@@ -95,11 +95,7 @@
 
 
 
-	<form action="ServletDocente" id="Form" method="get">
-		<button id="btnMostrar" value="Agregar" type="submit"
-			class="btn btn-primary" name="btnMostrar">Agregar</button>
-	</form>
-
+		<button id="btnMostrar" value="Agregar" type="submit"	class="btn btn-primary" name="btnMostrar">Agregar</button>
 
 	<jsp:include page="VerAlumnoModal.jsp"></jsp:include>
 
