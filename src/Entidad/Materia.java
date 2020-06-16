@@ -13,6 +13,11 @@ public class Materia {
 		Estado = materia.Estado;
 	}
 	
+	public Materia()
+	{
+		
+	}
+	
 	public int getIdMateria() {
 		return IdMateria;
 	}
