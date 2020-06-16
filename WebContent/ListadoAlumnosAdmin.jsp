@@ -88,5 +88,7 @@
 			</table>
 		</div>
 	</div>
+
+	<jsp:include page="VerAlumnoModal.jsp"></jsp:include>
 </body>
 </html>
