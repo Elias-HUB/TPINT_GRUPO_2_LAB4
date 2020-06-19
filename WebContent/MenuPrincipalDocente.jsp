@@ -16,7 +16,7 @@
                     <div class="card-body ">
                         <h5 class="card-title">2020 1C</h5>
                         <p class="card-text">Noche</p>
-                    <a href="ListadoNotas.jsp" class="btn btn-lg btn-info">Alumnos</a>
+                    <a href="ListadoAlumnosDocente.jsp" class="btn btn-lg btn-info">Alumnos</a>
                     </div>
                     <div class="card-footer bg-transparent">
                        
@@ -25,23 +25,6 @@
             </div>
         </div>
        
-        <div class="col-sm-4" style="margin-top: 25px;">
-            <div class="card">
-                <div class="card text-center border-info">
-                    <div class="card-header bg-white">
-                    <h1>Laboratorio III</h1>
-                    </div>
-                    <div class="card-body ">
-                        <h5 class="card-title">2020 1C</h5>
-                        <p class="card-text">Noche</p>
-                    <a href="ListadoNotas.jsp" class="btn btn-lg btn-info">Alumnos</a>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                       
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     
 </body>

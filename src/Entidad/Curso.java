@@ -6,21 +6,16 @@ public class Curso {
 
 
 	private int Id;
-	private Materia Materia;
-	private String Cuatrimestre;
+	public Materia Materia;
+	private int Cuatrimestre;
 	private int Año;
-	private Docente docente;
+	public Docente docente;
+	private String turno;
 	private ArrayList<Alumno> Alumnos;
+	private String estado; 
 	
-	public Curso(int iD, Materia materia, String cuatrimestre, int año, Docente docente,
-			ArrayList<Alumno> alumnos) {
+	public Curso() {
 		
-		Id = iD;
-		Materia = materia;
-		Cuatrimestre = cuatrimestre;
-		Año = año;
-		this.docente = docente;
-		Alumnos = alumnos;
 	}
 	
 	public int getId() {
@@ -35,10 +30,10 @@ public class Curso {
 	public void setMateria(Materia materia) {
 		Materia = materia;
 	}
-	public String getCuatrimestre() {
+	public int getCuatrimestre() {
 		return Cuatrimestre;
 	}
-	public void setCuatrimestre(String cuatrimestre) {
+	public void setCuatrimestre(int cuatrimestre) {
 		Cuatrimestre = cuatrimestre;
 	}
 	public int getAño() {
@@ -58,6 +53,22 @@ public class Curso {
 	}
 	public void setAlumnos(ArrayList<Alumno> alumnos) {
 		Alumnos = alumnos;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
+	public String getTurno() {
+		return turno;
+	}
+
+	public void setTurno(String turno) {
+		this.turno = turno;
 	}
 	
 	
