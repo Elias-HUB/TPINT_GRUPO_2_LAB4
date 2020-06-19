@@ -23,9 +23,7 @@
 							<div>
 								<label Class="control-label">Legajo</label>
 							</div>
-							<input ID="TboxLegajo" onKeyPress="return soloNumeros(event)"
-								onkeyup="validarLegajo(this.id)" onfocus="Seleccionar(this.id)"
-								maxlength="8" placeholder="22012" Class="form-control">
+							<input ID="TboxLegajo" Class="form-control" readonly="readonly">
 							<p id="MensajeErrorLegajo"></p>
 						</div>
 
@@ -35,9 +33,7 @@
 							<div>
 								<label Class="control-label">Nombre</label>
 							</div>
-							<input ID="TboxNombre" onkeypress="return soloLetras(event)"
-								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
-								maxlength="20" placeholder="Agustin" Class="form-control">
+							<input ID="TboxNombre" Class="form-control" readonly="readonly">
 							<p id="MensajeErrorNombre"></p>
 						</div>
 
@@ -46,9 +42,7 @@
 							<div>
 								<label Class="control-label">Apellido</label>
 							</div>
-							<input ID="TboxApellido" onkeypress="return soloLetras(event)"
-								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
-								maxlength="20" placeholder="Argento" Class="form-control">
+							<input ID="TboxApellido" Class="form-control" readonly="readonly">
 							<p id="MensajeErrorApellido"></p>
 						</div>
 					</div>
@@ -60,8 +54,7 @@
 							<div>
 								<label Class="control-label">Fecha Nacimiento</label>
 							</div>
-							<input type="date" ID="TboxFechaNacimiento" name="bday" max="3000-12-31" min="1995-01-01"
-								class="form-control">
+							<input type="date" ID="TboxFechaNacimiento" class="form-control" readonly="readonly">
 						</div>
 
 						<%--Email--%>
@@ -75,9 +68,7 @@
 									<div class="input-group-text">@</div>
 								</div>
 
-								<input ID="TboxEmail" onkeyup="validarEmail()"
-									onfocus="Seleccionar(this.id)" maxlength="33"
-									placeholder="Example@gmail.com" Class="form-control">
+								<input ID="TboxEmail" Class="form-control" readonly="readonly">
 								<p id="MensajeErrorEmail"></p>
 							</div>
 						</div>
@@ -88,9 +79,7 @@
 							<div>
 								<label Class="control-label">Telefono</label>
 							</div>
-							<input ID="TboxTelefono" onkeypress="return soloNumeros(event)"
-								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
-								maxlength="15" placeholder="1157412365" Class="form-control">
+							<input ID="TboxTelefono" Class="form-control" readonly="readonly">
 							<p id="MensajeErrorTelefono"></p>
 						</div>
 
@@ -103,9 +92,7 @@
 							<div>
 								<label Class="control-label">Dirección</label>
 							</div>
-							<input ID="TboxDirreccion" onkeyup="validarVacio(this.id)"
-								onfocus="Seleccionar(this.id)" maxlength="40"
-								placeholder="Avenida Siempreviva 742" Class="form-control">
+							<input ID="TboxDirreccion" Class="form-control" readonly="readonly">
 							<p id="MensajeErrorDireccion"></p>
 						</div>
 
@@ -114,9 +101,7 @@
 							<div>
 								<label Class="control-label">Localidad</label>
 							</div>
-							<input ID="TboxLocalidad" onkeyup="validarVacio(this.id)"
-								onfocus="Seleccionar(this.id)" maxlength="20"
-								placeholder="Talar" Class="form-control">
+							<input ID="TboxLocalidad" Class="form-control" readonly="readonly">
 							<p id="MensajeErrorLocalidad"></p>
 						</div>
 
@@ -125,9 +110,7 @@
 							<div>
 								<label Class="control-label">Provincia</label>
 							</div>
-							<input ID="TboxProvincia" onKeyPress="return soloNumeros(event)"
-								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
-								maxlength="16" placeholder="Buenos Aires" Class="form-control">
+							<input ID="TboxProvincia" Class="form-control" readonly="readonly">
 							<p id="MensajeErrorCP"></p>
 						</div>
 					</div>

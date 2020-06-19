@@ -1,66 +1,145 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<jsp:include page="HeadAdministrador.jsp"></jsp:include>
-<jsp:include page="LibreriasJtable.jsp"></jsp:include>
-</head>
+<!-- Modal -->
+<div class="modal fade bd-example-modal-xl" id="ModalAlumnoModificar" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog  modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Alumno</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<!-- 			______________________________________________________ -->
 
-		<div class="modal-dialog  modal-xl" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Alumno</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+
+				<div class="container">
+
+					<div class="form-row ">
+
+						<%--LEGAJO--%>
+						<div class="form-group col-md-1">
+							<div>
+								<label Class="control-label">Legajo</label>
+							</div>
+							<input ID="TboxLegajo" onKeyPress="return soloNumeros(event)"
+								onkeyup="validarLegajo(this.id)" onfocus="Seleccionar(this.id)"
+								maxlength="8" placeholder="22012" Class="form-control">
+							<p id="MensajeErrorLegajo"></p>
+						</div>
+
+
+						<%--Nombre--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Nombre</label>
+							</div>
+							<input ID="TboxNombre" onkeypress="return soloLetras(event)"
+								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
+								maxlength="20" placeholder="Agustin" Class="form-control">
+							<p id="MensajeErrorNombre"></p>
+						</div>
+
+						<%--Apellido--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Apellido</label>
+							</div>
+							<input ID="TboxApellido" onkeypress="return soloLetras(event)"
+								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
+								maxlength="20" placeholder="Argento" Class="form-control">
+							<p id="MensajeErrorApellido"></p>
+						</div>
+					</div>
+
+					<div class="form-row ">
+
+						<%--FechaNacimiento--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Fecha Nacimiento</label>
+							</div>
+							<input type="date" ID="TboxFechaNacimiento" name="bday" max="3000-12-31" min="1995-01-01"
+								class="form-control">
+						</div>
+
+						<%--Email--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Email</label>
+							</div>
+
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">@</div>
+								</div>
+
+								<input ID="TboxEmail" onkeyup="validarEmail()"
+									onfocus="Seleccionar(this.id)" maxlength="33"
+									placeholder="Example@gmail.com" Class="form-control">
+								<p id="MensajeErrorEmail"></p>
+							</div>
+						</div>
+
+
+						<%--Telefono--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Telefono</label>
+							</div>
+							<input ID="TboxTelefono" onkeypress="return soloNumeros(event)"
+								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
+								maxlength="15" placeholder="1157412365" Class="form-control">
+							<p id="MensajeErrorTelefono"></p>
+						</div>
+
+					</div>
+
+					<div class="form-row">
+
+						<%--Dirrecion--%>
+						<div class="form-group col-md-5">
+							<div>
+								<label Class="control-label">Dirección</label>
+							</div>
+							<input ID="TboxDirreccion" onkeyup="validarVacio(this.id)"
+								onfocus="Seleccionar(this.id)" maxlength="40"
+								placeholder="Avenida Siempreviva 742" Class="form-control">
+							<p id="MensajeErrorDireccion"></p>
+						</div>
+
+						<%--Localidad--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Localidad</label>
+							</div>
+							<input ID="TboxLocalidad" onkeyup="validarVacio(this.id)"
+								onfocus="Seleccionar(this.id)" maxlength="20"
+								placeholder="Talar" Class="form-control">
+							<p id="MensajeErrorLocalidad"></p>
+						</div>
+
+						<%--Provincia--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Provincia</label>
+							</div>
+							<input ID="TboxProvincia" onKeyPress="return soloNumeros(event)"
+								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
+								maxlength="16" placeholder="Buenos Aires" Class="form-control">
+							<p id="MensajeErrorCP"></p>
+						</div>
+					</div>
 				</div>
 
-				<div class="modal-body">
+				<!-- 			______________________________________________________ -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Cerrar</button>
 
-					<%--Legajo--%>
-					<div >
-						<label for="Legajo">Legajo</label> 
-						<input type="text" id="txtLegajo" name="Legajo">
-						 
-						<%--Nombre--%>
-							<label for="Nombre">Nombre</label> 
-							<input type="text" id="txtNombre" name="Nombre">
-						<%--Apellido--%>	
-							<label for="Apellido">Apellido</label> 
-							<input type="text" id="txtApellido" name="Apellido">
-						</div>
-						<br> 
-					<%--Fecha nac--%>
-					<div >
-						<label for="FechaNac">Fecha Nacimiento</label> 
-						<input type="date" id="txtFechaNac" name="FechaNac">
-						
-						<label for="Email">Email</label> 
-						<input type="Email" id="txtEmail" name="Email">
-						
-						<label for="Telefono">Telefono</label> 
-						<input type="text" id="txtTelefono" name="Telefono">
-					</div>
-					<br> 
-					<div >
-						<label for="Direccion">Direccion</label> 
-						<input type="text" id="txtDireccion" name="Direccion">
-						
-						<label for="Localidad">Localidad</label> 
-						<input type="text" id="txtLocalidad" name="Localidad">
-						
-						<label for="´Provincia">Provincia</label> 
-						<input type="Provincia" id="txtProvincia" name="Provincia">
-					</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Cerrar</button>
-							<button type="button" class="btn btn-primary">Aceptar</button>
-						</div>
-					</div>
 				</div>
 			</div>
-</body>
-</html>
+		</div>
+	</div>
+</div>
