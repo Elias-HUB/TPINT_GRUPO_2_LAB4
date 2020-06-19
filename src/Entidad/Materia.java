@@ -12,6 +12,8 @@ public class Materia {
 		Nombre = materia.Nombre;
 		Estado = materia.Estado;
 	}
+	public Materia() {
+	}
 	
 	public int getIdMateria() {
 		return IdMateria;
