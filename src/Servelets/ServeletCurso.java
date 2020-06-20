@@ -27,7 +27,8 @@ public class ServeletCurso extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 
-		if(request.getParameter("Param")!=null )
+		 String Param= request.getParameter("Param");
+		if(Param.equals("3"))
 			{
 			 	CursoDaoImpl cDao = new CursoDaoImpl();
 				List <Curso> listaCursos = (ArrayList<Curso>)cDao.readAll();
@@ -36,6 +37,16 @@ public class ServeletCurso extends HttpServlet {
 				
 				request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward( request, response);
 			}
+		else if(Param.equals("4"))
+		{
+			CursoDaoImpl cDao = new CursoDaoImpl();
+			List <Curso> listaCursos = (ArrayList<Curso>)cDao.readAll();
+			
+			request.setAttribute("ListaCursos",listaCursos );
+			
+			request.getRequestDispatcher("MenuPrincipalAdmin.jsp").forward( request, response);
+		}
+		
 	}
 
 	/**
