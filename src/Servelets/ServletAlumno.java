@@ -83,6 +83,40 @@ public class ServletAlumno extends HttpServlet {
 			request.setAttribute("ListaAlumnos", listaAlumnos);
 			request.getRequestDispatcher("ListadoAlumnosAdmin.jsp").forward(request, response);			
 		}
+		
+		
+		if (request.getParameter("BtnAgregar") != null) {
+			Alumno alumno = new Alumno();
+//			alumno.setLegajo(Integer.parseInt(request.getParameter("TboxLegajoM")));
+			alumno.setDni(Integer.parseInt(request.getParameter("TboxDniA").toString()));
+			alumno.setNombre(request.getParameter("TboxNombreA"));
+			alumno.setApellido(request.getParameter("TboxApellidoA"));
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+			Date parsed = null;
+			try {
+				parsed = format.parse(request.getParameter("TboxFechaNacimientoA"));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			java.sql.Date sql = new java.sql.Date(parsed.getTime());
+			alumno.setFechaNacimiento(sql);
+			alumno.setEmail(request.getParameter("TboxEmailA"));
+			alumno.setTelefono((long) Integer.parseInt(request.getParameter("TboxTelefonoA")));
+			
+			alumno.setEstado(true);
+
+			alumno.domicilio = new Domicilio();
+			alumno.domicilio.setDireccion(request.getParameter("TboxDirreccionA"));
+			alumno.domicilio.setLocalidad(request.getParameter("TboxLocalidadA"));
+			alumno.domicilio.setProvincia(request.getParameter("TboxProvinciaA"));
+			alumno.setEstado(true);
+			
+			aDao.insert(alumno);		
+			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao.readAll();
+			request.setAttribute("ListaAlumnos", listaAlumnos);
+			request.getRequestDispatcher("ListadoAlumnosAdmin.jsp").forward(request, response);			
+		}
 
 		// response.setContentType( "text/html; charset=iso-8859-1" );
 		//// response.setContentType("text/plain");

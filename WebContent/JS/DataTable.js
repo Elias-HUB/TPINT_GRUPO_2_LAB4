@@ -20,7 +20,9 @@ function ModalVerCargaDatos(datos) {
 	// success : function(result) {
 	// // $('#result1').html(result);
 	jQuery.noConflict();
+	// $('#ModalAlumnoVer').modal.find('.modal-title').text('ALO')
 	$('#ModalAlumnoVer').modal('show');
+	$('#ModalAlumnoVer').find('.modal-title').text("Alumno")
 	//
 	// $("#TboxLegajo").val(result["Nombre"]);
 	// }
@@ -41,7 +43,9 @@ function ModalModificarCargaDatos(datos) {
 	$("#TboxDniM").val(alumno[9]);
 	jQuery.noConflict();
 	$('#ModalAlumnoModificar').modal('show');
+	$('#ModalAlumnoModificar').find('.modal-title').text("Modificar Alumno")
 }
+
 
 // $('document').ready(function() {
 // $('#Ver').click(function() {

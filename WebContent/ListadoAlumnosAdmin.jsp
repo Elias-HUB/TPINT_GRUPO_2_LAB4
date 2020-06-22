@@ -19,7 +19,7 @@
 	<div class="wrapper">
 		<div id="formContent" class="table-responsive">
 			<!-- 		        <asp:Button Text="Agregar Alumno" OnClick="BtnAlumno_Click" ID="BtnAlumno" runat="server" class="btn btn-block btn-info" /> -->
-			<button type="submit" class="btn btn-block btn-outline-info"
+			<button type="button" class="btn btn-block btn-outline-info" data-toggle="modal" data-target="#ModalAlumnoAgregar"
 				style="margin-bottom: 10px;">Agregar Alumno</button>
 			<!-- 		<button type="submit" class="btn"><img src="Imagenes/Nuevo.png" data-toggle="tooltip" data-placement="bottom" title="Agregar Alumno" alt="x" /></button> -->
 			<table id="example" class="table table-striped table-bordered"
@@ -94,6 +94,7 @@
 
 	<jsp:include page="VerAlumnoModal.jsp"></jsp:include>
 	<jsp:include page="ModificarAlumnoModal.jsp"></jsp:include>
+	<jsp:include page="AgregarAlumnoModal.jsp"></jsp:include>
 
 	<script src="JS/DataTable.js"></script>
 
