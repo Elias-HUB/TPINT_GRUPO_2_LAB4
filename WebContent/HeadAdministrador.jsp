@@ -6,14 +6,13 @@
 
 <jsp:include page="Librerias.jsp"></jsp:include>
 <link rel="stylesheet" href="Css/Head.css">
-
 <div class="Cabecera">
 	<div style="height: 100px;">
 		<div class="snap-pm-user" style="margin-left: 20px">
 			<h2>Nombre usuario Admin</h2>
 			<div style="margin-left: 20px; margin-top: 10px;">
-				<a class="aHead" href="ServeletCurso?Param=4">Perfil</a> - <a class="aHead" href="ServletAlumno?Param=1">Alumnos</a> - <a class="aHead" href="ServletDocente?Param=2">Profesores</a>
-				- <a class="aHead" href="ServeletCurso?Param=3">Cursos</a> - <a class="aHead" href="...">Reportes</a> - <a class="aHead"
+				<a class="aHead" href="...">Perfil</a> - <a class="aHead" href="ServletAlumno?Param=1">Alumnos</a> - <a class="aHead" href="ServletDocente?Param=2">Profesores</a>
+				 - <a class="aHead" href="ServeletCurso?Param=1">Cursos</a> - <a class="aHead" href="...">Reportes</a> - <a class="aHead"
 					id="snap-pm-logout" href="...">Salir</a>
 			</div>
 		</div>

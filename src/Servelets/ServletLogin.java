@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DaoImpl.DocenteDaoImpl;
 import DaoImpl.UsuarioImpl;
+import Entidad.Docente;
 import Entidad.Usuario;
-
+import javax.servlet.http.HttpSession;
 @WebServlet("/ServletLogin")
 public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,16 +27,25 @@ public class ServletLogin extends HttpServlet {
 			if( request.getParameter("btnIngresar")!=null)
 				{
 				 	UsuarioImpl usuarioImpl = new UsuarioImpl();
-					//Usuario usuario = new Usuario();
+				 	DocenteDaoImpl docImpl = new DocenteDaoImpl();
+				 	Docente docente = new Docente();
 					String legajo = request.getParameter("TxtLegajo").toString();
 					String contrasenia = request.getParameter("TxtContrasenia").toString();
-					//usuario= usuarioImpl.Validar(legajo,contraseña);
-					
-					if(usuarioImpl.Validar(legajo,contrasenia))
+					HttpSession session = request.getSession();
+					session.setAttribute("Legajo",legajo);
+					int validador =usuarioImpl.Validar(legajo,contrasenia);
+					docente = docImpl.Buscar(legajo);
+					session.setAttribute("NombreHead",docente.getNombre().toString());
+					session.setAttribute("ApellidoHead",docente.getApellido().toString());
+					if(validador==1)
 					{
-						request.getRequestDispatcher("ServeletCurso?Param=4").forward( request, response);
+						request.getRequestDispatcher("ServeletCurso?ParamLogin=1").forward( request, response);
 					}
-					else
+					else if(validador==2)
+					{
+						request.getRequestDispatcher("ServeletCurso?ParamLogin=2").forward( request, response);
+					}
+					else if(validador==0)
 					{
 						request.getRequestDispatcher("Login.jsp").forward( request, response);
 					}

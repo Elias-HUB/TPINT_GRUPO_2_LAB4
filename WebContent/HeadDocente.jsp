@@ -10,10 +10,16 @@
 <div class="Cabecera">
 	<div style="height: 100px;">
 		<div class="snap-pm-user" style="margin-left: 20px">
-			<h2>Nombre usuario</h2>
+			<%
+			session = request.getSession();
+			String Nombre = session.getAttribute("NombreHead").toString();
+			String Apellido = session.getAttribute("ApellidoHead").toString();			
+			%>
+							<h1><%=Nombre%> <%=Apellido%></h1>
+				    
 			<div style="margin-left: 80px; margin-top: 10px;">
 			<a class="aHead" href="...">Perfil</a> -
-				<a class="aHead" href="...">Mis Cursos</a> - <a
+				<a class="aHead" href="ServeletCurso?Param=2">Mis Cursos</a> - <a
 					class="aHead" id="snap-pm-logout" href="...">Salir</a>
 			</div>
 		</div>
