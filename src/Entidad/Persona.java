@@ -75,10 +75,5 @@ public class Persona {
 	}
 	public void setTelefono(Long telefono) {
 		Telefono = telefono;
-	}
-
-
-	
-	
-	
+	}	
 }

@@ -5,7 +5,7 @@ import Entidad.Alumno;
 
 public interface AlumnoDao {
 	public boolean insert(Alumno alumno);
-	public boolean delete(Alumno alumno_a_eliminar);
-	public boolean update(Alumno alumno_a_modificar, String aux);
+	public boolean delete(int alumno_a_eliminar);
+	public boolean update(Alumno alumno_a_modificar);
 	public List<Alumno> readAll();
 }

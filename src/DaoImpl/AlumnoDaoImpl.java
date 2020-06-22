@@ -15,8 +15,8 @@ import Entidad.Domicilio;
 public class AlumnoDaoImpl implements AlumnoDao {
 
 	private static final String insert = "insert into Alumnos(Dni, Nombre, Apellido, FechaNacimiento, Direccion, Localidad, Provincia, Email, Telefono, Estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String delete = "UPDATE Alumnos set Estado = 0 WHERE Dni = ?";
-	private static final String update = "UPDATE Alumnos set Dni=?, Nombre=?, Apellido=?, FechaNacimiento=?, Direccion=?, Localidad=?, Provincia=?, Email=?, Telefono=?, Estado=? where Dni =?";
+	private static final String delete = "UPDATE Alumnos set Estado = 0 WHERE Legajo = ?";
+	private static final String update = "UPDATE Alumnos set Dni=?, Nombre=?, Apellido=?, FechaNacimiento=?, Direccion=?, Localidad=?, Provincia=?, Email=?, Telefono=?, Estado=? where Legajo =?";
 	private static final String readall = "SELECT * FROM Alumnos where Estado = 1";
 
 	@Override
@@ -53,13 +53,13 @@ public class AlumnoDaoImpl implements AlumnoDao {
 	}
 
 	@Override
-	public boolean delete(Alumno alumno) {
+	public boolean delete(int Legajo) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isdeleteExitoso = false;
 		try {
 			statement = conexion.prepareStatement(delete);
-			statement.setInt(1, alumno.getDni());
+			statement.setInt(1, Legajo);
 			if (statement.executeUpdate() > 0) {
 				conexion.commit();
 				isdeleteExitoso = true;
@@ -71,7 +71,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 	}
 
 	@Override
-	public boolean update(Alumno alumno, String aux) {
+	public boolean update(Alumno alumno) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isupdateExitoso = false;
@@ -87,6 +87,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			statement.setString(8, alumno.getEmail());
 			statement.setLong(9, alumno.getTelefono());
 			statement.setBoolean(10, alumno.getEstado());
+			statement.setInt(11, alumno.getLegajo());
 
 			if (statement.executeUpdate() > 0) {
 				conexion.commit();

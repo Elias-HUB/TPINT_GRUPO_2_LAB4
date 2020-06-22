@@ -43,5 +43,4 @@ public class Docente extends Persona {
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
-
 }
