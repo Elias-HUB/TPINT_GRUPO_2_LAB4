@@ -18,7 +18,7 @@ public class DocenteDaoImpl implements DocenteDao {
 	private static final String delete = "UPDATE Docentes set Estado = 0 WHERE Dni = ?";
 	private static final String update = "UPDATE Docentes set Dni=?, Nombre=?, Apellido=?, FechaNacimiento=?, Direccion=?, Localidad=?, Provincia=?, Email=?, Telefono=?, Estado=? where Dni =?";
 	private static final String readall = "SELECT * FROM Docentes where Estado = 1";
-
+	private static final String readUno = "SELECT * FROM Docentes where legajo=?"; 
 	@Override
 	public boolean insert(Docente docente) {
 		PreparedStatement statement;
@@ -149,5 +149,28 @@ public class DocenteDaoImpl implements DocenteDao {
 
 		return docente;
 	}
-
+public Docente Buscar(String legajo) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		Docente docente = new Docente();
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(readUno);
+			statement.setInt(1,Integer.parseInt(legajo));
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				docente=(GetDocente(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return docente;
+	}
 }

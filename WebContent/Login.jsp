@@ -13,7 +13,8 @@
 <body>
 	<div class="Cabecera">
 		<div style="height: 100px;">
-			<div class="snap-pm-user" style="margin-left: 80px;line-height: 2.35;" >
+			<div class="snap-pm-user"
+				style="margin-left: 80px; line-height: 2.35;">
 				<h1 style="line-height: 2.35;">Gestión Educativa</h1>
 			</div>
 			<div class="topcorner">
@@ -23,31 +24,36 @@
 		</div>
 	</div>
 
-	<div class="wrapper fadeInDown">
-		<div id="formContent">
+	<form action="ServletLogin" method="get">
+		<div class="wrapper fadeInDown">
+			<div id="formContent">
 
-			<!-- Icon -->
-			<div class="fadeIn first">
+				<!-- Icon -->
+				<div class="fadeIn first">
 
-				<!-- Logo -->
-				<img ID="Image1" src="Imagenes/Login.png" Width="50px"
-					alt="Imagen no disponible" align="top">
-			</div>
+					<!-- Logo -->
+					<img ID="Image1" src="Imagenes/Login.png" Width="50px"
+						alt="Imagen no disponible" align="top">
+				</div>
 
-			<!-- Login -->
-			<input type="text" class="fadeIn second" placeholder="Legajo">
-			<input type="text" class="fadeIn third pass" placeholder="Contraseña">
-			<div>
+				<!-- Login -->
+				<input type="text" class="fadeIn second" name="TxtLegajo" placeholder="Legajo"
+					id="TxtLegajo">
+					 <input type="text"	class="fadeIn third pass" name="TxtContrasenia" placeholder="Contraseña"
+					id="TxtContrasenia">
+				<div>
 
-				<input type="button" class="fadeIn fourth"
-					OnClick="BtnAceptar_Click" value="Ingreso">
+					<input type="submit" name="btnIngresar" id="btnIngresar"
+						class="btn btn-success" value="Ingreso">
 
-				<!-- Ayuda -->
-				<div id="formFooter">
-					<a class="fadeIn five underlineHover" href="...">Ayuda</a>
+
+					<!-- Ayuda -->
+					<div id="formFooter">
+						<a class="fadeIn five underlineHover" href="...">Ayuda</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</form>
 </body>
 </html>

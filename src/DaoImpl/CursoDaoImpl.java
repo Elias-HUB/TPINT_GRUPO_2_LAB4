@@ -15,6 +15,7 @@ import Entidad.Persona;
 
 public class CursoDaoImpl implements CursoDao{
 	private static final String readall = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria";
+	private static final String readCursosXDocente = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria where c.legajoDocente=?";
 
 	@Override
 	public boolean insert(Curso curso) {
@@ -59,6 +60,30 @@ public class CursoDaoImpl implements CursoDao{
 		return Cursos;
 	}
 	
+	public List<Curso> readCursosXDocente(int legajo) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		ArrayList<Curso> Cursos = new ArrayList<Curso>();
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(readCursosXDocente);
+			statement.setInt(1,legajo);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Cursos.add(GetCurso(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Cursos;
+	}
 
 	private Curso GetCurso(ResultSet resultSet) throws SQLException {
 		try {

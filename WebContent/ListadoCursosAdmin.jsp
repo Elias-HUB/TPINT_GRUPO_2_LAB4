@@ -41,8 +41,9 @@
 </script>
 </head>
 <body>
-
-
+<br>
+<button type="submit" class="btn btn-block btn-outline-info"
+               id="btnAgregar" name="btnAgregar" style="margin-bottom: 10px;">Agregar Curso</button>
 	<div class="wrapper">
 		<div id="formContent" class="table-responsive">
 
@@ -65,8 +66,8 @@
 					<%
 						ArrayList<Curso> lista = null;
 
-						if (request.getAttribute("ListaCursos") != null) {
-							lista = (ArrayList<Curso>) request.getAttribute("ListaCursos");
+						if (request.getAttribute("ListaCursosAdmin") != null) {
+							lista = (ArrayList<Curso>) request.getAttribute("ListaCursosAdmin");
 						}
 					%>
 
