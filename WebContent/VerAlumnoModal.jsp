@@ -1,6 +1,7 @@
 <!-- Modal -->
-<div class="modal fade bd-example-modal-xl" id="ModalAlumnoVer" tabindex="-1"
-	role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-xl" id="ModalAlumnoVer"
+	tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
 	<div class="modal-dialog  modal-xl" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -11,7 +12,6 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<!-- 			______________________________________________________ -->
 
 
 				<div class="container">
@@ -23,7 +23,9 @@
 							<div>
 								<label Class="control-label">Legajo</label>
 							</div>
-							<input ID="TboxLegajo" Class="form-control" readonly="readonly">
+							<input id="TboxLegajo" name="TboxLegajo"
+								Class="form-control input_valores_provisionales"
+								readonly="readonly">
 							<p id="MensajeErrorLegajo"></p>
 						</div>
 
@@ -45,8 +47,21 @@
 							<input ID="TboxApellido" Class="form-control" readonly="readonly">
 							<p id="MensajeErrorApellido"></p>
 						</div>
+						
+						<%--Dni--%>
+							<div class="form-group col-md-3">
+								<div>
+									<label Class="control-label">Dni</label>
+								</div>
+								<input id="TboxDni" Class="form-control" readonly="readonly">
+								<p id="MensajeErrorDni"></p>
+							</div>
+						</div>
 					</div>
 
+
+					
+						
 					<div class="form-row ">
 
 						<%--FechaNacimiento--%>
@@ -54,7 +69,8 @@
 							<div>
 								<label Class="control-label">Fecha Nacimiento</label>
 							</div>
-							<input type="date" ID="TboxFechaNacimiento" class="form-control" readonly="readonly">
+							<input type="date" ID="TboxFechaNacimiento" class="form-control"
+								readonly="readonly">
 						</div>
 
 						<%--Email--%>
@@ -92,7 +108,8 @@
 							<div>
 								<label Class="control-label">Dirección</label>
 							</div>
-							<input ID="TboxDirreccion" Class="form-control" readonly="readonly">
+							<input ID="TboxDirreccion" Class="form-control"
+								readonly="readonly">
 							<p id="MensajeErrorDireccion"></p>
 						</div>
 
@@ -101,7 +118,8 @@
 							<div>
 								<label Class="control-label">Localidad</label>
 							</div>
-							<input ID="TboxLocalidad" Class="form-control" readonly="readonly">
+							<input ID="TboxLocalidad" Class="form-control"
+								readonly="readonly">
 							<p id="MensajeErrorLocalidad"></p>
 						</div>
 
@@ -110,13 +128,14 @@
 							<div>
 								<label Class="control-label">Provincia</label>
 							</div>
-							<input ID="TboxProvincia" Class="form-control" readonly="readonly">
+							<input ID="TboxProvincia" Class="form-control"
+								readonly="readonly">
 							<p id="MensajeErrorCP"></p>
 						</div>
 					</div>
 				</div>
 
-				<!-- 			______________________________________________________ -->
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Cerrar</button>

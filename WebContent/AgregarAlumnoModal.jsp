@@ -1,11 +1,11 @@
 <!-- Modal -->
-<div class="modal fade bd-example-modal-xl" id="ModalAlumnoModificar"
+<div class="modal fade bd-example-modal-xl" id="ModalAlumnoAgregar"
 	tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog  modal-xl" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Alumno</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Agregar Alumno</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -20,17 +20,17 @@
 
 						<div class="form-row ">
 
-							<%--LEGAJO--%>
-							<div class="form-group col-md-1">
-								<div>
-									<label Class="control-label">Legajo</label>
-								</div>
-								<input ID="TboxLegajoM" name="TboxLegajoM"
-									onKeyPress="return soloNumeros(event)"
-									onkeyup="validarLegajo(this.id)" onfocus="Seleccionar(this.id)"
-									maxlength="8" placeholder="22012" Class="form-control" readonly="readonly">
-								<p id="MensajeErrorLegajo"></p>
-							</div>
+<%-- 							LEGAJO --%>
+<!-- 							<div class="form-group col-md-1"> -->
+<!-- 								<div> -->
+<!-- 									<label Class="control-label">Legajo</label> -->
+<!-- 								</div> -->
+<!-- 								<input ID="TboxLegajoA" name="TboxLegajoA" -->
+<!-- 									onKeyPress="return soloNumeros(event)" -->
+<!-- 									onkeyup="validarLegajo(this.id)" onfocus="Seleccionar(this.id)" -->
+<!-- 									maxlength="8" placeholder="22012" Class="form-control" readonly="readonly"> -->
+<!-- 								<p id="MensajeErrorLegajo"></p> -->
+<!-- 							</div> -->
 
 
 							<%--Nombre--%>
@@ -38,7 +38,7 @@
 								<div>
 									<label Class="control-label">Nombre</label>
 								</div>
-								<input ID="TboxNombreM" name="TboxNombreM"
+								<input ID="TboxNombreA" name="TboxNombreA"
 									onkeypress="return soloLetras(event)"
 									onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
 									maxlength="20" placeholder="Agustin" Class="form-control">
@@ -50,7 +50,7 @@
 								<div>
 									<label Class="control-label">Apellido</label>
 								</div>
-								<input ID="TboxApellidoM" name="TboxApellidoM"
+								<input ID="TboxApellidoA" name="TboxApellidoA"
 									onkeypress="return soloLetras(event)"
 									onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
 									maxlength="20" placeholder="Argento" Class="form-control">
@@ -62,7 +62,7 @@
 								<div>
 									<label Class="control-label">Dni</label>
 								</div>
-								<input id="TboxDniM" name="TboxDniM"
+								<input id="TboxDniA" name="TboxDniA"
 									onkeypress="return soloNumeros(event)"
 									onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
 									maxlength="8" placeholder="40174332" Class="form-control">
@@ -81,8 +81,8 @@
 							<div>
 								<label Class="control-label">Fecha Nacimiento</label>
 							</div>
-							<input type="date" ID="TboxFechaNacimientoM"
-								name="TboxFechaNacimientoM" max="3000-12-31" min="1995-01-01"
+							<input type="date" ID="TboxFechaNacimientoA"
+								name="TboxFechaNacimientoA" max="3000-12-31" min="1995-01-01"
 								class="form-control">
 						</div>
 
@@ -97,7 +97,7 @@
 									<div class="input-group-text">@</div>
 								</div>
 
-								<input ID="TboxEmailM" name="TboxEmailM"
+								<input ID="TboxEmailA" name="TboxEmailA"
 									onkeyup="validarEmail()" onfocus="Seleccionar(this.id)"
 									maxlength="33" placeholder="Example@gmail.com"
 									Class="form-control">
@@ -111,7 +111,7 @@
 							<div>
 								<label Class="control-label">Telefono</label>
 							</div>
-							<input ID="TboxTelefonoM" name="TboxTelefonoM"
+							<input ID="TboxTelefonoA" name="TboxTelefonoA"
 								onkeypress="return soloNumeros(event)"
 								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
 								maxlength="15" placeholder="1157412365" Class="form-control">
@@ -127,7 +127,7 @@
 							<div>
 								<label Class="control-label">Dirección</label>
 							</div>
-							<input ID="TboxDirreccionM" name="TboxDirreccionM"
+							<input ID="TboxDirreccionA" name="TboxDirreccionA"
 								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
 								maxlength="40" placeholder="Avenida Siempreviva 742"
 								Class="form-control">
@@ -139,7 +139,7 @@
 							<div>
 								<label Class="control-label">Localidad</label>
 							</div>
-							<input ID="TboxLocalidadM" name="TboxLocalidadM"
+							<input ID="TboxLocalidadA" name="TboxLocalidadA"
 								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
 								maxlength="20" placeholder="Talar" Class="form-control">
 							<p id="MensajeErrorLocalidad"></p>
@@ -150,7 +150,7 @@
 							<div>
 								<label Class="control-label">Provincia</label>
 							</div>
-							<input ID="TboxProvinciaM" name="TboxProvinciaM"
+							<input ID="TboxProvinciaA" name="TboxProvinciaA"
 								onKeyPress="return soloNumeros(event)"
 								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
 								maxlength="16" placeholder="Buenos Aires" Class="form-control">
@@ -161,8 +161,8 @@
 
 				<!-- 			______________________________________________________ -->
 				<div class="modal-footer">
-					<button type="submit" id="BtnActualizar" name="BtnActualizar"
-						class="btn btn-primary">Actualizar</button>
+					<button type="submit" id="BtnAgregar" name="BtnAgregar"
+						class="btn btn-primary">Crear</button>
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Cerrar</button>
 
