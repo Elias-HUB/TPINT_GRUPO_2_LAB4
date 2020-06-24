@@ -1,5 +1,10 @@
 package Dao;
 
-public interface MateriaDao {
+import java.util.List;
 
+import Entidad.Materia;
+
+public interface MateriaDao {
+	
+	public List<Materia> readAll();
 }

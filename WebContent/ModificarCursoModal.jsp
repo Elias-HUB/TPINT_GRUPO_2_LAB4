@@ -1,5 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="Entidad.Materia"%>
+<%@ page import="Entidad.Docente"%>
+<%@ page import="Entidad.Alumno"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,43 +34,37 @@ $(document).ready(function() {
     
 } );
     </script>
-    
- <style type="text/css">
-    .modal-lg {
-       max-width: 95%;
-} </style>
    
  </head>
 <body>
-	<button type="button" class="btn btn-primary" data-toggle="modal"
-		data-target="#exampleModal">Probar</button>
-	<!-- Modal -->
-	<div class="modal fade modal-lg" id="exampleModal" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalLabel">
-		<div class="modal-dialog  modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Curso</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-
-				<div class="modal-body form-group">
-
-					<%--Legajo--%>
-					<div class="row">
+				<div>
+					<div class="form-row">
 						<label for="Materia">Materia</label> 
 					<div class="col-2">
-						<select id="slMateria" name="slMateria" class="custom-select"selectedindex=-1>
-							<option value="1" class="dropdown-item">Programacion II</option>
-							<option value="2" class="dropdown-item">Programacion III</option>
-							<option value="3" class="dropdown-item">Laboratiorio III</option>
-							<option value="4" class="dropdown-item">Laboratorio IV</option>
+					<%
+						ArrayList<Materia> listaMaterias = null;
+						if (request.getAttribute("ListaMaterias") != null) {
+							listaMaterias = (ArrayList<Materia>) request.getAttribute("ListaMaterias");
+						}
+
+						if (listaMaterias != null) {
+							%>	<select id="slMateria" name="slMateria" class="custom-select"selectedindex=-1>
+						<%	for (Materia materia : listaMaterias) {
+					%>
+						<option value=<%=materia.getIdMateria()%> class="dropdown-item"><%=materia.getNombre()%></option>
+					
+						<%
+						}
+						%>	
 						</select>
 						</div>
 						
+						<%
+						}
+					%>
+					
+				</div>
+					<div>
 						<label for="Cuatrimestre">Cuatrimestre</label>
 					<div class="col-2">
 						<select id="slCuatrimestre" name="slCuatrimestre" class="custom-select"
@@ -85,58 +83,78 @@ $(document).ready(function() {
 							<option value="2021" class="dropdown-item">2021</option>
 						</select>
 						</div>
+						<div>
 						<label for="Docente">Docente</label> 
-							<div class="col-2">
-						<select id="slDocente" name="slDocente" class="custom-select"
-							selectedindex=-1>
-							<option value="1" class="dropdown-item">Tamara</option>
-							<option value="2" class="dropdown-item">Carlos</option>
+					<div class="col-2">
+						<%
+						ArrayList<Docente> listaDocentes = null;
+						if (request.getAttribute("ListaDocentes") != null) {
+							listaDocentes = (ArrayList<Docente>) request.getAttribute("ListaDocentes");
+						}
+
+						if (listaDocentes != null) {
+							%>	<select id="slDocente" name="slDocente" class="custom-select"selectedindex=1>
+						<%	for (Docente doc : listaDocentes) {
+					%>
+						<option value=<%=doc.getLegajo()%> class="dropdown-item"><%=doc.getNombre()%> <%=doc.getApellido()%></option>
+					
+						<%
+						}
+						%>	
 						</select>
 						</div>
 						
+						<%
+						}
+					%>
+						</div>
 					</div>
+					
 					<br>
 					<div>
-					<div class="wrapper">
+				</div>
+		<div class="wrapper">
 		<div id="formContent" class="table-responsive">
-					<table id="example" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-         <th>Seleccionar</th>  
-		 <th>Legajo</th>
-		 <th>Nombre</th>
-		 <th>Apellido</th>
-            </tr>
-        </thead>
-        <tbody>
-       <tr>
-          <th><input type="checkbox"></th>
-          <th>21592</th>
-		 <th>Oriana</th>
-		 <th>Garcia</th>
-       </tr>
-              <tr>
-              <th><input type="checkbox"></th>
-          <th>22012</th>
-		 <th>Elias</th>
-		 <th>Valenzuela</th>
-       </tr>
-        </tbody>
-      
-    </table>
+			<table id="example" class="table table-striped table-bordered"
+				style="width: 100%">
+				<thead class="thead-dark">
+					<tr>
+						<th style="text-align: center">Seleccionar </th>
+						<th style="text-align: center">Legajo</th>
+						<th style="text-align: center">Apellido</th>
+						<th style="text-align: center">Nombre</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						ArrayList<Alumno> lista = null;
+						if (request.getAttribute("ListaAlumnos") != null) {
+							lista = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
+						}
+
+						if (lista != null) {
+							for (Alumno alumno : lista) {
+					%>
+					<tr>
+						<th><input type="checkbox" id="cbox1" value="cboxAlumno"> </th>
+						<th><%=alumno.getLegajo()%></th>
+						<th><%=alumno.getApellido()%></th>
+						<th><%=alumno.getNombre()%></th>
+					</tr>
+					<%
+						}
+						}
+					%>
+				</tbody>
+			</table>
 			</div>	
 			</div>			
 					</div>
 					<br>
-					
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Cerrar</button>
-						<button type="button" class="btn btn-primary">Aceptar</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+				<form method="post" action="ServeletCurso">
+				<button type="submit" class="btn btn-block btn-outline-info"
+               id="btnAltaCurso" name="btnGuardarCurso">Guardar Curso</button>
+				</form>
+
 </body>
 </html>

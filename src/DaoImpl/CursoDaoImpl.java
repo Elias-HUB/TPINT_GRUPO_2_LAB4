@@ -1,5 +1,7 @@
 package DaoImpl;
 
+import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,13 +16,37 @@ import Entidad.Materia;
 import Entidad.Persona;
 
 public class CursoDaoImpl implements CursoDao{
+	private static final String insert = "insert into cursos (IdMateria, Cuatrimestre, Año, Turno, LegajoDocente, Estado) VALUES(?, ?, ?, ?, ?, ?)";
 	private static final String readall = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria";
 	private static final String readCursosXDocente = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria where c.legajoDocente=?";
 
 	@Override
 	public boolean insert(Curso curso) {
-		// TODO Auto-generated method stub
-		return false;
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isInsertExitoso = false;
+		try {
+			statement = conexion.prepareStatement(insert);
+			statement.setInt(1, curso.Materia.getIdMateria());
+			statement.setInt(2, curso.getCuatrimestre());
+			statement.setInt(3, curso.getAño());
+			statement.setString(4, curso.getTurno());
+			statement.setInt(5, curso.docente.getLegajo());
+			statement.setBoolean(6, true);
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+		} catch (SQLException e) {
+
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+
+				return isInsertExitoso = false;
+			}
+		}
+		return isInsertExitoso;
 	}
 
 	@Override

@@ -42,8 +42,10 @@
 </head>
 <body>
 <br>
+<form method="post" action="ServeletCurso">
 <button type="submit" class="btn btn-block btn-outline-info"
-               id="btnAgregar" name="btnAgregar" style="margin-bottom: 10px;">Agregar Curso</button>
+               id="btnAgregar" name="btnAgregarCurso" style="margin-bottom: 10px;">Agregar Curso</button>
+</form>
 	<div class="wrapper">
 		<div id="formContent" class="table-responsive">
 
