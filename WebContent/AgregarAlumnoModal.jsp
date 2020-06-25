@@ -19,20 +19,7 @@
 					<div class="container">
 
 						<div class="form-row ">
-
-<%-- 							LEGAJO --%>
-<!-- 							<div class="form-group col-md-1"> -->
-<!-- 								<div> -->
-<!-- 									<label Class="control-label">Legajo</label> -->
-<!-- 								</div> -->
-<!-- 								<input ID="TboxLegajoA" name="TboxLegajoA" -->
-<!-- 									onKeyPress="return soloNumeros(event)" -->
-<!-- 									onkeyup="validarLegajo(this.id)" onfocus="Seleccionar(this.id)" -->
-<!-- 									maxlength="8" placeholder="22012" Class="form-control" readonly="readonly"> -->
-<!-- 								<p id="MensajeErrorLegajo"></p> -->
-<!-- 							</div> -->
-
-
+						
 							<%--Nombre--%>
 							<div class="form-group col-md-3">
 								<div>

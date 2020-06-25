@@ -4,37 +4,50 @@ public class Domicilio {
 	
 
 	private String Direccion;
-	private String Localidad;
-	private String Provincia;
+	private Localidad Localidad;
+	private Provincia Provincia;
+	
 
 	
 	public Domicilio() {
 		
 	}
-	
-	public Domicilio(String direccion, String localidad, String provincia) {
-		Direccion = direccion;
-		Localidad = localidad;
-		Provincia = provincia;
-	}
-		
+
+
+
 	public String getDireccion() {
 		return Direccion;
 	}
+
+
+
 	public void setDireccion(String direccion) {
 		Direccion = direccion;
 	}
-	public String getLocalidad() {
+
+
+
+	public Localidad getLocalidad() {
 		return Localidad;
 	}
-	public void setLocalidad(String localidad) {
+
+
+
+	public void setLocalidad(Localidad localidad) {
 		Localidad = localidad;
 	}
-	public String getProvincia() {
+
+
+
+	public Provincia getProvincia() {
 		return Provincia;
 	}
-	public void setProvincia(String provincia) {
+
+
+
+	public void setProvincia(Provincia provincia) {
 		Provincia = provincia;
 	}
 	
+
 }

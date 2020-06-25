@@ -31,8 +31,8 @@ public class DocenteDaoImpl implements DocenteDao {
 			statement.setString(3, docente.getApellido());
 			statement.setDate(4, (Date) docente.getFechaNacimiento());
 			statement.setString(5, docente.getDomicilio().getDireccion());
-			statement.setString(6, docente.getDomicilio().getLocalidad());
-			statement.setString(7, docente.getDomicilio().getProvincia());
+//			statement.setString(6, docente.getDomicilio().getLocalidad());
+//			statement.setString(7, docente.getDomicilio().getProvincia());
 			statement.setString(8, docente.getEmail());
 			statement.setLong(9, docente.getTelefono());
 			statement.setBoolean(10, docente.getEstado());
@@ -82,8 +82,8 @@ public class DocenteDaoImpl implements DocenteDao {
 			statement.setString(3, docente.getApellido());
 			statement.setDate(4, (Date) docente.getFechaNacimiento());
 			statement.setString(5, docente.getDomicilio().getDireccion());
-			statement.setString(6, docente.getDomicilio().getLocalidad());
-			statement.setString(7, docente.getDomicilio().getProvincia());
+//			statement.setString(6, docente.getDomicilio().getLocalidad());
+//			statement.setString(7, docente.getDomicilio().getProvincia());
 			statement.setString(8, docente.getEmail());
 			statement.setLong(9, docente.getTelefono());
 			statement.setBoolean(10, docente.getEstado());
@@ -143,8 +143,8 @@ public class DocenteDaoImpl implements DocenteDao {
 		docente.setEstado(resultSet.getBoolean("Estado"));
 		Domicilio domicilio = new Domicilio();
 		domicilio.setDireccion(resultSet.getString("Direccion"));
-		domicilio.setLocalidad(resultSet.getString("Localidad"));
-		domicilio.setProvincia(resultSet.getString("Provincia"));
+//		domicilio.setLocalidad(resultSet.getString("Localidad"));
+//		domicilio.setProvincia(resultSet.getString("Provincia"));
 		docente.setDomicilio(domicilio);
 
 		return docente;

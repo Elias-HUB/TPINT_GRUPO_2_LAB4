@@ -13,11 +13,10 @@ public class Docente extends Persona {
 
 	}
 
-	public Docente(int legajo, int dni, String nombre, String apellido, Date fechaNacimiento, String email,
-			long telefono, Domicilio domicilio, Boolean estado, TipoUsuario tipoU) {
-		super(legajo, dni, nombre, apellido, fechaNacimiento, email, telefono, domicilio);
-		Estado = estado;
-		tipo = new TipoUsuario(tipoU);
+	public Docente(int legajo, int dni, String nombre, String apellido, Date fechaNacimiento, Domicilio domicilio,
+			String email, Long telefono) {
+		super(legajo, dni, nombre, apellido, fechaNacimiento, domicilio, email, telefono);
+		// TODO Auto-generated constructor stub
 	}
 
 	public Boolean getEstado() {

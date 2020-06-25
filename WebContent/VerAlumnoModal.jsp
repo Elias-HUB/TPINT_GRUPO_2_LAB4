@@ -16,7 +16,7 @@
 
 				<div class="container">
 
-					<div class="form-row ">
+					<div class="form-row">
 
 						<%--LEGAJO--%>
 						<div class="form-group col-md-1">
@@ -113,16 +113,6 @@
 							<p id="MensajeErrorDireccion"></p>
 						</div>
 
-						<%--Localidad--%>
-						<div class="form-group col-md-3">
-							<div>
-								<label Class="control-label">Localidad</label>
-							</div>
-							<input ID="TboxLocalidad" Class="form-control"
-								readonly="readonly">
-							<p id="MensajeErrorLocalidad"></p>
-						</div>
-
 						<%--Provincia--%>
 						<div class="form-group col-md-3">
 							<div>
@@ -130,7 +120,17 @@
 							</div>
 							<input ID="TboxProvincia" Class="form-control"
 								readonly="readonly">
-							<p id="MensajeErrorCP"></p>
+							<p id="MensajeErrorProvincia"></p>
+						</div>
+						
+						<%--Localidad--%>						
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Localidad</label>
+							</div>
+							<input ID="TboxLocalidad" Class="form-control"
+								readonly="readonly">
+							<p id="MensajeErrorLocalidad"></p>
 						</div>
 					</div>
 				</div>

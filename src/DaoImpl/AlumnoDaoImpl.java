@@ -11,13 +11,15 @@ import java.util.ArrayList;
 import Dao.AlumnoDao;
 import Entidad.Alumno;
 import Entidad.Domicilio;
+import Entidad.Localidad;
+import Entidad.Provincia;
 
 public class AlumnoDaoImpl implements AlumnoDao {
 
 	private static final String insert = "insert into Alumnos(Dni, Nombre, Apellido, FechaNacimiento, Direccion, Localidad, Provincia, Email, Telefono, Estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "UPDATE Alumnos set Estado = 0 WHERE Legajo = ?";
 	private static final String update = "UPDATE Alumnos set Dni=?, Nombre=?, Apellido=?, FechaNacimiento=?, Direccion=?, Localidad=?, Provincia=?, Email=?, Telefono=?, Estado=? where Legajo =?";
-	private static final String readall = "SELECT * FROM Alumnos where Estado = 1";
+	private static final String readall = "SELECT alumnos.Legajo, alumnos.Dni, alumnos.Nombre, alumnos.Apellido, alumnos.FechaNacimiento, alumnos.Email, alumnos.Telefono, alumnos.Estado, alumnos.Direccion, alumnos.Provincia as 'ProvinciaId', provincias.provincia as 'ProvinciaNombre', alumnos.Localidad as 'LocalidadId', localidades.localidad as 'LocalidadNombre' FROM tpint_grupo2_lab4.alumnos inner join tpint_grupo2_lab4.provincias on alumnos.Provincia = provincias.id inner join tpint_grupo2_lab4.localidades on alumnos.Localidad = localidades.id where Estado = 1;";
 
 	@Override
 	public boolean insert(Alumno alumno) {
@@ -31,8 +33,8 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			statement.setString(3, alumno.getApellido());
 			statement.setDate(4, (Date) alumno.getFechaNacimiento());
 			statement.setString(5, alumno.getDomicilio().getDireccion());
-			statement.setString(6, alumno.getDomicilio().getLocalidad());
-			statement.setString(7, alumno.getDomicilio().getProvincia());
+			statement.setInt(6, alumno.getDomicilio().getLocalidad().getID());
+			statement.setInt(7, alumno.getDomicilio().getProvincia().getID());
 			statement.setString(8, alumno.getEmail());
 			statement.setLong(9, alumno.getTelefono());
 			statement.setBoolean(10, alumno.getEstado());
@@ -82,8 +84,8 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			statement.setString(3, alumno.getApellido());
 			statement.setDate(4, (Date) alumno.getFechaNacimiento());
 			statement.setString(5, alumno.getDomicilio().getDireccion());
-			statement.setString(6, alumno.getDomicilio().getLocalidad());
-			statement.setString(7, alumno.getDomicilio().getProvincia());
+			statement.setInt(6, alumno.getDomicilio().getLocalidad().getID());
+			statement.setInt(7, alumno.getDomicilio().getProvincia().getID());
 			statement.setString(8, alumno.getEmail());
 			statement.setLong(9, alumno.getTelefono());
 			statement.setBoolean(10, alumno.getEstado());
@@ -130,20 +132,29 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		Alumno alumno = new Alumno();
-		alumno.setLegajo(resultSet.getInt("Legajo"));
-		alumno.setDni(resultSet.getInt("Dni"));
-		alumno.setNombre(resultSet.getString("Nombre"));
-		alumno.setApellido(resultSet.getString("Apellido"));
-		alumno.setFechaNacimiento(resultSet.getDate("FechaNacimiento"));
-		alumno.setEmail(resultSet.getString("Email"));
-		alumno.setTelefono(resultSet.getLong("Telefono"));
-		alumno.setEstado(resultSet.getBoolean("Estado"));
+		alumno.setLegajo(resultSet.getInt("alumnos.Legajo"));
+		alumno.setDni(resultSet.getInt("alumnos.Dni"));
+		alumno.setNombre(resultSet.getString("alumnos.Nombre"));
+		alumno.setApellido(resultSet.getString("alumnos.Apellido"));
+		alumno.setFechaNacimiento(resultSet.getDate("alumnos.FechaNacimiento"));
+		alumno.setEmail(resultSet.getString("alumnos.Email"));
+		alumno.setTelefono(resultSet.getLong("alumnos.Telefono"));
+		alumno.setEstado(resultSet.getBoolean("alumnos.Estado"));
 		Domicilio domicilio = new Domicilio();
 		domicilio.setDireccion(resultSet.getString("Direccion"));
-		domicilio.setLocalidad(resultSet.getString("Localidad"));
-		domicilio.setProvincia(resultSet.getString("Provincia"));
+		
+		Localidad localidad = new Localidad();
+		localidad.setID((resultSet.getInt("ProvinciaId")));
+		localidad.setNombre((resultSet.getString("ProvinciaNombre")));
+		
+		Provincia provincia = new Provincia();
+		provincia.setID((resultSet.getInt("LocalidadId")));
+		provincia.setNombre((resultSet.getString("LocalidadNombre")));
+		
+		domicilio.setLocalidad(localidad);
+		domicilio.setProvincia(provincia);
 		alumno.setDomicilio(domicilio);
 
 		return alumno;

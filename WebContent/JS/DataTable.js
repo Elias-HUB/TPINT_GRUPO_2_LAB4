@@ -7,27 +7,40 @@ function ModalVerCargaDatos(datos) {
 	$("#TboxEmail").val(alumno[4]);
 	$("#TboxTelefono").val(alumno[5]);
 	$("#TboxDirreccion").val(alumno[6]);
-	$("#TboxLocalidad").val(alumno[7]);
-	$("#TboxProvincia").val(alumno[8]);
+	$("#TboxProvincia").val(alumno[7]);
+	$("#TboxLocalidad").val(alumno[8]);
 	$("#TboxDni").val(alumno[9]);
-	// var fullname = algo;
-	// $.ajax({
-	// type : 'POST',
-	// url : 'ServletAlumno',
-	// data : {
-	// fullname : fullname
-	// },
-	// success : function(result) {
-	// // $('#result1').html(result);
 	jQuery.noConflict();
-	// $('#ModalAlumnoVer').modal.find('.modal-title').text('ALO')
 	$('#ModalAlumnoVer').modal('show');
 	$('#ModalAlumnoVer').find('.modal-title').text("Alumno")
-	//
-	// $("#TboxLegajo").val(result["Nombre"]);
-	// }
-	// })
 }
+
+function cambia_Localidad(){ 
+	var ProvinciaId;
+	ProvinciaId = document.getElementById('TboxProvinciaM').value;
+	$.ajax({
+		type : 'POST',
+		url : 'ServeletLocalidad',
+		dataType : "json",
+		data : {
+			Provinciaid : ProvinciaId
+		},
+		success : function(result) {
+			if (result) {
+				$("#TboxLocalidadM option:not(:disabled)").remove();
+				$.each(result, function(index, option) {
+					console.log("option: " + option)
+					$("#TboxLocalidadM").append(
+							'<option value="' + option.ID + '">'
+									+ option.Nombre + '</option>')					
+				});
+			}
+		},
+		error : function(data) {
+			alert('fail');
+		}
+	})
+};
 
 function ModalModificarCargaDatos(datos) {
 	var alumno = datos.split('||');
@@ -38,20 +51,43 @@ function ModalModificarCargaDatos(datos) {
 	$("#TboxEmailM").val(alumno[4]);
 	$("#TboxTelefonoM").val(alumno[5]);
 	$("#TboxDirreccionM").val(alumno[6]);
-	$("#TboxLocalidadM").val(alumno[7]);
-	$("#TboxProvinciaM").val(alumno[8]);
 	$("#TboxDniM").val(alumno[9]);
-	jQuery.noConflict();
-	$('#ModalAlumnoModificar').modal('show');
-	$('#ModalAlumnoModificar').find('.modal-title').text("Modificar Alumno")
+	$("#TboxProvinciaM").val(alumno[10]);
+	var ProvinciaId;
+	ProvinciaId = document.getElementById('TboxProvinciaM').value;
+	$.ajax({
+		type : 'POST',
+		url : 'ServeletLocalidad',
+		dataType : "json",
+		data : {
+			Provinciaid : ProvinciaId
+		},
+		success : function(result) {
+			if (result) {
+				$("#TboxLocalidadM option:not(:disabled)").remove();
+				$.each(result, function(index, option) {
+					console.log("option: " + option)
+					$("#TboxLocalidadM").append(
+							'<option value="' + option.ID + '">'
+									+ option.Nombre + '</option>')
+					jQuery.noConflict();
+					$('#ModalAlumnoModificar').modal('show');
+					$('#ModalAlumnoModificar').find('.modal-title').text(
+							"Modificar Alumno");
+					$("#TboxLocalidadM").val(alumno[11]);
+				});
+			}
+		},
+		error : function(data) {
+			alert('fail');
+		}
+	})
 }
 
-
-// $('document').ready(function() {
-// $('#Ver').click(function() {
-// $('#ModalAlumnoVer').modal('show');
-// });
-// });
+function Cambia_Localidad() {
+	var Provincia;
+	Provincia = document.getElementById('TboxProvinciaM').value;
+}
 
 $(document)
 		.ready(
@@ -129,4 +165,7 @@ $(document)
 													columns : 4
 												}, ]
 									});
+					
 				});
+//ACA TA BIEN
+

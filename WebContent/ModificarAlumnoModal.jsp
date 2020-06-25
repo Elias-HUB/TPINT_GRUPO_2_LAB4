@@ -1,4 +1,7 @@
-<!-- Modal -->
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="Entidad.Provincia"%>
+<%@ page import="Entidad.Localidad"%>
+<!-- Inicio Modal -->
 <div class="modal fade bd-example-modal-xl" id="ModalAlumnoModificar"
 	tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
@@ -13,7 +16,6 @@
 			</div>
 			<form action="ServletAlumno" method="post">
 				<div class="modal-body">
-					<!-- 			______________________________________________________ -->
 
 
 					<div class="container">
@@ -28,7 +30,8 @@
 								<input ID="TboxLegajoM" name="TboxLegajoM"
 									onKeyPress="return soloNumeros(event)"
 									onkeyup="validarLegajo(this.id)" onfocus="Seleccionar(this.id)"
-									maxlength="8" placeholder="22012" Class="form-control" readonly="readonly">
+									maxlength="8" placeholder="22012" Class="form-control"
+									readonly="readonly">
 								<p id="MensajeErrorLegajo"></p>
 							</div>
 
@@ -134,28 +137,74 @@
 							<p id="MensajeErrorDireccion"></p>
 						</div>
 
-						<%--Localidad--%>
-						<div class="form-group col-md-3">
-							<div>
-								<label Class="control-label">Localidad</label>
-							</div>
-							<input ID="TboxLocalidadM" name="TboxLocalidadM"
-								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
-								maxlength="20" placeholder="Talar" Class="form-control">
-							<p id="MensajeErrorLocalidad"></p>
-						</div>
-
 						<%--Provincia--%>
 						<div class="form-group col-md-3">
-							<div>
-								<label Class="control-label">Provincia</label>
-							</div>
-							<input ID="TboxProvinciaM" name="TboxProvinciaM"
-								onKeyPress="return soloNumeros(event)"
-								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
-								maxlength="16" placeholder="Buenos Aires" Class="form-control">
-							<p id="MensajeErrorCP"></p>
+							<label for="TboxProvinciaM" class="col-form-label">Provincia</label>
+							<select id="TboxProvinciaM" name="TboxProvinciaM"
+								class="form-control" tabindex="6" onchange="cambia_Localidad()">
+								
+					<%
+						ArrayList<Provincia> lista = null;
+						if (request.getAttribute("ListaProvincia") != null) {
+							lista = (ArrayList<Provincia>) request.getAttribute("ListaProvincia");
+						}
+
+						if (lista != null) {
+							for (Provincia provincia : lista) {
+					%>
+					<option value="<%=provincia.getID()%>" ><%=provincia.getNombre()%></option>
+								<%
+							}}
+								%>	
+							</select>
 						</div>
+
+<%-- 						Provincia --%>
+<!-- 						<div class="form-group col-md-3"> -->
+<!-- 							<div> -->
+<!-- 								<label Class="control-label">Provincia</label> -->
+<!-- 							</div> -->
+<!-- 							<input ID="TboxProvinciaM" name="TboxProvinciaM" -->
+<!-- 								onKeyPress="return soloNumeros(event)" -->
+<!-- 								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)" -->
+<!-- 								maxlength="16" placeholder="Buenos Aires" Class="form-control"> -->
+<!-- 							<p id="MensajeErrorCP"></p> -->
+<!-- 						</div> -->
+
+
+						<%--Localidad--%>
+						<div class="form-group col-md-3">
+							<label for="TboxLocalidadM" class="col-form-label">Localidad</label>
+							<select id="TboxLocalidadM" name="TboxLocalidadM"
+								class="form-control" tabindex="6">
+								
+					<%
+						ArrayList<Localidad> ListaLocalidades = null;
+						if (request.getAttribute("ListaLocalidad") != null) {
+							ListaLocalidades = (ArrayList<Localidad>) request.getAttribute("ListaLocalidad");
+						}
+
+						if (lista != null) {
+							for (Localidad localidad : ListaLocalidades) {
+					%>
+					<option value="<%=localidad.getID()%>"><%=localidad.getNombre()%></option>
+								<%
+							}}
+								%>	
+							</select>
+						</div>
+
+						<%--Localidad--%>
+<!-- 						<div class="form-group col-md-3"> -->
+<!-- 							<div> -->
+<!-- 								<label Class="control-label">Localidad</label> -->
+<!-- 							</div> -->
+<!-- 							<input ID="TboxLocalidadM" name="TboxLocalidadM" -->
+<!-- 								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)" -->
+<!-- 								maxlength="20" placeholder="Talar" Class="form-control"> -->
+<!-- 							<p id="MensajeErrorLocalidad"></p> -->
+<!-- 						</div> -->
+
 					</div>
 				</div>
 
@@ -172,3 +221,5 @@
 	</div>
 </div>
 </div>
+
+<!-- Inicio Modal -->

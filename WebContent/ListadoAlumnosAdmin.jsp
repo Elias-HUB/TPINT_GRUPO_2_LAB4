@@ -3,6 +3,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="Entidad.Alumno"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,8 +12,6 @@
 <jsp:include page="LibreriasJtable.jsp"></jsp:include>
 
 <link rel="stylesheet" href="Css/JTable.css">
-
-
 </head>
 <body>
 
@@ -46,7 +45,8 @@
 								String datos = ("'" + alumno.getLegajo() + "||" + alumno.getNombre() + "||" + alumno.getApellido()
 										+ "||" + alumno.getFechaNacimiento() + "||" + alumno.getEmail() + "||"
 										+ alumno.getTelefono() + "||" + alumno.getDomicilio().getDireccion() + "||"
-										+ alumno.getDomicilio().getLocalidad() + "||" + alumno.getDomicilio().getProvincia() + "||" + alumno.getDni() + "'")
+										+ alumno.getDomicilio().getProvincia().getNombre() + "||" + alumno.getDomicilio().getLocalidad().getNombre() + "||" + alumno.getDni()
+										+ "||" + alumno.getDomicilio().getLocalidad().getID() + "||" + alumno.getDomicilio().getProvincia().getID()+ "||" + "Prueba" +"'")
 												.toString();
 					%>
 
