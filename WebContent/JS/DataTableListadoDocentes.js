@@ -3,14 +3,26 @@ $( document ).ready(function() {
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
     var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-    $("#TboxFechaNacimientoA").val(today);
+    $("#TboxFechaNacimientoA").val(today);  
 });
 
-function ModalAlumnoAgregar() {
+function mostrarPassword(){
+	var cambio = document.getElementById("txtPassword");
+	if(cambio.type == "password"){
+		cambio.type = "text";
+		$('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+	}else{
+		cambio.type = "password";
+		$('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+	}
+} 
+
+
+function ModalDocenteAgregar() {
 	$("#TboxProvincia").val('1');
 	$("#TboxLocalidad").val('1');
 	jQuery.noConflict();
-	$('#ModalAlumnoAgregar').modal('show');
+	$('#ModalDocenteAgregar').modal('show');
 }
 
 function ModalVerCargaDatos(datos) {
@@ -26,8 +38,8 @@ function ModalVerCargaDatos(datos) {
 	$("#TboxLocalidad").val(alumno[8]);
 	$("#TboxDni").val(alumno[9]);
 	jQuery.noConflict();
-	$('#ModalAlumnoVer').modal('show');
-	$('#ModalAlumnoVer').find('.modal-title').text("Alumno")
+	$('#ModalDocenteVer').modal('show');
+	$('#ModalDocenteVer').find('.modal-title').text("Docente")
 }
 
 function cambia_Localidad(){ 
@@ -115,9 +127,9 @@ function ModalModificarCargaDatos(datos) {
 							'<option value="' + option.ID + '">'
 									+ option.Nombre + '</option>')
 					jQuery.noConflict();
-					$('#ModalAlumnoModificar').modal('show');
-					$('#ModalAlumnoModificar').find('.modal-title').text(
-							"Modificar Alumno");
+					$('#ModalDocenteModificar').modal('show');
+					$('#ModalDocenteModificar').find('.modal-title').text(
+							"Modificar Docente");
 					$("#TboxLocalidadM").val(alumno[11]);
 				});
 			}
@@ -132,3 +144,5 @@ function Cambia_Localidad() {
 	var Provincia;
 	Provincia = document.getElementById('TboxProvinciaM').value;
 }
+
+

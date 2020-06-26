@@ -7,7 +7,7 @@ $(document)
 									{
 										"columnDefs" : [ {
 											"orderable" : false,
-											"targets" : [ 4 ]
+											"targets" : [ 5 ]
 										} ],
 										"lengthMenu" : [ [ 5, 10, -1 ],
 												[ 5, 10, "Todos" ] ],
@@ -71,7 +71,7 @@ $(document)
 													text : '<i class="fa fa-eye-slash" ></i> ',
 													titleAttr : 'Sacar Columna Acciones',
 													className : 'btn btn-info',
-													columns : 4
+													columns : 5
 												}, ]
 									});
 					

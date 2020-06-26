@@ -20,7 +20,7 @@
 					<!-- 			______________________________________________________ -->
 
 
-					<div class="container">
+
 
 						<div class="form-row ">
 						
@@ -61,7 +61,7 @@
 							</div>
 						</div>
 
-					</div>
+
 
 
 
@@ -114,7 +114,7 @@
 					<div class="form-row">
 
 						<%--Dirrecion--%>
-						<div class="form-group col-md-5">
+						<div class="form-group col-md-5" style="margin-top: 7px">
 							<div>
 								<label Class="control-label">Dirección</label>
 							</div>

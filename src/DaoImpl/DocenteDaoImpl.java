@@ -11,13 +11,15 @@ import java.util.List;
 import Dao.DocenteDao;
 import Entidad.Docente;
 import Entidad.Domicilio;
+import Entidad.Localidad;
+import Entidad.Provincia;
 
 public class DocenteDaoImpl implements DocenteDao {
 
 	private static final String insert = "insert into Docentes(Dni, Nombre, Apellido, FechaNacimiento, Direccion, Localidad, Provincia, Email, Telefono, Estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "UPDATE Docentes set Estado = 0 WHERE Dni = ?";
 	private static final String update = "UPDATE Docentes set Dni=?, Nombre=?, Apellido=?, FechaNacimiento=?, Direccion=?, Localidad=?, Provincia=?, Email=?, Telefono=?, Estado=? where Dni =?";
-	private static final String readall = "SELECT * FROM Docentes where Estado = 1";
+	private static final String readall = "SELECT docentes.Legajo, docentes.Dni, docentes.Nombre, docentes.Apellido, docentes.FechaNacimiento, docentes.Email, docentes.Telefono, docentes.Estado, docentes.Direccion, docentes.Provincia as 'ProvinciaId', provincias.provincia as 'ProvinciaNombre', docentes.Localidad as 'LocalidadId', localidades.localidad as 'LocalidadNombre' FROM tpint_grupo2_lab4.docentes inner join tpint_grupo2_lab4.provincias on docentes.Provincia = provincias.id inner join tpint_grupo2_lab4.localidades on docentes.Localidad = localidades.id where Estado = 1;";
 	private static final String readUno = "SELECT * FROM Docentes where legajo=?"; 
 	@Override
 	public boolean insert(Docente docente) {
@@ -31,8 +33,8 @@ public class DocenteDaoImpl implements DocenteDao {
 			statement.setString(3, docente.getApellido());
 			statement.setDate(4, (Date) docente.getFechaNacimiento());
 			statement.setString(5, docente.getDomicilio().getDireccion());
-//			statement.setString(6, docente.getDomicilio().getLocalidad());
-//			statement.setString(7, docente.getDomicilio().getProvincia());
+			statement.setInt(6, docente.getDomicilio().getLocalidad().getID());
+			statement.setInt(7, docente.getDomicilio().getProvincia().getID());
 			statement.setString(8, docente.getEmail());
 			statement.setLong(9, docente.getTelefono());
 			statement.setBoolean(10, docente.getEstado());
@@ -82,8 +84,8 @@ public class DocenteDaoImpl implements DocenteDao {
 			statement.setString(3, docente.getApellido());
 			statement.setDate(4, (Date) docente.getFechaNacimiento());
 			statement.setString(5, docente.getDomicilio().getDireccion());
-//			statement.setString(6, docente.getDomicilio().getLocalidad());
-//			statement.setString(7, docente.getDomicilio().getProvincia());
+			statement.setInt(6, docente.getDomicilio().getLocalidad().getID());
+			statement.setInt(7, docente.getDomicilio().getProvincia().getID());
 			statement.setString(8, docente.getEmail());
 			statement.setLong(9, docente.getTelefono());
 			statement.setBoolean(10, docente.getEstado());
@@ -143,8 +145,17 @@ public class DocenteDaoImpl implements DocenteDao {
 		docente.setEstado(resultSet.getBoolean("Estado"));
 		Domicilio domicilio = new Domicilio();
 		domicilio.setDireccion(resultSet.getString("Direccion"));
-//		domicilio.setLocalidad(resultSet.getString("Localidad"));
-//		domicilio.setProvincia(resultSet.getString("Provincia"));
+		
+		Localidad localidad = new Localidad();
+		localidad.setID((resultSet.getInt("ProvinciaId")));
+		localidad.setNombre((resultSet.getString("ProvinciaNombre")));
+		
+		Provincia provincia = new Provincia();
+		provincia.setID((resultSet.getInt("LocalidadId")));
+		provincia.setNombre((resultSet.getString("LocalidadNombre")));
+		
+		domicilio.setLocalidad(localidad);
+		domicilio.setProvincia(provincia);
 		docente.setDomicilio(domicilio);
 
 		return docente;

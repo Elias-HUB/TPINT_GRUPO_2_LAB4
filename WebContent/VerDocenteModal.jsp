@@ -1,74 +1,147 @@
-</html>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<jsp:include page="HeadAdministrador.jsp"></jsp:include>
+<!-- Modal -->
+<div class="modal fade bd-example-modal-xl" id="ModalDocenteVer"
+	tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog  modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-secondary text-white">
+				<h5 class="modal-title" id="exampleModalLabel">Docente</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
 
-</head>
-<body>
-	<!-- Button trigger modal -->
-	<button type="button" class="btn btn-primary" data-toggle="modal"
-		data-target="#exampleModal">Probar</button>
 
-	<!-- Modal -->
-	<div class="modal fade modal-xl" id="exampleModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog  modal-xl" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Docente</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+				<div class="container">
+
+					<div class="form-row">
+
+						<%--LEGAJO--%>
+						<div class="form-group col-md-1">
+							<div>
+								<label Class="control-label">Legajo</label>
+							</div>
+							<input id="TboxLegajo" name="TboxLegajo"
+								Class="form-control input_valores_provisionales"
+								readonly="readonly">
+							<p id="MensajeErrorLegajo"></p>
+						</div>
+
+
+						<%--Nombre--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Nombre</label>
+							</div>
+							<input ID="TboxNombre" Class="form-control" readonly="readonly">
+							<p id="MensajeErrorNombre"></p>
+						</div>
+
+						<%--Apellido--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Apellido</label>
+							</div>
+							<input ID="TboxApellido" Class="form-control" readonly="readonly">
+							<p id="MensajeErrorApellido"></p>
+						</div>
+						
+						<%--Dni--%>
+							<div class="form-group col-md-3">
+								<div>
+									<label Class="control-label">Dni</label>
+								</div>
+								<input id="TboxDni" Class="form-control" readonly="readonly">
+								<p id="MensajeErrorDni"></p>
+							</div>
+						</div>
+					</div>
+
+
+					
+						
+					<div class="form-row ">
+
+						<%--FechaNacimiento--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Fecha Nacimiento</label>
+							</div>
+							<input type="date" ID="TboxFechaNacimiento" class="form-control"
+								readonly="readonly">
+						</div>
+
+						<%--Email--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Email</label>
+							</div>
+
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">@</div>
+								</div>
+
+								<input ID="TboxEmail" Class="form-control" readonly="readonly">
+								<p id="MensajeErrorEmail"></p>
+							</div>
+						</div>
+
+
+						<%--Telefono--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Telefono</label>
+							</div>
+							<input ID="TboxTelefono" Class="form-control" readonly="readonly">
+							<p id="MensajeErrorTelefono"></p>
+						</div>
+
+					</div>
+
+					<div class="form-row">
+
+						<%--Dirrecion--%>
+						<div class="form-group col-md-5">
+							<div>
+								<label Class="control-label">Dirección</label>
+							</div>
+							<input ID="TboxDirreccion" Class="form-control"
+								readonly="readonly">
+							<p id="MensajeErrorDireccion"></p>
+						</div>
+
+						<%--Provincia--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Provincia</label>
+							</div>
+							<input ID="TboxProvincia" Class="form-control"
+								readonly="readonly">
+							<p id="MensajeErrorProvincia"></p>
+						</div>
+						
+						<%--Localidad--%>						
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Localidad</label>
+							</div>
+							<input ID="TboxLocalidad" Class="form-control"
+								readonly="readonly">
+							<p id="MensajeErrorLocalidad"></p>
+						</div>
+					</div>
 				</div>
 
-				<div class="modal-body">
 
-					<%--Legajo--%>
-					<div >
-						<label for="Legajo">Legajo</label> 
-						<input type="text" id="txtLegajo" name="Legajo" readonly>
-						 
-						<%--Nombre--%>
-							<label for="Nombre">Nombre</label> 
-							<input type="text" id="txtNombre" name="Nombre" readonly>
-						<%--Apellido--%>	
-							<label for="Apellido">Apellido</label> 
-							<input type="text" id="txtApellido" name="Apellido" readonly>
-						</div>
-						<br> 
-					<%--Fecha nac--%>
-					<div >
-						<label for="FechaNac">Fecha Nacimiento</label> 
-						<input type="text" id="txtFechaNac" name="FechaNac" readonly>
-						
-						<label for="Email">Email</label> 
-						<input type="Email" id="txtEmail" name="Email" readonly>
-						
-						<label for="Telefono">Telefono</label> 
-						<input type="Telefono" id="txtTelefono" name="Telefono" readonly>
-					</div>
-					<br> 
-					<div >
-						<label for="Direccion">Direccion</label> 
-						<input type="text" id="txtDireccion" name="Direccion" readonly>
-						
-						<label for="Localidad">Localidad</label> 
-						<input type="text" id="txtLocalidad" name="Localidad" readonly>
-						
-						<label for="´Provincia">Provincia</label> 
-						<input type="Provincia" id="txtProvincia" name="Provincia" readonly>
-					</div>
-						<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Cerrar</button>
-							
-						</div>
-					</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Cerrar</button>
+
 				</div>
 			</div>
-</body>
-</html>
+		</div>
+	</div>
+</div>

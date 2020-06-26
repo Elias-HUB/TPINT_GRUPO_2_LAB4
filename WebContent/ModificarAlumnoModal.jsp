@@ -7,7 +7,7 @@
 	aria-hidden="true">
 	<div class="modal-dialog  modal-xl" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
+			<div class="modal-header bg-secondary text-white">
 				<h5 class="modal-title" id="exampleModalLabel">Alumno</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
@@ -18,7 +18,6 @@
 				<div class="modal-body">
 
 
-					<div class="container">
 
 						<div class="form-row ">
 
@@ -73,7 +72,7 @@
 							</div>
 						</div>
 
-					</div>
+	
 
 
 
@@ -126,7 +125,7 @@
 					<div class="form-row">
 
 						<%--Dirrecion--%>
-						<div class="form-group col-md-5">
+						<div class="form-group col-md-5" style="margin-top: 7px">
 							<div>
 								<label Class="control-label">Dirección</label>
 							</div>
@@ -159,18 +158,6 @@
 							</select>
 						</div>
 
-<%-- 						Provincia --%>
-<!-- 						<div class="form-group col-md-3"> -->
-<!-- 							<div> -->
-<!-- 								<label Class="control-label">Provincia</label> -->
-<!-- 							</div> -->
-<!-- 							<input ID="TboxProvinciaM" name="TboxProvinciaM" -->
-<!-- 								onKeyPress="return soloNumeros(event)" -->
-<!-- 								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)" -->
-<!-- 								maxlength="16" placeholder="Buenos Aires" Class="form-control"> -->
-<!-- 							<p id="MensajeErrorCP"></p> -->
-<!-- 						</div> -->
-
 
 						<%--Localidad--%>
 						<div class="form-group col-md-3">
@@ -193,17 +180,6 @@
 								%>	
 							</select>
 						</div>
-
-						<%--Localidad--%>
-<!-- 						<div class="form-group col-md-3"> -->
-<!-- 							<div> -->
-<!-- 								<label Class="control-label">Localidad</label> -->
-<!-- 							</div> -->
-<!-- 							<input ID="TboxLocalidadM" name="TboxLocalidadM" -->
-<!-- 								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)" -->
-<!-- 								maxlength="20" placeholder="Talar" Class="form-control"> -->
-<!-- 							<p id="MensajeErrorLocalidad"></p> -->
-<!-- 						</div> -->
 
 					</div>
 				</div>

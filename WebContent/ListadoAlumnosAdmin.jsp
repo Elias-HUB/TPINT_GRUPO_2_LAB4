@@ -22,9 +22,8 @@
 			
 			<button type="button" class="btn btn-block btn-outline-info" onclick="ModalAlumnoAgregar()"
 				style="margin-bottom: 10px;">Agregar Alumno</button>
-				
-				
-			<!-- 		<button type="submit" class="btn"><img src="Imagenes/Nuevo.png" data-toggle="tooltip" data-placement="bottom" title="Agregar Alumno" alt="x" /></button> -->
+
+
 			<table id="example" class="table table-striped table-bordered"
 				style="width: 100%">
 				<thead class="thead-dark">
@@ -32,6 +31,7 @@
 						<th style="text-align: center">Legajo</th>
 						<th style="text-align: center">Apellido</th>
 						<th style="text-align: center">Nombre</th>
+						<th style="text-align: center">Documento</th>
 						<th style="text-align: center">Email</th>
 						<th style="text-align: center">Acciones</th>
 					</tr>
@@ -54,10 +54,11 @@
 												.toString();
 					%>
 						<form action="ServletAlumno" method="post">
-						<th><%=alumno.getLegajo()%> <input type="hidden"
+						<th style="width: 80px;"><%=alumno.getLegajo()%> <input type="hidden"
 							name="LegajoAlumno" value="<%=alumno.getLegajo()%>"></th>
 						<th><%=alumno.getApellido()%></th>
 						<th><%=alumno.getNombre()%></th>
+						<th><%=alumno.getDni()%></th>
 						<th><%=alumno.getEmail()%></th>
 						<th style="width: 250px;">
 						
@@ -84,7 +85,6 @@
 							</button>
 							</form>
 						</th>
-
 					</tr>
 					<%
 						}
