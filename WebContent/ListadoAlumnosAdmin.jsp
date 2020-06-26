@@ -17,9 +17,13 @@
 
 	<div class="wrapper">
 		<div id="formContent" class="table-responsive">
-			<!-- 		        <asp:Button Text="Agregar Alumno" OnClick="BtnAlumno_Click" ID="BtnAlumno" runat="server" class="btn btn-block btn-info" /> -->
-			<button type="button" class="btn btn-block btn-outline-info" data-toggle="modal" data-target="#ModalAlumnoAgregar"
+		
+		
+			
+			<button type="button" class="btn btn-block btn-outline-info" onclick="ModalAlumnoAgregar()"
 				style="margin-bottom: 10px;">Agregar Alumno</button>
+				
+				
 			<!-- 		<button type="submit" class="btn"><img src="Imagenes/Nuevo.png" data-toggle="tooltip" data-placement="bottom" title="Agregar Alumno" alt="x" /></button> -->
 			<table id="example" class="table table-striped table-bordered"
 				style="width: 100%">
@@ -33,8 +37,8 @@
 					</tr>
 				</thead>
 				<tbody>
-
-					<%
+					<tr>
+										<%
 						ArrayList<Alumno> lista = null;
 						if (request.getAttribute("ListaAlumnos") != null) {
 							lista = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
@@ -49,8 +53,6 @@
 										+ "||" + alumno.getDomicilio().getLocalidad().getID() + "||" + alumno.getDomicilio().getProvincia().getID()+ "||" + "Prueba" +"'")
 												.toString();
 					%>
-
-					<tr>
 						<form action="ServletAlumno" method="post">
 						<th><%=alumno.getLegajo()%> <input type="hidden"
 							name="LegajoAlumno" value="<%=alumno.getLegajo()%>"></th>
@@ -58,6 +60,7 @@
 						<th><%=alumno.getNombre()%></th>
 						<th><%=alumno.getEmail()%></th>
 						<th style="width: 250px;">
+						
 							<!-- Button trigger modal -->
 							<button type="button" onclick="ModalVerCargaDatos(<%=datos%>)"
 								class="btn btn-outline-primary">
@@ -96,7 +99,8 @@
 	<jsp:include page="ModificarAlumnoModal.jsp"></jsp:include>
 	<jsp:include page="AgregarAlumnoModal.jsp"></jsp:include>
 
-	<script src="JS/DataTable.js"></script>
+	<script src="JS/DataTableListAlumnosAdminCONFIG.js"></script>
+	<script src="JS/DataTableListAlumnosAdmin.js"></script>
 
 </body>
 </html>
