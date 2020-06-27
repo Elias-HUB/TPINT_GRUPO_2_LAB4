@@ -11,32 +11,31 @@
 <jsp:include page="LibreriasJtable.jsp"></jsp:include>
 <link rel="stylesheet" href="Css/JTable.css">
 <script type="text/javascript">
+
 $(document).ready(function() {
-    $('#example').DataTable(
+ var tabla = $('#example').DataTable(
 	{
-		//Para cambiar el lenguaje a español
-		"language" : {
-			"lengthMenu" : "Mostrar _MENU_ registros",
-			"zeroRecords" : "No se encontraron resultados",
-			"info" : "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-			"infoEmpty" : "Mostrando registros del 0 al 0 de un total de 0 registros",
-			"infoFilteres" : "(filtrado de un total de _MAX_ registros)",
-			"sSearch" : "Buscar:",
-			"oPaginate" : {
-				"sFirst" : "Primero",
-				"sLast" : "Ultimo",
-				"sNext" : "Siguiente",
-				"sPrevious" : "Anterior"
-			},
-			"sProcessing" : "Procesando...",
-		}
-	});
-    
+		ajax : 'data json',
+		columnDefs: 
+		[
+			{
+				targets:0,
+				checkboxes: {
+					selectRow: true
+				}
+			}
+		],
+		select: {
+			style: 'multi'
+		},
+		order: [(1,'asc')]
+		},
 } );
     </script>
    
  </head>
 <body>
+<form method="post" action="ServeletCurso">
 				<div>
 					<div class="form-row">
 						<label for="Materia">Materia</label> 
@@ -48,7 +47,7 @@ $(document).ready(function() {
 						}
 
 						if (listaMaterias != null) {
-							%>	<select id="slMateria" name="slMateria" class="custom-select"selectedindex=-1>
+							%>	<select id="slMateria" name="slMateria" class="custom-select">
 						<%	for (Materia materia : listaMaterias) {
 					%>
 						<option value=<%=materia.getIdMateria()%> class="dropdown-item"><%=materia.getNombre()%></option>
@@ -67,16 +66,14 @@ $(document).ready(function() {
 					<div>
 						<label for="Cuatrimestre">Cuatrimestre</label>
 					<div class="col-2">
-						<select id="slCuatrimestre" name="slCuatrimestre" class="custom-select"
-							selectedindex=-1>
+						<select id="slCuatrimestre" name="slCuatrimestre" class="custom-select">
 							<option value="1" class="dropdown-item">1</option>
 							<option value="2" class="dropdown-item">2</option>
 						</select>
 						</div>
 							<label for="Año">Año</label>
 						<div class="col-2">
-						<select id="slAnio" name="slAnio" class="custom-select"
-							selectedindex=-1>
+						<select id="slAnio" name="slAnio" class="custom-select">
 							<option value="2018" class="dropdown-item">2018</option>
 							<option value="2019" class="dropdown-item">2019</option>
 							<option value="2020" class="dropdown-item">2020</option>
@@ -93,7 +90,7 @@ $(document).ready(function() {
 						}
 
 						if (listaDocentes != null) {
-							%>	<select id="slDocente" name="slDocente" class="custom-select"selectedindex=1>
+							%>	<select id="slDocente" name="slDocente" class="custom-select">
 						<%	for (Docente doc : listaDocentes) {
 					%>
 						<option value=<%=doc.getLegajo()%> class="dropdown-item"><%=doc.getNombre()%> <%=doc.getApellido()%></option>
@@ -151,9 +148,8 @@ $(document).ready(function() {
 			</div>			
 					</div>
 					<br>
-				<form method="post" action="ServeletCurso">
 				<button type="submit" class="btn btn-block btn-outline-info"
-               id="btnAltaCurso" name="btnGuardarCurso">Guardar Curso</button>
+               id="btnAltaCurso" name="btnAltaCurso">Guardar Curso</button>
 				</form>
 
 </body>

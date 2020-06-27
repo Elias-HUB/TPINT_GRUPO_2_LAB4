@@ -98,10 +98,18 @@ public class ServeletCurso extends HttpServlet {
 		if(request.getParameter("btnAltaCurso") != null)
 	    {
 			CursoDaoImpl cursoImpl = new CursoDaoImpl();
-			Curso curso = new Curso();
-			
-					
-			
+			Curso curso = new Curso();			
+			String alkgo = request.getParameter("slCuatrimestre").toString();
+			curso.setCuatrimestre(Integer.parseInt(request.getParameter("slCuatrimestre").toString()));
+			curso.docente = new Docente( );
+			curso.docente.setLegajo(Integer.parseInt(request.getParameter("slDocente").toString()));
+			curso.Materia  = new Materia();
+			curso.Materia.setIdMateria(Integer.parseInt(request.getParameter("slMateria").toString()));
+			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
+			curso.setTurno("Noche");
+			curso.setEstado("1");
+			cursoImpl.insert(curso);
+			request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);;
 		}
 				
 	}
