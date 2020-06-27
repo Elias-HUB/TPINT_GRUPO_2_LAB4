@@ -11,8 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DaoImpl.AlumnoDaoImpl;
 import DaoImpl.CursoDaoImpl;
+import DaoImpl.DocenteDaoImpl;
+import DaoImpl.MateriaDaoImpl;
+import Entidad.Alumno;
 import Entidad.Curso;
+import Entidad.Docente;
+import Entidad.Materia;
 
 /**
  * Servlet implementation class ServeletCurso
@@ -70,11 +76,42 @@ public class ServeletCurso extends HttpServlet {
 			}
 
 		}
-	}
+		
+	};
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
+		if(request.getParameter("btnAgregarCurso") != null)
+		{
+			MateriaDaoImpl mDao = new MateriaDaoImpl();
+			List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
+			DocenteDaoImpl dDao = new DocenteDaoImpl(); 
+			List<Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
+			AlumnoDaoImpl aDao = new AlumnoDaoImpl();
+			List<Alumno> listaAlumnos = (ArrayList<Alumno>)aDao.readAll();
+			request.setAttribute("ListaAlumnos", listaAlumnos);
+			request.setAttribute("ListaDocentes",listaDocentes);
+			request.setAttribute("ListaMaterias", listaMaterias);
+			request.getRequestDispatcher("ModificarCursoModal.jsp").forward(request, response);
+		}
+		
+		if(request.getParameter("btnAltaCurso") != null)
+	    {
+			CursoDaoImpl cursoImpl = new CursoDaoImpl();
+			Curso curso = new Curso();			
+			String alkgo = request.getParameter("slCuatrimestre").toString();
+			curso.setCuatrimestre(Integer.parseInt(request.getParameter("slCuatrimestre").toString()));
+			curso.docente = new Docente( );
+			curso.docente.setLegajo(Integer.parseInt(request.getParameter("slDocente").toString()));
+			curso.Materia  = new Materia();
+			curso.Materia.setIdMateria(Integer.parseInt(request.getParameter("slMateria").toString()));
+			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
+			curso.setTurno("Noche");
+			curso.setEstado("1");
+			cursoImpl.insert(curso);
+			request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);;
+		}
+				
 	}
 
 }
