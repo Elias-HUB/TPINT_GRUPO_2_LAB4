@@ -19,7 +19,7 @@ public class CursoDaoImpl implements CursoDao{
 	private static final String insert = "insert into cursos (IdMateria, Cuatrimestre, Año, Turno, LegajoDocente, Estado) VALUES(?, ?, ?, ?, ?, ?)";
 	private static final String readall = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria";
 	private static final String readCursosXDocente = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria where c.legajoDocente=?";
-
+	private static final String insertAlumnosPorCurso = "insert into AlumnosPorCurso(IdCurso, LegajoAlumnno, EstadoCurso, Estado) VALUES (?, ? , 'Cursando',true)";
 	@Override
 	public boolean insert(Curso curso) {
 		PreparedStatement statement;
@@ -48,7 +48,30 @@ public class CursoDaoImpl implements CursoDao{
 		}
 		return isInsertExitoso;
 	}
+	public boolean insertAlumnosPorCurso(int idCurso,String LegajoAlumno) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isInsertExitoso = false;
+		try {
+			statement = conexion.prepareStatement(insertAlumnosPorCurso);
+			statement.setInt(1, idCurso);
+			statement.setInt(2, Integer.parseInt(LegajoAlumno.toString()));
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+		} catch (SQLException e) {
 
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+
+				return isInsertExitoso = false;
+			}
+		}
+		return isInsertExitoso;
+	}
+	
 	@Override
 	public boolean delete(Curso curso) {
 		// TODO Auto-generated method stub
@@ -134,6 +157,30 @@ public class CursoDaoImpl implements CursoDao{
 		curso.setDocente(doc);
 		curso.setEstado(resultSet.getString("Estado"));
 		return curso;
+	}
+	public int DevuelveUltimoCurso()
+	{
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		int ultimoID=0;
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement("SELECT idcurso FROM tpint_grupo2_lab4.Cursos order by idCurso desc LIMIT 1");
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				ultimoID= (resultSet.getInt("idcurso"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ultimoID;
 	}
 
 }

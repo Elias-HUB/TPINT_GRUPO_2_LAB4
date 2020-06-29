@@ -24,7 +24,7 @@
 		</div>
 	</div>
 
-	<form action="ServletLogin" method="get">
+	<form method="post" action="ServletLogin" >
 		<div class="wrapper fadeInDown">
 			<div id="formContent">
 
@@ -42,9 +42,7 @@
 					 <input type="text"	class="fadeIn third pass" name="TxtContrasenia" placeholder="Contraseña"
 					id="TxtContrasenia">
 				<div>
-
-					<input type="submit" name="btnIngresar" id="btnIngresar"
-						class="btn btn-success" value="Ingreso">
+		<button type="submit" class="btn btn-info" id="btnIngresar" name="btnIngresar" style="margin-bottom: 10px;">Ingreso</button>
 
 
 					<!-- Ayuda -->

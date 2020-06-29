@@ -34,53 +34,30 @@ public class ServeletCurso extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String ParamLogin = request.getParameter("ParamLogin");
 		String ParamListar = request.getParameter("Param");
-		
-		if (request.getParameter("ParamLogin") != null) {
-			if (ParamLogin.equals("1")) {
-				CursoDaoImpl cDao = new CursoDaoImpl();
-				List<Curso> listaCursos = (ArrayList<Curso>) cDao.readAll();
-
-				request.setAttribute("ListaCursos", listaCursos);
-
-				request.getRequestDispatcher("MenuPrincipalAdmin.jsp").forward(request, response);
-			} else {
-				CursoDaoImpl cDao = new CursoDaoImpl();
-				int legajo = Integer.parseInt(request.getParameter("TxtLegajo").toString());
-				List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajo);
-
-				request.setAttribute("ListaCursos", listaCursos);
-
-				request.getRequestDispatcher("MenuPrincipalDocente.jsp").forward(request, response);
-			}
-		}
-	
+	//LISTAR TODOS LOS CURSOS PARA EL ADMIN
 		if (request.getParameter("Param") != null) {
 			if (ParamListar.equals("1")) {
 				CursoDaoImpl cDao = new CursoDaoImpl();
 				List<Curso> listaCursos = (ArrayList<Curso>) cDao.readAll();
-
 				request.setAttribute("ListaCursosAdmin", listaCursos);
-
 				request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
-			} else {
+			} }
+	// LISTAR LOS CURSOS PARA UN DOCENTE LOGUEADO
+		else {
 				CursoDaoImpl cDao = new CursoDaoImpl();
 				HttpSession session = request.getSession();
 				int legajo = Integer.parseInt(session.getAttribute("Legajo").toString());
 				List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajo);
-
 				request.setAttribute("ListaCursosDocente", listaCursos);
-
 				request.getRequestDispatcher("ListadoCursosDocente.jsp").forward(request, response);
 			}
 
 		}
-		
-	};
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+// BOTON PARA QUE SE ABRA LA PANTALLA DAR DE ALTA UN CURSO Y ELEGIR ALUMNOS
 		if(request.getParameter("btnAgregarCurso") != null)
 		{
 			MateriaDaoImpl mDao = new MateriaDaoImpl();
@@ -94,22 +71,30 @@ public class ServeletCurso extends HttpServlet {
 			request.setAttribute("ListaMaterias", listaMaterias);
 			request.getRequestDispatcher("ModificarCursoModal.jsp").forward(request, response);
 		}
-		
-		if(request.getParameter("btnAltaCurso") != null)
+// BOTON PARA QUE SE GUARDE EN LA BD EL CURSO NUEVO
+		if(request.getParameter("btnGuardarCurso") != null)
 	    {
 			CursoDaoImpl cursoImpl = new CursoDaoImpl();
-			Curso curso = new Curso();			
-			String alkgo = request.getParameter("slCuatrimestre").toString();
+			Curso curso = new Curso();		
+			String[] AlumnosXCurso; 
 			curso.setCuatrimestre(Integer.parseInt(request.getParameter("slCuatrimestre").toString()));
 			curso.docente = new Docente( );
 			curso.docente.setLegajo(Integer.parseInt(request.getParameter("slDocente").toString()));
 			curso.Materia  = new Materia();
 			curso.Materia.setIdMateria(Integer.parseInt(request.getParameter("slMateria").toString()));
 			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
-			curso.setTurno("Noche");
+			curso.setTurno((request.getParameter("slTurno").toString()));
 			curso.setEstado("1");
 			cursoImpl.insert(curso);
-			request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);;
+			AlumnosXCurso = request.getParameterValues("cboxAlumno");
+			int ultimoCurso = cursoImpl.DevuelveUltimoCurso();
+			for (int x=0; x<AlumnosXCurso.length;x++)
+			{
+				cursoImpl.insertAlumnosPorCurso(ultimoCurso,AlumnosXCurso[x]);
+			} 
+			List<Curso> listaCursos = (ArrayList<Curso>) cursoImpl.readAll();
+			request.setAttribute("ListaCursosAdmin", listaCursos);
+			request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
 		}
 				
 	}

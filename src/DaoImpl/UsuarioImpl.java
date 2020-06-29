@@ -3,49 +3,41 @@ package DaoImpl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import Entidad.Curso;
 import Entidad.Usuario;
 
 public class UsuarioImpl {
-	private static final String read = "SELECT * FROM usuarios where LegajoDocente=? and Contraseña=?";
-	
-public int Validar(String legajo, String contraseña) {
+	private static final String read = " SELECT tipousuario FROM tpint_grupo2_lab4.usuarios where legajodocente= ? and contraseña= ? ;";
+
+/*	public int ValidarLogin(String legajo, String contraseña) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int tipo=0;
+
 		PreparedStatement statement;
 		ResultSet resultSet; // Guarda el resultado de la query
-		Usuario usuario = new Usuario();
+		int tipo = 0;
 		Conexion conexion = Conexion.getConexion();
 		try {
 			statement = conexion.getSQLConexion().prepareStatement(read);
-			statement.setInt(1,Integer.parseInt(legajo));
+			statement.setInt(1, Integer.parseInt((legajo).toString()));
 			statement.setString(2, contraseña);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				usuario = GetUsuario(resultSet);
+				tipo = (resultSet.getInt("tipousuario"));
 			}
-			 
-			if  (usuario.getTipo()==1)
-			{
-				tipo=1; 
-			}
-			else if(usuario.getTipo()==2)
-			{
-				tipo=2;
-			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return tipo; 
-	}
-
-	private Usuario GetUsuario(ResultSet resultSet) throws SQLException {
+		return tipo;
+	}*/
+	public int read(String legajo, String contraseña) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -53,40 +45,22 @@ public int Validar(String legajo, String contraseña) {
 			e.printStackTrace();
 		}
 		
-		Usuario usuario = new Usuario();
-		usuario.setIdUsuario(resultSet.getInt("IdUsuario"));
-		usuario.setLegajo(resultSet.getInt("LegajoDocente"));
-		usuario.setEmail(resultSet.getString("Email"));
-		usuario.setContraseña(resultSet.getString("Contraseña"));
-		usuario.setTipo(resultSet.getInt("TipoUsuario"));
-		usuario.setEstado(resultSet.getBoolean("Estado"));
-		return usuario;
-	}
-	
-	
-public Usuario BuscarUsuario(String legajo, String contraseña) {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Usuario usuario = new Usuario();
 		PreparedStatement statement;
-		ResultSet resultSet;
+		ResultSet resultSet; // Guarda el resultado de la query
+		int tipo =0;
 		Conexion conexion = Conexion.getConexion();
 		try {
 			statement = conexion.getSQLConexion().prepareStatement(read);
-			statement.setInt(1,Integer.parseInt(legajo));
-			statement.setString(2, contraseña);
+			statement.setInt(1,Integer.parseInt((legajo).toString()));
+			statement.setString(2, contraseña.toString());
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				usuario = GetUsuario(resultSet);
+				tipo=resultSet.getInt("tipousuario");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return usuario; 
+		return tipo;
 	}
 
 }

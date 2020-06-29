@@ -20,7 +20,7 @@ public class DocenteDaoImpl implements DocenteDao {
 	private static final String delete = "UPDATE Docentes set Estado = 0 WHERE legajo = ?";
 	private static final String update = "UPDATE Docentes set Dni=?, Nombre=?, Apellido=?, FechaNacimiento=?, Direccion=?, Localidad=?, Provincia=?, Email=?, Telefono=?, Estado=? where Legajo =?";
 	private static final String readall = "SELECT docentes.Legajo, docentes.Dni, docentes.Nombre, docentes.Apellido, docentes.FechaNacimiento, docentes.Email, docentes.Telefono, docentes.Estado, docentes.Direccion, docentes.Provincia as 'ProvinciaId', provincias.provincia as 'ProvinciaNombre', docentes.Localidad as 'LocalidadId', localidades.localidad as 'LocalidadNombre' FROM tpint_grupo2_lab4.docentes inner join tpint_grupo2_lab4.provincias on docentes.Provincia = provincias.id inner join tpint_grupo2_lab4.localidades on docentes.Localidad = localidades.id where Estado = 1;";
-	private static final String readUno = "SELECT * FROM Docentes where legajo=?"; 
+	private static final String readUno = "SELECT Legajo, Nombre, Apellido FROM Docentes where legajo=?;"; 
 	@Override
 	public boolean insert(Docente docente) {
 		PreparedStatement statement;
@@ -161,9 +161,8 @@ public class DocenteDaoImpl implements DocenteDao {
 
 		return docente;
 	}
-	
-public Docente Buscar(String legajo) {
-		
+
+	public Docente Buscar(String legajo) {		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -179,7 +178,9 @@ public Docente Buscar(String legajo) {
 			statement.setInt(1,Integer.parseInt(legajo));
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				docente=(GetDocente(resultSet));
+				docente.setLegajo(resultSet.getInt("Legajo"));;
+				docente.setNombre(resultSet.getString("Nombre"));
+				docente.setApellido(resultSet.getString("Apellido"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
