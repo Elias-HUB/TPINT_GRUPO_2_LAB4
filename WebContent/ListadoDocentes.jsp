@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="Css/JTable.css">
 
 </head>
-<body>W
+<body>
 	<div class="wrapper">
 		<div id="formContent" class="table-responsive">
 
