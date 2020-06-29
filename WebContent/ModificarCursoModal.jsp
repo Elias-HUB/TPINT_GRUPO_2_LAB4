@@ -10,28 +10,7 @@
 <jsp:include page="HeadAdministrador.jsp"></jsp:include>
 <jsp:include page="LibreriasJtable.jsp"></jsp:include>
 <link rel="stylesheet" href="Css/JTable.css">
-<script type="text/javascript">
 
-$(document).ready(function() {
- var tabla = $('#example').DataTable(
-	{
-		ajax : 'data json',
-		columnDefs: 
-		[
-			{
-				targets:0,
-				checkboxes: {
-					selectRow: true
-				}
-			}
-		],
-		select: {
-			style: 'multi'
-		},
-		order: [(1,'asc')]
-		},
-} );
-    </script>
    
  </head>
 <body>
@@ -78,6 +57,15 @@ $(document).ready(function() {
 							<option value="2019" class="dropdown-item">2019</option>
 							<option value="2020" class="dropdown-item">2020</option>
 							<option value="2021" class="dropdown-item">2021</option>
+						</select>
+						</div>
+						<div>
+							<label for="Turno">Turno</label>
+						<div class="col-2">
+						<select id="slTurno" name="slTurno" class="custom-select">
+							<option value="Mañana" class="dropdown-item">Mañana</option>
+							<option value="Tarde" class="dropdown-item">Tarde</option>
+							<option value="Noche" class="dropdown-item">Noche</option>
 						</select>
 						</div>
 						<div>
@@ -133,7 +121,7 @@ $(document).ready(function() {
 							for (Alumno alumno : lista) {
 					%>
 					<tr>
-						<th><input type="checkbox" id="cbox1" value="cboxAlumno"> </th>
+						<th><input type="checkbox" id="cboxAlumno" name="cboxAlumno" value="<%=alumno.getLegajo()%>"> </th>
 						<th><%=alumno.getLegajo()%></th>
 						<th><%=alumno.getApellido()%></th>
 						<th><%=alumno.getNombre()%></th>
@@ -149,7 +137,8 @@ $(document).ready(function() {
 					</div>
 					<br>
 				<button type="submit" class="btn btn-block btn-outline-info"
-               id="btnAltaCurso" name="btnAltaCurso">Guardar Curso</button>
+               id="btnGuardarCurso" name="btnGuardarCurso">Guardar Curso</button>
+              </div>
 				</form>
 
 </body>

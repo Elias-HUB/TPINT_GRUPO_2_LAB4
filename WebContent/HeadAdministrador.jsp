@@ -9,7 +9,13 @@
 <div class="Cabecera">
 	<div style="height: 100px;">
 		<div class="snap-pm-user" style="margin-left: 20px">
-			<h2>Nombre usuario Admin</h2>
+			<%
+			session = request.getSession();
+			String Nombre = session.getAttribute("NombreHead").toString();
+			String Apellido = session.getAttribute("ApellidoHead").toString();			
+			%>
+							<h1><%=Nombre%> <%=Apellido%></h1>
+				    
 			<div style="margin-left: 20px; margin-top: 10px;">
 <!-- 				<a class="aHead" href="...">Perfil</a> -  -->
 				<a class="aHead" href="ServletAlumno?Param=1">Alumnos</a> - <a class="aHead" href="ServletDocente?Param=2">Profesores</a>
