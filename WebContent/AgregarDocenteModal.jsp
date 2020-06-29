@@ -7,22 +7,17 @@
 	tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog  modal-xl" role="document">
-		<div class="modal-content">
-			<div class="modal-header bg-secondary text-white">
-				<h5 class="modal-title" id="exampleModalLabel">Agregar Nuevo
-					Docente</h5>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<form action="ServletAlumno" method="post">
+		<form action="ServletDocente" method="post">
+			<div class="modal-content">
+				<div class="modal-header bg-secondary text-white">
+					<h5 class="modal-title" id="exampleModalLabel">Agregar Nuevo
+						Docente</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
 				<div class="modal-body">
-					<!-- 			______________________________________________________ -->
-
-
-
-
 					<div class="form-row ">
 
 						<%--Nombre--%>
@@ -204,8 +199,7 @@
 						data-dismiss="modal">Cerrar</button>
 
 				</div>
-		</div>
+			</div>
 		</form>
 	</div>
-</div>
 </div>

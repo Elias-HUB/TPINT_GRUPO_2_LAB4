@@ -6,73 +6,67 @@
 	tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog  modal-xl" role="document">
-		<div class="modal-content">
-			<div class="modal-header bg-secondary text-white">
-				<h5 class="modal-title" id="exampleModalLabel">Docente</h5>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<form action="ServletAlumno" method="post">
+		<form action="ServletDocente" method="post">
+			<div class="modal-content">
+				<div class="modal-header bg-secondary text-white">
+					<h5 class="modal-title" id="exampleModalLabel">Docente</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
 				<div class="modal-body">
+					<div class="form-row ">
 
-
-					<div class="container">
-
-						<div class="form-row ">
-
-							<%--LEGAJO--%>
-							<div class="form-group col-md-1">
-								<div>
-									<label Class="control-label">Legajo</label>
-								</div>
-								<input ID="TboxLegajoM" name="TboxLegajoM"
-									onKeyPress="return soloNumeros(event)"
-									onkeyup="validarLegajo(this.id)" onfocus="Seleccionar(this.id)"
-									maxlength="8" placeholder="22012" Class="form-control"
-									readonly="readonly">
-								<p id="MensajeErrorLegajo"></p>
+						<%--LEGAJO--%>
+						<div class="form-group col-md-1">
+							<div>
+								<label Class="control-label">Legajo</label>
 							</div>
-
-
-							<%--Nombre--%>
-							<div class="form-group col-md-3">
-								<div>
-									<label Class="control-label">Nombre</label>
-								</div>
-								<input ID="TboxNombreM" name="TboxNombreM"
-									onkeypress="return soloLetras(event)"
-									onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
-									maxlength="20" placeholder="Agustin" Class="form-control">
-								<p id="MensajeErrorNombre"></p>
-							</div>
-
-							<%--Apellido--%>
-							<div class="form-group col-md-3">
-								<div>
-									<label Class="control-label">Apellido</label>
-								</div>
-								<input ID="TboxApellidoM" name="TboxApellidoM"
-									onkeypress="return soloLetras(event)"
-									onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
-									maxlength="20" placeholder="Argento" Class="form-control">
-								<p id="MensajeErrorApellido"></p>
-							</div>
-
-							<%--Dni--%>
-							<div class="form-group col-md-2">
-								<div>
-									<label Class="control-label">Dni</label>
-								</div>
-								<input id="TboxDniM" name="TboxDniM"
-									onkeypress="return soloNumeros(event)"
-									onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
-									maxlength="8" placeholder="40174332" Class="form-control">
-								<p id="MensajeErrorADni"></p>
-							</div>
+							<input ID="TboxLegajoM" name="TboxLegajoM"
+								onKeyPress="return soloNumeros(event)"
+								onkeyup="validarLegajo(this.id)" onfocus="Seleccionar(this.id)"
+								maxlength="8" placeholder="22012" Class="form-control"
+								readonly="readonly">
+							<p id="MensajeErrorLegajo"></p>
 						</div>
 
+
+						<%--Nombre--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Nombre</label>
+							</div>
+							<input ID="TboxNombreM" name="TboxNombreM"
+								onkeypress="return soloLetras(event)"
+								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
+								maxlength="20" placeholder="Agustin" Class="form-control">
+							<p id="MensajeErrorNombre"></p>
+						</div>
+
+						<%--Apellido--%>
+						<div class="form-group col-md-3">
+							<div>
+								<label Class="control-label">Apellido</label>
+							</div>
+							<input ID="TboxApellidoM" name="TboxApellidoM"
+								onkeypress="return soloLetras(event)"
+								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
+								maxlength="20" placeholder="Argento" Class="form-control">
+							<p id="MensajeErrorApellido"></p>
+						</div>
+
+						<%--Dni--%>
+						<div class="form-group col-md-2">
+							<div>
+								<label Class="control-label">Dni</label>
+							</div>
+							<input id="TboxDniM" name="TboxDniM"
+								onkeypress="return soloNumeros(event)"
+								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
+								maxlength="8" placeholder="40174332" Class="form-control">
+							<p id="MensajeErrorADni"></p>
+						</div>
 					</div>
 
 
@@ -210,12 +204,12 @@
 						class="btn btn-primary">Actualizar</button>
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Cerrar</button>
-
 				</div>
-		</div>
+			</div>
 		</form>
 	</div>
 </div>
-</div>
+
+
 
 <!-- Inicio Modal -->

@@ -35,12 +35,11 @@ public class ServletAlumno extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		AlumnoDaoImpl aDao = new AlumnoDaoImpl();
+		ProvinciaDaoImpl pDao = new ProvinciaDaoImpl();
+		LocalidadDaoImpl lDao = new LocalidadDaoImpl();
 		if (request.getParameter("Param") != null) {
-			AlumnoDaoImpl aDao = new AlumnoDaoImpl();
-			ProvinciaDaoImpl pDao = new ProvinciaDaoImpl();
-			LocalidadDaoImpl lDao = new LocalidadDaoImpl();
-			
+
 			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao.readAll();
 			List<Provincia> listaProvincia = (ArrayList<Provincia>) pDao.readAll();
 			List<Localidad> listaLocalidad = (ArrayList<Localidad>) lDao.ListarLocalidades();
@@ -54,16 +53,23 @@ public class ServletAlumno extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		AlumnoDaoImpl aDao = new AlumnoDaoImpl();
-		
+		ProvinciaDaoImpl pDao = new ProvinciaDaoImpl();
+		LocalidadDaoImpl lDao = new LocalidadDaoImpl();
+
+		String algo = request.getParameter("BtnEliminar");
 		if (request.getParameter("BtnEliminar") != null) {
 			int Legajo = Integer.parseInt(request.getParameter("LegajoAlumno"));
 			aDao.delete(Legajo);
-			
+
 			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao.readAll();
+			List<Provincia> listaProvincia = (ArrayList<Provincia>) pDao.readAll();
+			List<Localidad> listaLocalidad = (ArrayList<Localidad>) lDao.ListarLocalidades();
 			request.setAttribute("ListaAlumnos", listaAlumnos);
+			request.setAttribute("ListaProvincia", listaProvincia);
+			request.setAttribute("ListaLocalidad", listaLocalidad);
 			request.getRequestDispatcher("ListadoAlumnosAdmin.jsp").forward(request, response);
 		}
-		
+
 		if (request.getParameter("BtnActualizar") != null) {
 			Alumno alumno = new Alumno();
 			alumno.setLegajo(Integer.parseInt(request.getParameter("TboxLegajoM")));
@@ -86,29 +92,29 @@ public class ServletAlumno extends HttpServlet {
 
 			alumno.domicilio = new Domicilio();
 			alumno.domicilio.setDireccion(request.getParameter("TboxDirreccionM"));
-			
-			
-			//
+
+			String Localidad = request.getParameter("TboxLocalidadM").toString();
+			String Provincia = request.getParameter("TboxProvinciaM").toString();
 			Localidad localidad = new Localidad();
-			localidad.setID(Integer.parseInt(request.getParameter("TboxLocalidadA")));
+			localidad.setID(Integer.parseInt(Localidad));
 			Provincia provincia = new Provincia();
-			provincia.setID(Integer.parseInt(request.getParameter("TboxProvinciaM")));
-			
+			provincia.setID(Integer.parseInt(Provincia));
+
 			alumno.domicilio.setLocalidad(localidad);
 			alumno.domicilio.setProvincia(provincia);
-			//ANALIZAR
 
-			
-			aDao.update(alumno);		
+			aDao.update(alumno);
 			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao.readAll();
+			List<Provincia> listaProvincia = (ArrayList<Provincia>) pDao.readAll();
+			List<Localidad> listaLocalidad = (ArrayList<Localidad>) lDao.ListarLocalidades();
 			request.setAttribute("ListaAlumnos", listaAlumnos);
-			request.getRequestDispatcher("ListadoAlumnosAdmin.jsp").forward(request, response);			
+			request.setAttribute("ListaProvincia", listaProvincia);
+			request.setAttribute("ListaLocalidad", listaLocalidad);
+			request.getRequestDispatcher("ListadoAlumnosAdmin.jsp").forward(request, response);
 		}
-		
-		
+
 		if (request.getParameter("BtnAgregar") != null) {
 			Alumno alumno = new Alumno();
-//			alumno.setLegajo(Integer.parseInt(request.getParameter("TboxLegajoM")));
 			alumno.setDni(Integer.parseInt(request.getParameter("TboxDniA").toString()));
 			alumno.setNombre(request.getParameter("TboxNombreA"));
 			alumno.setApellido(request.getParameter("TboxApellidoA"));
@@ -124,27 +130,30 @@ public class ServletAlumno extends HttpServlet {
 			alumno.setFechaNacimiento(sql);
 			alumno.setEmail(request.getParameter("TboxEmailA"));
 			alumno.setTelefono((long) Integer.parseInt(request.getParameter("TboxTelefonoA")));
-						
 
 			alumno.domicilio = new Domicilio();
 			alumno.domicilio.setDireccion(request.getParameter("TboxDirreccionA"));
 
-			//
+			String Localidad = request.getParameter("TboxLocalidadA").toString();
+			String Provincia = request.getParameter("TboxProvinciaA").toString();
 			Localidad localidad = new Localidad();
-			localidad.setID(Integer.parseInt(request.getParameter("TboxLocalidadA")));
+			localidad.setID(Integer.parseInt(Localidad));
 			Provincia provincia = new Provincia();
-			provincia.setID(Integer.parseInt(request.getParameter("TboxProvinciaM")));
-			
+			provincia.setID(Integer.parseInt(Provincia));
+
 			alumno.domicilio.setLocalidad(localidad);
 			alumno.domicilio.setProvincia(provincia);
-			//ANALIZAR
-			
+
 			alumno.setEstado(true);
-			
-			aDao.insert(alumno);		
+
+			aDao.insert(alumno);
 			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao.readAll();
+			List<Provincia> listaProvincia = (ArrayList<Provincia>) pDao.readAll();
+			List<Localidad> listaLocalidad = (ArrayList<Localidad>) lDao.ListarLocalidades();
 			request.setAttribute("ListaAlumnos", listaAlumnos);
-			request.getRequestDispatcher("ListadoAlumnosAdmin.jsp").forward(request, response);			
+			request.setAttribute("ListaProvincia", listaProvincia);
+			request.setAttribute("ListaLocalidad", listaLocalidad);
+			request.getRequestDispatcher("ListadoAlumnosAdmin.jsp").forward(request, response);
 		}
 
 	}

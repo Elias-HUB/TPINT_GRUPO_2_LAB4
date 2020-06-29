@@ -17,8 +17,8 @@ import Entidad.Provincia;
 public class DocenteDaoImpl implements DocenteDao {
 
 	private static final String insert = "insert into Docentes(Dni, Nombre, Apellido, FechaNacimiento, Direccion, Localidad, Provincia, Email, Telefono, Estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String delete = "UPDATE Docentes set Estado = 0 WHERE Dni = ?";
-	private static final String update = "UPDATE Docentes set Dni=?, Nombre=?, Apellido=?, FechaNacimiento=?, Direccion=?, Localidad=?, Provincia=?, Email=?, Telefono=?, Estado=? where Dni =?";
+	private static final String delete = "UPDATE Docentes set Estado = 0 WHERE legajo = ?";
+	private static final String update = "UPDATE Docentes set Dni=?, Nombre=?, Apellido=?, FechaNacimiento=?, Direccion=?, Localidad=?, Provincia=?, Email=?, Telefono=?, Estado=? where Legajo =?";
 	private static final String readall = "SELECT docentes.Legajo, docentes.Dni, docentes.Nombre, docentes.Apellido, docentes.FechaNacimiento, docentes.Email, docentes.Telefono, docentes.Estado, docentes.Direccion, docentes.Provincia as 'ProvinciaId', provincias.provincia as 'ProvinciaNombre', docentes.Localidad as 'LocalidadId', localidades.localidad as 'LocalidadNombre' FROM tpint_grupo2_lab4.docentes inner join tpint_grupo2_lab4.provincias on docentes.Provincia = provincias.id inner join tpint_grupo2_lab4.localidades on docentes.Localidad = localidades.id where Estado = 1;";
 	private static final String readUno = "SELECT Legajo, Nombre, Apellido FROM Docentes where legajo=?;"; 
 	@Override
@@ -55,13 +55,13 @@ public class DocenteDaoImpl implements DocenteDao {
 	}
 
 	@Override
-	public boolean delete(Docente docente) {
+	public boolean delete(int Legajo) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isdeleteExitoso = false;
 		try {
 			statement = conexion.prepareStatement(delete);
-			statement.setInt(1, docente.getDni());
+			statement.setInt(1, Legajo);
 			if (statement.executeUpdate() > 0) {
 				conexion.commit();
 				isdeleteExitoso = true;
@@ -73,7 +73,7 @@ public class DocenteDaoImpl implements DocenteDao {
 	}
 
 	@Override
-	public boolean update(Docente docente, String aux) {
+	public boolean update(Docente docente) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isupdateExitoso = false;
@@ -89,6 +89,7 @@ public class DocenteDaoImpl implements DocenteDao {
 			statement.setString(8, docente.getEmail());
 			statement.setLong(9, docente.getTelefono());
 			statement.setBoolean(10, docente.getEstado());
+			statement.setInt(11, docente.getLegajo());
 
 			if (statement.executeUpdate() > 0) {
 				conexion.commit();
@@ -161,8 +162,7 @@ public class DocenteDaoImpl implements DocenteDao {
 		return docente;
 	}
 
-	public Docente Buscar(String legajo) {
-		
+	public Docente Buscar(String legajo) {		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {

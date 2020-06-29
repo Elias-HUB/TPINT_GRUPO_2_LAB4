@@ -12,135 +12,120 @@
 				</button>
 			</div>
 			<div class="modal-body">
+				<div class="form-row">
+
+					<%--LEGAJO--%>
+					<div class="form-group col-md-1">
+						<div>
+							<label Class="control-label">Legajo</label>
+						</div>
+						<input id="TboxLegajo" name="TboxLegajo"
+							Class="form-control input_valores_provisionales"
+							readonly="readonly">
+						<p id="MensajeErrorLegajo"></p>
+					</div>
 
 
-				<div class="container">
+					<%--Nombre--%>
+					<div class="form-group col-md-3">
+						<div>
+							<label Class="control-label">Nombre</label>
+						</div>
+						<input ID="TboxNombre" Class="form-control" readonly="readonly">
+						<p id="MensajeErrorNombre"></p>
+					</div>
 
-					<div class="form-row">
+					<%--Apellido--%>
+					<div class="form-group col-md-3">
+						<div>
+							<label Class="control-label">Apellido</label>
+						</div>
+						<input ID="TboxApellido" Class="form-control" readonly="readonly">
+						<p id="MensajeErrorApellido"></p>
+					</div>
 
-						<%--LEGAJO--%>
-						<div class="form-group col-md-1">
-							<div>
-								<label Class="control-label">Legajo</label>
-							</div>
-							<input id="TboxLegajo" name="TboxLegajo"
-								Class="form-control input_valores_provisionales"
-								readonly="readonly">
-							<p id="MensajeErrorLegajo"></p>
+					<%--Dni--%>
+					<div class="form-group col-md-3">
+						<div>
+							<label Class="control-label">Dni</label>
+						</div>
+						<input id="TboxDni" Class="form-control" readonly="readonly">
+						<p id="MensajeErrorDni"></p>
+					</div>
+				</div>
+				<div class="form-row ">
+
+					<%--FechaNacimiento--%>
+					<div class="form-group col-md-3">
+						<div>
+							<label Class="control-label">Fecha Nacimiento</label>
+						</div>
+						<input type="date" ID="TboxFechaNacimiento" class="form-control"
+							readonly="readonly">
+					</div>
+
+					<%--Email--%>
+					<div class="form-group col-md-3">
+						<div>
+							<label Class="control-label">Email</label>
 						</div>
 
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">@</div>
+							</div>
 
-						<%--Nombre--%>
-						<div class="form-group col-md-3">
-							<div>
-								<label Class="control-label">Nombre</label>
-							</div>
-							<input ID="TboxNombre" Class="form-control" readonly="readonly">
-							<p id="MensajeErrorNombre"></p>
-						</div>
-
-						<%--Apellido--%>
-						<div class="form-group col-md-3">
-							<div>
-								<label Class="control-label">Apellido</label>
-							</div>
-							<input ID="TboxApellido" Class="form-control" readonly="readonly">
-							<p id="MensajeErrorApellido"></p>
-						</div>
-						
-						<%--Dni--%>
-							<div class="form-group col-md-3">
-								<div>
-									<label Class="control-label">Dni</label>
-								</div>
-								<input id="TboxDni" Class="form-control" readonly="readonly">
-								<p id="MensajeErrorDni"></p>
-							</div>
+							<input ID="TboxEmail" Class="form-control" readonly="readonly">
+							<p id="MensajeErrorEmail"></p>
 						</div>
 					</div>
 
 
-					
-						
-					<div class="form-row ">
-
-						<%--FechaNacimiento--%>
-						<div class="form-group col-md-3">
-							<div>
-								<label Class="control-label">Fecha Nacimiento</label>
-							</div>
-							<input type="date" ID="TboxFechaNacimiento" class="form-control"
-								readonly="readonly">
+					<%--Telefono--%>
+					<div class="form-group col-md-3">
+						<div>
+							<label Class="control-label">Telefono</label>
 						</div>
-
-						<%--Email--%>
-						<div class="form-group col-md-3">
-							<div>
-								<label Class="control-label">Email</label>
-							</div>
-
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">@</div>
-								</div>
-
-								<input ID="TboxEmail" Class="form-control" readonly="readonly">
-								<p id="MensajeErrorEmail"></p>
-							</div>
-						</div>
-
-
-						<%--Telefono--%>
-						<div class="form-group col-md-3">
-							<div>
-								<label Class="control-label">Telefono</label>
-							</div>
-							<input ID="TboxTelefono" Class="form-control" readonly="readonly">
-							<p id="MensajeErrorTelefono"></p>
-						</div>
-
+						<input ID="TboxTelefono" Class="form-control" readonly="readonly">
+						<p id="MensajeErrorTelefono"></p>
 					</div>
 
-					<div class="form-row">
+				</div>
 
-						<%--Dirrecion--%>
-						<div class="form-group col-md-5">
-							<div>
-								<label Class="control-label">Dirección</label>
-							</div>
-							<input ID="TboxDirreccion" Class="form-control"
-								readonly="readonly">
-							<p id="MensajeErrorDireccion"></p>
-						</div>
+				<div class="form-row">
 
-						<%--Provincia--%>
-						<div class="form-group col-md-3">
-							<div>
-								<label Class="control-label">Provincia</label>
-							</div>
-							<input ID="TboxProvincia" Class="form-control"
-								readonly="readonly">
-							<p id="MensajeErrorProvincia"></p>
+					<%--Dirrecion--%>
+					<div class="form-group col-md-5">
+						<div>
+							<label Class="control-label">Dirección</label>
 						</div>
-						
-						<%--Localidad--%>						
-						<div class="form-group col-md-3">
-							<div>
-								<label Class="control-label">Localidad</label>
-							</div>
-							<input ID="TboxLocalidad" Class="form-control"
-								readonly="readonly">
-							<p id="MensajeErrorLocalidad"></p>
+						<input ID="TboxDirreccion" Class="form-control"
+							readonly="readonly">
+						<p id="MensajeErrorDireccion"></p>
+					</div>
+
+					<%--Provincia--%>
+					<div class="form-group col-md-3">
+						<div>
+							<label Class="control-label">Provincia</label>
 						</div>
+						<input ID="TboxProvincia" Class="form-control" readonly="readonly">
+						<p id="MensajeErrorProvincia"></p>
+					</div>
+
+					<%--Localidad--%>
+					<div class="form-group col-md-3">
+						<div>
+							<label Class="control-label">Localidad</label>
+						</div>
+						<input ID="TboxLocalidad" Class="form-control" readonly="readonly">
+						<p id="MensajeErrorLocalidad"></p>
 					</div>
 				</div>
 
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Cerrar</button>
-
-				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 			</div>
 		</div>
 	</div>
