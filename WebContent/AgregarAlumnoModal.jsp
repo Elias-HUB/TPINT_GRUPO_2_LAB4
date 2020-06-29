@@ -128,7 +128,7 @@
 
 						<%--Provincia--%>
 						<div class="form-group col-md-3">
-							<label for="TboxProvinciaA" class="col-form-label">Provincia</label>
+							<label class="col-form-label">Provincia</label>
 							<select id="TboxProvinciaA" name="TboxProvinciaA"
 								class="form-control" tabindex="6" onchange="cambia_LocalidadAgregar()">
 								
@@ -151,7 +151,7 @@
 						
 						<%--Localidad--%>
 						<div class="form-group col-md-3">
-							<label for="TboxLocalidadA" class="col-form-label">Localidad</label>
+							<label class="col-form-label">Localidad</label>
 							<select id="TboxLocalidadA" name="TboxLocalidadA"
 								class="form-control" tabindex="6">
 								

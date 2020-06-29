@@ -17,13 +17,12 @@
 
 	<div class="wrapper">
 		<div id="formContent" class="table-responsive">
-		
-		
-			
-			<button type="button" class="btn btn-block btn-outline-info" onclick="ModalAlumnoAgregar()"
-				style="margin-bottom: 10px;">Agregar Alumno</button>
 
 
+
+			<button type="button" class="btn btn-block btn-outline-info"
+				onclick="ModalAlumnoAgregar()" style="margin-bottom: 10px;">Agregar
+				Alumno</button>
 			<table id="example" class="table table-striped table-bordered"
 				style="width: 100%">
 				<thead class="thead-dark">
@@ -37,31 +36,31 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-										<%
-						ArrayList<Alumno> lista = null;
-						if (request.getAttribute("ListaAlumnos") != null) {
-							lista = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
-						}
+				<%
+							ArrayList<Alumno> lista = null;
+							if (request.getAttribute("ListaAlumnos") != null) {
+								lista = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
+							}
 
-						if (lista != null) {
-							for (Alumno alumno : lista) {
-								String datos = ("'" + alumno.getLegajo() + "||" + alumno.getNombre() + "||" + alumno.getApellido()
-										+ "||" + alumno.getFechaNacimiento() + "||" + alumno.getEmail() + "||"
-										+ alumno.getTelefono() + "||" + alumno.getDomicilio().getDireccion() + "||"
-										+ alumno.getDomicilio().getProvincia().getNombre() + "||" + alumno.getDomicilio().getLocalidad().getNombre() + "||" + alumno.getDni()
-										+ "||" + alumno.getDomicilio().getLocalidad().getID() + "||" + alumno.getDomicilio().getProvincia().getID()+ "||" + "Prueba" +"'")
-												.toString();
-					%>
+							if (lista != null) {
+								for (Alumno alumno : lista) {
+									String datos = ("'" + alumno.getLegajo() + "||" + alumno.getNombre() + "||" + alumno.getApellido()
+											+ "||" + alumno.getFechaNacimiento() + "||" + alumno.getEmail() + "||"
+											+ alumno.getTelefono() + "||" + alumno.getDomicilio().getDireccion() + "||"
+											+ alumno.getDomicilio().getProvincia().getNombre() + "||"
+											+ alumno.getDomicilio().getLocalidad().getNombre() + "||" + alumno.getDni() + "||"
+											+ alumno.getDomicilio().getLocalidad().getID() + "||"
+											+ alumno.getDomicilio().getProvincia().getID() + "||" + "Prueba" + "'").toString();
+						%>
+					<tr>						
 						<form action="ServletAlumno" method="post">
-						<th style="width: 80px;"><%=alumno.getLegajo()%> <input type="hidden"
-							name="LegajoAlumno" value="<%=alumno.getLegajo()%>"></th>
+						<th style="width: 80px;"><%=alumno.getLegajo()%> <input
+							type="hidden" name="LegajoAlumno" value="<%=alumno.getLegajo()%>"></th>
 						<th><%=alumno.getApellido()%></th>
 						<th><%=alumno.getNombre()%></th>
 						<th><%=alumno.getDni()%></th>
 						<th><%=alumno.getEmail()%></th>
 						<th style="width: 250px;">
-						
 							<!-- Button trigger modal -->
 							<button type="button" onclick="ModalVerCargaDatos(<%=datos%>)"
 								class="btn btn-outline-primary">
@@ -83,8 +82,8 @@
 									data-toggle="tooltip" data-placement="bottom"
 									title="Eliminar Alumno" />
 							</button>
-							</form>
 						</th>
+						</form>
 					</tr>
 					<%
 						}

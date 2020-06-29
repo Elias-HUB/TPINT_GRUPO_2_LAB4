@@ -6,7 +6,7 @@ import Entidad.Docente;
 
 public interface DocenteDao {
 	public boolean insert(Docente docente);
-	public boolean delete(Docente docente);
-	public boolean update(Docente docente, String aux);
+	public boolean delete(int Legajo);
+	public boolean update(Docente docente);
 	public List<Docente> readAll();
 }
