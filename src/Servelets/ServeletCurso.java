@@ -96,7 +96,21 @@ public class ServeletCurso extends HttpServlet {
 			request.setAttribute("ListaCursosAdmin", listaCursos);
 			request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
 		}
-				
+		if(request.getParameter("btnBuscar")!=null)
+		{
+			CursoDaoImpl cDao = new CursoDaoImpl();
+			int legajo= (Integer.parseInt(request.getParameter("slDocente").toString()));
+			List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajo);
+			MateriaDaoImpl mDao = new MateriaDaoImpl();
+			List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
+			DocenteDaoImpl dDao = new DocenteDaoImpl(); 
+			List<Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
+			request.setAttribute("ListaCursos", listaCursos);
+			request.setAttribute("ListaMaterias", listaMaterias);
+			request.setAttribute("ListaDocentes",listaDocentes);
+			request.getRequestDispatcher("MenuPrincipalAdmin.jsp").forward(request, response);
+		}
+		
 	}
 
 }

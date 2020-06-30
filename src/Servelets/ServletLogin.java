@@ -12,9 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import DaoImpl.CursoDaoImpl;
 import DaoImpl.DocenteDaoImpl;
+import DaoImpl.MateriaDaoImpl;
 import DaoImpl.UsuarioImpl;
 import Entidad.Curso;
 import Entidad.Docente;
+import Entidad.Materia;
+
 import javax.servlet.http.HttpSession;
 @WebServlet("/ServletLogin")
 public class ServletLogin extends HttpServlet {
@@ -52,9 +55,13 @@ public class ServletLogin extends HttpServlet {
 				
 						CursoDaoImpl cDao = new CursoDaoImpl();
 						List<Curso> listaCursos = (ArrayList<Curso>) cDao.readAll();
-
+						MateriaDaoImpl mDao = new MateriaDaoImpl();
+						List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
+						DocenteDaoImpl dDao = new DocenteDaoImpl(); 
+						List<Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
 						request.setAttribute("ListaCursos", listaCursos);
-
+						request.setAttribute("ListaMaterias", listaMaterias);
+						request.setAttribute("ListaDocentes",listaDocentes);
 						request.getRequestDispatcher("MenuPrincipalAdmin.jsp").forward(request, response);
 					} 
 			else if (validador==2) {

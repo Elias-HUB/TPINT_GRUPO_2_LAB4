@@ -182,5 +182,73 @@ public class CursoDaoImpl implements CursoDao{
 		}
 		return ultimoID;
 	}
+	
+	public List<Curso>  Filtrar(int legajo, int idMateria, int Turno, int cuatrimestre, int anio)
+    {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		ArrayList<Curso> Cursos = new ArrayList<Curso>();
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement("exec sp_CursosFiltrado ?,?,?,?,?;");
+		    if (legajo!=0)
+            {
+            	statement.setInt(1,legajo);
+            }
+		    else
+            {
+		    	statement.setString(1,"");
+            }
+		    if (idMateria!=0)
+            {
+		    	statement.setInt(2,idMateria);
+            }
+            else
+            {
+            	statement.setString(2,"");
+            }
+
+            if (Turno!=0)
+            {
+            	statement.setInt(3,Turno);
+            }
+            else
+            {
+            	statement.setString(3,"");
+            }
+		if (cuatrimestre!=0)
+            {
+				statement.setInt(4,cuatrimestre);
+            }
+            else
+            {
+            	statement.setString(4,"");
+            }
+		if (anio!=0)
+            {
+				statement.setInt(5,anio);
+            }
+            else
+            {
+            	statement.setString(5,"");
+            }
+			
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Cursos.add(GetCurso(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Cursos;
+
+    }
 
 }
