@@ -38,7 +38,7 @@ public class ServletAlumno extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession();		
 		if(session.getAttribute("Legajo") == null) {
 			request.getRequestDispatcher("Login.jsp").forward(request, response);
 		}
@@ -70,13 +70,13 @@ public class ServletAlumno extends HttpServlet {
 			String Curso = request.getParameter("ParamAlumnoXCursoDocente").toString();
 			int curso = Integer.parseInt(Curso);
 			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao2.readAlumnosXCurso(curso);
-			NotaDaoImpl cal = new NotaDaoImpl();
-			Calificacion calificacion = new Calificacion();
-			List <Calificacion> listaCalificaciones = null; 
-			for (Alumno alumno : listaAlumnos) {
+			NotaDaoImpl cal = new NotaDaoImpl();			
+			List <Calificacion> listaCalificaciones = null;			
+			/*for (Alumno alumno : listaAlumnos) {
+				Calificacion calificacion = new Calificacion();
 				calificacion = cal.readNotasXAlumno(curso, alumno.getLegajo());
 				listaCalificaciones.add(calificacion);
-			}
+			}*/
 			request.setAttribute("ListaCalificaciones", listaCalificaciones);
 			request.setAttribute("ListaAlumnos", listaAlumnos);
 			request.getRequestDispatcher("AlumnosPorCursoDocente.jsp").forward(request, response);
