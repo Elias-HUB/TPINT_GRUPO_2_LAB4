@@ -59,7 +59,7 @@
 							name="LegajoAlumno" value="<%=alumno.getLegajo()%>"></th>
 						<th><%=alumno.getApellido()%> <%=alumno.getNombre()%></th>
 						<th><%=alumno.getDni()%></th>
-						<th><input type="number" value="<%=calificacion.getParcial1()%>"
+						<th><input type="text" value="<%=calificacion.getParcial1()%>"
 							style="width: 60px; heigth: 50px" min="1" max="10" /></th>
 						<th><input type="number" value="<%=calificacion.getParcial2()%>"
 							style="width: 60px; heigth: 50px" min="1" max="10" /></th>
