@@ -44,7 +44,7 @@ public class ServeletCurso extends HttpServlet {
 				request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
 			} }
 	// LISTAR LOS CURSOS PARA UN DOCENTE LOGUEADO
-		else {
+		else if (ParamListar.equals("2")) {
 				CursoDaoImpl cDao = new CursoDaoImpl();
 				HttpSession session = request.getSession();
 				int legajo = Integer.parseInt(session.getAttribute("Legajo").toString());
