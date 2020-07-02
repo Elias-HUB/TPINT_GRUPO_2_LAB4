@@ -44,7 +44,7 @@ public class ServeletCurso extends HttpServlet {
 				request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
 			} }
 	// LISTAR LOS CURSOS PARA UN DOCENTE LOGUEADO
-		else {
+		else if (ParamListar.equals("2")) {
 				CursoDaoImpl cDao = new CursoDaoImpl();
 				HttpSession session = request.getSession();
 				int legajo = Integer.parseInt(session.getAttribute("Legajo").toString());
@@ -111,6 +111,19 @@ public class ServeletCurso extends HttpServlet {
 			request.getRequestDispatcher("MenuPrincipalAdmin.jsp").forward(request, response);
 		}
 		
+		if(request.getParameter("btnModificarCurso")!=null)
+		{
+			MateriaDaoImpl mDao = new MateriaDaoImpl();
+			List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
+			DocenteDaoImpl dDao = new DocenteDaoImpl(); 
+			List<Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
+			AlumnoDaoImpl aDao = new AlumnoDaoImpl();
+			//List<Alumno> listaAlumnos = (ArrayList<Alumno>)aDao.readAll();
+			//request.setAttribute("ListaAlumnos", listaAlumnos);
+			request.setAttribute("ListaDocentes",listaDocentes);
+			request.setAttribute("ListaMaterias", listaMaterias);
+			request.getRequestDispatcher("ModificarCurso.jsp").forward(request, response);
+		}
 	}
 
 }

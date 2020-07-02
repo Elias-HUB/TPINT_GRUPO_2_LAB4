@@ -1,19 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="Entidad.Materia"%>
 <%@ page import="Entidad.Docente"%>
 <%@ page import="Entidad.Alumno"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <jsp:include page="HeadAdministrador.jsp"></jsp:include>
 <jsp:include page="LibreriasJtable.jsp"></jsp:include>
 <link rel="stylesheet" href="Css/JTable.css">
-
-
 </head>
+<body>
 <body>
 	<form method="post" action="ServeletCurso">
 		<br>
@@ -120,49 +118,6 @@
 				<br>
 				<div></div>
 			</div>
-		<div class="wrapper">
-			<div id="formContent" class="table-responsive">
-				<table id="example" class="table table-striped table-bordered"
-					style="width: 100%">
-					<thead class="thead-dark">
-						<tr>
-							<th style="text-align: center">Seleccionar</th>
-							<th style="text-align: center">Legajo</th>
-							<th style="text-align: center">Apellido</th>
-							<th style="text-align: center">Nombre</th>
-						</tr>
-					</thead>
-					<tbody>
-						<%
-							ArrayList<Alumno> lista = null;
-							if (request.getAttribute("ListaAlumnos") != null) {
-								lista = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
-							}
-
-							if (lista != null) {
-								for (Alumno alumno : lista) {
-						%>
-						<tr>
-							<th><input type="checkbox" id="cboxAlumno" name="cboxAlumno"
-								value="<%=alumno.getLegajo()%>"></th>
-							<th><%=alumno.getLegajo()%></th>
-							<th><%=alumno.getApellido()%></th>
-							<th><%=alumno.getNombre()%></th>
-						</tr>
-						<%
-							}
-							}
-						%>
-					</tbody>
-				</table>
-			</div>
-		</div>
-
-		<br>
-		<button type="submit" class="btn btn-block btn-outline-info"
-			id="btnGuardarCurso" name="btnGuardarCurso">Guardar Curso</button>
-		</div>
-	</form>
-
+		</form>
 </body>
 </html>

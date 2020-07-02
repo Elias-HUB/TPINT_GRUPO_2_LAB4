@@ -87,7 +87,25 @@
 						<th><%=curso.docente.getNombre()%> <%=curso.docente.getApellido()%></th>
 						<th><%=curso.getEstado()%></th>
 						<th style="width: 250px;">
+					<div class="form row">
+					
+						<form method="get" action="ServletAlumno" >
+						<a href="ServletAlumno?ParamAlumnoXCursoAdmin=<%=curso.getId()%>" class="btn btn-outline-primary">
+						<img src="Imagenes/Ver.png" Width="22px" data-toggle="tooltip"
+									data-placement="bottom" title="Ver alumnos" alt="x" />
+						</a>
+						</form>
+						<form method="post" action="ServeletCurso">
+							<button type="submit" class="btn btn-outline-warning" id="btnModificarCurso" name="btnModificarCurso">
+								<img src="Imagenes/Editar.png" Width="22px" alt="x"
+									data-toggle="tooltip" data-placement="bottom"
+									title="Modificar Curso" />
+							</button>
+							</form>
+						</div>
+						</th>
 					</tr>
+					
 						<%
 							}
 							}
@@ -97,5 +115,6 @@
 			</table>
 		</div>
 	</div>
+	
 </body>
 </html>

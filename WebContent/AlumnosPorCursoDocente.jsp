@@ -43,25 +43,19 @@
 						if (request.getAttribute("ListaAlumnos") != null) {
 							lista = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
 						}
-						ArrayList<Calificacion> listaCalificaciones = null;
-						if(request.getAttribute("ListCalificaciones")!=null)
-						{
-							 listaCalificaciones = (ArrayList<Calificacion>)request.getAttribute("ListaCalificaciones");
-						}
+						
 						if (lista != null) {
 							for (Alumno alumno : lista) {
-								for (Calificacion calificacion : listaCalificaciones) {
-									if (calificacion.getLegajo() == alumno.getLegajo())
-									{
+								
 								
 					%>
 						<th style="width: 80px;"><%=alumno.getLegajo()%> <input type="hidden"
 							name="LegajoAlumno" value="<%=alumno.getLegajo()%>"></th>
 						<th><%=alumno.getApellido()%> <%=alumno.getNombre()%></th>
 						<th><%=alumno.getDni()%></th>
-						<th><input type="number" value="<%=calificacion.getParcial1()%>"
+						<th><input type="text" value="10"
 							style="width: 60px; heigth: 50px" min="1" max="10" /></th>
-						<th><input type="number" value="<%=calificacion.getParcial2()%>"
+						<th><input type="number" value="10"
 							style="width: 60px; heigth: 50px" min="1" max="10" /></th>
 						<th><input type="number" placeholder="-"
 							style="width: 60px; heigth: 50px" min="1" max="10" /></th>
@@ -82,8 +76,6 @@
 						
 					</tr>
 					<%
-						}
-						}
 						}
 						}
 					%>
