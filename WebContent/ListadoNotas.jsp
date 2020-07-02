@@ -3,21 +3,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<jsp:include page="HeadAdministrador.jsp"></jsp:include>
+<jsp:include page="HeadDocente.jsp"></jsp:include>
 <jsp:include page="LibreriasJtable.jsp"></jsp:include>
 <link rel="stylesheet" href="Css/JTable.css">
 
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#example').DataTable(
-    		 {
-    			  "columnDefs": [
-    			    { "orderable": false, "targets": [2,3,4,5,6,7]}
-    			    ]    		 
-    			})
-}
-);
-    </script>
 
 </head>
 <body>
@@ -92,7 +81,6 @@ $(document).ready(function() {
 		</div>
 	</div>
 
-	<button type="submit" class="btn btn-primary" id="btnCargarNotas">Cargar
-		Notas</button>
+	<button type="submit" class="btn btn-primary" id="btnCargarNotas">Cargar Notas</button>
 </body>
 </html>

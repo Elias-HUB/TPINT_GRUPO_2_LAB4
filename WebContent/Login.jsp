@@ -10,6 +10,11 @@
 <link rel="stylesheet" href="JS/Funciones.js">
 
 </head>
+<% 
+		session = request.getSession();
+		session.setAttribute("Legajo",null);
+
+%>
 <body>
 	<div class="Cabecera">
 		<div style="height: 100px;">
