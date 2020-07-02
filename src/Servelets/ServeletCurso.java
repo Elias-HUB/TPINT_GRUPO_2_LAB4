@@ -69,7 +69,7 @@ public class ServeletCurso extends HttpServlet {
 			request.setAttribute("ListaAlumnos", listaAlumnos);
 			request.setAttribute("ListaDocentes",listaDocentes);
 			request.setAttribute("ListaMaterias", listaMaterias);
-			request.getRequestDispatcher("ModificarCursoModal.jsp").forward(request, response);
+			request.getRequestDispatcher("AltaCurso.jsp").forward(request, response);
 		}
 // BOTON PARA QUE SE GUARDE EN LA BD EL CURSO NUEVO
 		if(request.getParameter("btnGuardarCurso") != null)

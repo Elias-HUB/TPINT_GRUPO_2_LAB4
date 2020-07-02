@@ -149,7 +149,7 @@
 						<p class="card-text"><%=curso.getTurno()%></p>
 						<p class="card-text"><%=curso.docente.getNombre()%>
 							<%=curso.docente.getApellido()%></p>
-						<a href="ServletAlumno?ParamAxC=<%=curso.getId()%>" class="btn btn-lg btn-info">Alumnos</a>
+						<a href="ServletAlumno?ParamAlumnoXCursoAdmin=<%=curso.getId()%>" class="btn btn-lg btn-info">Alumnos</a>
 					</div>
 					<div class="card-footer bg-transparent"> 
 					<input id="txtID" name="txtID" value="<%=curso.getId()%>" style="visibility:hidden" ></div>

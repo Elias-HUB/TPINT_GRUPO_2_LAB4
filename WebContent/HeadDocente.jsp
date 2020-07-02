@@ -6,8 +6,8 @@
 
 <jsp:include page="Librerias.jsp"></jsp:include>
 <link rel="stylesheet" href="Css/Head.css">
-
 <div class="Cabecera">
+
 	<div style="height: 100px;">
 		<div class="snap-pm-user" style="margin-left: 20px">
 			<%
@@ -20,13 +20,15 @@
 			<div style="margin-left: 80px; margin-top: 10px;">
 <!-- 			<a class="aHead" href="...">Perfil</a> - -->
 				<a class="aHead" href="ServeletCurso?Param=2">Mis Cursos</a> - <a
-					class="aHead" id="snap-pm-logout" href="...">Salir</a>
+					class="aHead" id="snap-pm-logout" href="Login.jsp">Salir</a>
 			</div>
 		</div>
 		<div class="topcorner">
-			<a class="aHead" href='...' class="topcorner"> <img src="Imagenes/Cabecera.png" width="300px"
+		
+			<a class="aHead" href="ServletLogin?LogoHead=2" class="topcorner"> <img src="Imagenes/Cabecera.png" width="300px"
 				alt="Logo">
 			</a>
+	
 		</div>
 	</div>
 </div>
