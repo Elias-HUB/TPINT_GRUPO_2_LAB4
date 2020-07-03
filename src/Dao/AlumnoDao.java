@@ -7,5 +7,6 @@ public interface AlumnoDao {
 	public boolean insert(Alumno alumno);
 	public boolean delete(int alumno_a_eliminar);
 	public boolean update(Alumno alumno_a_modificar);
+	public boolean reporteestadoporcurso(String cadena);
 	public List<Alumno> readAll();
 }

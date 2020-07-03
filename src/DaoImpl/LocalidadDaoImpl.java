@@ -15,8 +15,6 @@ public class LocalidadDaoImpl implements LocalidadDao {
 	private static final String readallPorProvincia = "SELECT * FROM tpint_grupo2_lab4.localidades where id_privincia = ?;";
 	
 	@Override
-	
-	
 	public List<Localidad> ListarLocalidades() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
