@@ -29,7 +29,7 @@
 								<div>
 									<label Class="control-label">Nombre</label>
 								</div>
-								<input ID="TboxNombreA" name="TboxNombreA"
+								<input ID="TboxNombreA" required pattern="[A-Za-z ]+" name="TboxNombreA"
 									onkeypress="return soloLetras(event)"
 									onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
 									maxlength="20" placeholder="Agustin" Class="form-control">
@@ -41,7 +41,7 @@
 								<div>
 									<label Class="control-label">Apellido</label>
 								</div>
-								<input ID="TboxApellidoA" name="TboxApellidoA"
+								<input ID="TboxApellidoA" required pattern="[A-Za-z ]+" name="TboxApellidoA"
 									onkeypress="return soloLetras(event)"
 									onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
 									maxlength="20" placeholder="Argento" Class="form-control">
@@ -53,10 +53,10 @@
 								<div>
 									<label Class="control-label">Dni</label>
 								</div>
-								<input id="TboxDniA" name="TboxDniA"
+								<input id="TboxDniA" required pattern="[0-9]+" name="TboxDniA"
 									onkeypress="return soloNumeros(event)"
 									onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
-									maxlength="8" placeholder="40174332" Class="form-control">
+									minlength="8" maxlength="8" placeholder="40174332" Class="form-control">
 								<p id="MensajeErrorADni"></p>
 							</div>
 						</div>
@@ -72,8 +72,8 @@
 							<div>
 								<label Class="control-label">Fecha Nacimiento</label>
 							</div>
-							<input type="date" ID="TboxFechaNacimientoA"
-								name="TboxFechaNacimientoA" max="3000-12-31" min="1995-01-01"
+							<input type="date" required pattern="[0-9]+" ID="TboxFechaNacimientoA"
+								name="TboxFechaNacimientoA" max="3000-12-31" min="1900-01-01"
 								class="form-control">
 						</div>
 
@@ -88,7 +88,7 @@
 									<div class="input-group-text">@</div>
 								</div>
 
-								<input ID="TboxEmailA" name="TboxEmailA"
+								<input ID="TboxEmailA" required type= "email" name="TboxEmailA"
 									onkeyup="validarEmail()" onfocus="Seleccionar(this.id)"
 									maxlength="33" placeholder="Example@gmail.com"
 									Class="form-control">
@@ -102,10 +102,10 @@
 							<div>
 								<label Class="control-label">Telefono</label>
 							</div>
-							<input ID="TboxTelefonoA" name="TboxTelefonoA"
+							<input ID="TboxTelefonoA" required pattern="[0-9]+" name="TboxTelefonoA"
 								onkeypress="return soloNumeros(event)"
 								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
-								maxlength="15" placeholder="1157412365" Class="form-control">
+								minlength="8" maxlength="15" placeholder="1157412365" Class="form-control">
 							<p id="MensajeErrorTelefono"></p>
 						</div>
 
@@ -118,7 +118,7 @@
 							<div>
 								<label Class="control-label">Dirección</label>
 							</div>
-							<input ID="TboxDirreccionA" name="TboxDirreccionA"
+							<input ID="TboxDirreccionA" required name="TboxDirreccionA"
 								onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)"
 								maxlength="40" placeholder="Avenida Siempreviva 742"
 								Class="form-control">
