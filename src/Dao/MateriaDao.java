@@ -7,4 +7,5 @@ import Entidad.Materia;
 public interface MateriaDao {
 	
 	public List<Materia> readAll();
+	public Materia ReadMateria(int Materiaid);
 }
