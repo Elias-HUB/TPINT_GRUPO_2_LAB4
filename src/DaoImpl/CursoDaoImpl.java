@@ -70,7 +70,6 @@ public class CursoDaoImpl implements CursoDao {
 			try {
 				conexion.rollback();
 			} catch (SQLException e1) {
-
 				return isInsertExitoso = false;
 			}
 		}

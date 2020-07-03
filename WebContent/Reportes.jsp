@@ -153,7 +153,7 @@
 						TablaReporteEstadoCurso = request.getAttribute("TablaReporteEstadoCurso").toString();
 				%>
 
-				<th style="text-align: center">Materia</th>
+				<th style="text-align: center">Estado</th>
 				<th style="text-align: center">Cant. alumnos</th>
 				<th style="text-align: center">Porcentaje</th>
 				</tr>
