@@ -12,9 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import DaoImpl.CursoDaoImpl;
 import DaoImpl.DocenteDaoImpl;
+import DaoImpl.MateriaDaoImpl;
 import DaoImpl.UsuarioImpl;
 import Entidad.Curso;
 import Entidad.Docente;
+import Entidad.Materia;
+
 import javax.servlet.http.HttpSession;
 @WebServlet("/ServletLogin")
 public class ServletLogin extends HttpServlet {
@@ -27,7 +30,30 @@ public class ServletLogin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		 // String Param= request.getParameter("Param");
+		if(request.getParameter("LogoHead")!=null)
+		{
+			int aux = Integer.parseInt(request.getParameter("LogoHead").toString());
+			if (aux==2) {
+				CursoDaoImpl cDao = new CursoDaoImpl();
+				HttpSession session = request.getSession();
+				int legajoD = Integer.parseInt(session.getAttribute("Legajo").toString());
+				List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajoD);
+				request.setAttribute("ListaCursos", listaCursos);
+				request.getRequestDispatcher("MenuPrincipalDocente.jsp").forward(request, response);
+			}
+			else if (aux==1) {
+				CursoDaoImpl cDao = new CursoDaoImpl();
+				List<Curso> listaCursos = (ArrayList<Curso>) cDao.readAll();
+				MateriaDaoImpl mDao = new MateriaDaoImpl();
+				List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
+				DocenteDaoImpl dDao = new DocenteDaoImpl(); 
+				List<Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
+				request.setAttribute("ListaCursos", listaCursos);
+				request.setAttribute("ListaMaterias", listaMaterias);
+				request.setAttribute("ListaDocentes",listaDocentes);
+				request.getRequestDispatcher("MenuPrincipalAdmin.jsp").forward(request, response);
+			}
+		}
 			
 	}
 
@@ -52,9 +78,13 @@ public class ServletLogin extends HttpServlet {
 				
 						CursoDaoImpl cDao = new CursoDaoImpl();
 						List<Curso> listaCursos = (ArrayList<Curso>) cDao.readAll();
-
+						MateriaDaoImpl mDao = new MateriaDaoImpl();
+						List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
+						DocenteDaoImpl dDao = new DocenteDaoImpl(); 
+						List<Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
 						request.setAttribute("ListaCursos", listaCursos);
-
+						request.setAttribute("ListaMaterias", listaMaterias);
+						request.setAttribute("ListaDocentes",listaDocentes);
 						request.getRequestDispatcher("MenuPrincipalAdmin.jsp").forward(request, response);
 					} 
 			else if (validador==2) {
@@ -71,6 +101,17 @@ public class ServletLogin extends HttpServlet {
 				request.getRequestDispatcher("Login.jsp").forward(request, response);
 			}
 			
+			if(request.getParameter("LogoHead")!=null)
+			{
+				int aux = Integer.parseInt(request.getParameter("LogoHead").toString());
+				if (aux==2) {
+					CursoDaoImpl cDao = new CursoDaoImpl();
+					int legajoD = (int) session.getAttribute("Legajo");
+					List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajoD);
+					request.setAttribute("ListaCursos", listaCursos);
+					request.getRequestDispatcher("MenuPrincipalDocente.jsp").forward(request, response);
+				}
+			}
 			
 		}
 	}

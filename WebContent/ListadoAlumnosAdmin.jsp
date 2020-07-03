@@ -3,6 +3,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="Entidad.Alumno"%>
+<%@ page import="javax.servlet.http.HttpSession"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,7 +15,12 @@
 <link rel="stylesheet" href="Css/JTable.css">
 </head>
 <body>
-
+<%
+ session = request.getSession();
+if(session.getAttribute("Legajo") == null) {
+	request.getRequestDispatcher("Login.jsp").forward(request, response);
+}
+%>
 	<div class="wrapper">
 		<div id="formContent" class="table-responsive">
 

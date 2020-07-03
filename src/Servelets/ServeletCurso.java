@@ -44,7 +44,7 @@ public class ServeletCurso extends HttpServlet {
 				request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
 			} }
 	// LISTAR LOS CURSOS PARA UN DOCENTE LOGUEADO
-		else {
+		else if (ParamListar.equals("2")) {
 				CursoDaoImpl cDao = new CursoDaoImpl();
 				HttpSession session = request.getSession();
 				int legajo = Integer.parseInt(session.getAttribute("Legajo").toString());
@@ -69,7 +69,7 @@ public class ServeletCurso extends HttpServlet {
 			request.setAttribute("ListaAlumnos", listaAlumnos);
 			request.setAttribute("ListaDocentes",listaDocentes);
 			request.setAttribute("ListaMaterias", listaMaterias);
-			request.getRequestDispatcher("ModificarCursoModal.jsp").forward(request, response);
+			request.getRequestDispatcher("AltaCurso.jsp").forward(request, response);
 		}
 // BOTON PARA QUE SE GUARDE EN LA BD EL CURSO NUEVO
 		if(request.getParameter("btnGuardarCurso") != null)
@@ -96,7 +96,34 @@ public class ServeletCurso extends HttpServlet {
 			request.setAttribute("ListaCursosAdmin", listaCursos);
 			request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
 		}
-				
+		if(request.getParameter("btnBuscar")!=null)
+		{
+			CursoDaoImpl cDao = new CursoDaoImpl();
+			int legajo= (Integer.parseInt(request.getParameter("slDocente").toString()));
+			List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajo);
+			MateriaDaoImpl mDao = new MateriaDaoImpl();
+			List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
+			DocenteDaoImpl dDao = new DocenteDaoImpl(); 
+			List<Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
+			request.setAttribute("ListaCursos", listaCursos);
+			request.setAttribute("ListaMaterias", listaMaterias);
+			request.setAttribute("ListaDocentes",listaDocentes);
+			request.getRequestDispatcher("MenuPrincipalAdmin.jsp").forward(request, response);
+		}
+		
+		if(request.getParameter("btnModificarCurso")!=null)
+		{
+			MateriaDaoImpl mDao = new MateriaDaoImpl();
+			List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
+			DocenteDaoImpl dDao = new DocenteDaoImpl(); 
+			List<Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
+			AlumnoDaoImpl aDao = new AlumnoDaoImpl();
+			//List<Alumno> listaAlumnos = (ArrayList<Alumno>)aDao.readAll();
+			//request.setAttribute("ListaAlumnos", listaAlumnos);
+			request.setAttribute("ListaDocentes",listaDocentes);
+			request.setAttribute("ListaMaterias", listaMaterias);
+			request.getRequestDispatcher("ModificarCurso.jsp").forward(request, response);
+		}
 	}
 
 }

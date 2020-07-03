@@ -14,13 +14,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Dao.LocalidadDao;
 import Dao.ProvinciaDao;
 import DaoImpl.AlumnoDaoImpl;
 import DaoImpl.LocalidadDaoImpl;
+import DaoImpl.NotaDaoImpl;
 import DaoImpl.ProvinciaDaoImpl;
 import Entidad.Alumno;
+import Entidad.Calificacion;
 import Entidad.Domicilio;
 import Entidad.Localidad;
 import Entidad.Provincia;
@@ -35,6 +38,10 @@ public class ServletAlumno extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();		
+		if(session.getAttribute("Legajo") == null) {
+			request.getRequestDispatcher("Login.jsp").forward(request, response);
+		}
 		AlumnoDaoImpl aDao = new AlumnoDaoImpl();
 		ProvinciaDaoImpl pDao = new ProvinciaDaoImpl();
 		LocalidadDaoImpl lDao = new LocalidadDaoImpl();
@@ -47,6 +54,32 @@ public class ServletAlumno extends HttpServlet {
 			request.setAttribute("ListaProvincia", listaProvincia);
 			request.setAttribute("ListaLocalidad", listaLocalidad);
 			request.getRequestDispatcher("ListadoAlumnosAdmin.jsp").forward(request, response);
+		}
+		if(request.getParameter("ParamAlumnoXCursoAdmin")!=null)
+		{
+			AlumnoDaoImpl aDao1 = new AlumnoDaoImpl();
+			String Curso = request.getParameter("ParamAlumnoXCursoAdmin").toString();
+			int curso = Integer.parseInt(Curso);
+			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao1.readAlumnosXCurso(curso);
+			request.setAttribute("ListaAlumnos", listaAlumnos);
+			request.getRequestDispatcher("AlumnosPorCursoAdmin.jsp").forward(request, response);
+		}
+		if(request.getParameter("ParamAlumnoXCursoDocente")!=null)
+		{
+			AlumnoDaoImpl aDao2 = new AlumnoDaoImpl();
+			String Curso = request.getParameter("ParamAlumnoXCursoDocente").toString();
+			int curso = Integer.parseInt(Curso);
+			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao2.readAlumnosXCurso(curso);
+			NotaDaoImpl cal = new NotaDaoImpl();			
+			List <Calificacion> listaCalificaciones = null;			
+			/*for (Alumno alumno : listaAlumnos) {
+				Calificacion calificacion = new Calificacion();
+				calificacion = cal.readNotasXAlumno(curso, alumno.getLegajo());
+				listaCalificaciones.add(calificacion);
+			}*/
+			request.setAttribute("ListaCalificaciones", listaCalificaciones);
+			request.setAttribute("ListaAlumnos", listaAlumnos);
+			request.getRequestDispatcher("AlumnosPorCursoDocente.jsp").forward(request, response);
 		}
 	}
 

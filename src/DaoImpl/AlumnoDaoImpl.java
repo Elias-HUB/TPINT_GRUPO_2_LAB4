@@ -20,7 +20,11 @@ public class AlumnoDaoImpl implements AlumnoDao {
 	private static final String delete = "UPDATE Alumnos set Estado = 0 WHERE Legajo = ?;";
 	private static final String update = "UPDATE Alumnos set Dni=?, Nombre=?, Apellido=?, FechaNacimiento=?, Direccion=?, Localidad=?, Provincia=?, Email=?, Telefono=?, Estado=? where Legajo =? ;";
 	private static final String readall = "SELECT alumnos.Legajo, alumnos.Dni, alumnos.Nombre, alumnos.Apellido, alumnos.FechaNacimiento, alumnos.Email, alumnos.Telefono, alumnos.Estado, alumnos.Direccion, alumnos.Provincia as 'ProvinciaId', provincias.provincia as 'ProvinciaNombre', alumnos.Localidad as 'LocalidadId', localidades.localidad as 'LocalidadNombre' FROM tpint_grupo2_lab4.alumnos inner join tpint_grupo2_lab4.provincias on alumnos.Provincia = provincias.id inner join tpint_grupo2_lab4.localidades on alumnos.Localidad = localidades.id where Estado = 1;";
+  private static final String readAlumnosXCurso = "SELECT a.Legajo, a.Dni, a.Nombre, a.Apellido, a.Email FROM alumnos a inner join AlumnosPorCurso ac on a.legajo = ac.LegajoAlumnno where ac.idcurso = ? ;";
 	private static final String readreporteestadoporcurso = "SELECT * FROM tpint_grupo2_lab4.cursos INNER JOIN tpint_grupo2_lab4.alumnosporcurso on alumnosporcurso.IdCurso = cursos.IdCurso where alumnosporcurso.IdCurso = cursos.IdCurso";
+
+
+	
 
 	@Override
 	public boolean insert(Alumno alumno) {
@@ -173,5 +177,37 @@ public class AlumnoDaoImpl implements AlumnoDao {
 
 		return false;
 	}
+
+public List<Alumno> readAlumnosXCurso(int idCurso)
+	{
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		ArrayList<Alumno> Alumnos = new ArrayList<Alumno>();
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(readAlumnosXCurso);
+			statement.setInt(1,idCurso);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Alumno alumno = new Alumno();
+				alumno.setLegajo(resultSet.getInt("Legajo"));
+				alumno.setDni(resultSet.getInt("Dni"));
+				alumno.setNombre(resultSet.getString("Nombre"));
+				alumno.setApellido(resultSet.getString("Apellido"));
+				alumno.setEmail(resultSet.getString("Email"));
+				Alumnos.add(alumno);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Alumnos;
+	}
+	
 
 }
