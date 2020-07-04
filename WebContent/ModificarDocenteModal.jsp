@@ -96,7 +96,7 @@
 						<div class="col-md-3">
 							<label>Contraseña</label>
 							<div class="input-group">
-								<input ID="txtPassword" required type="Password" Class="form-control">
+								<input ID="txtPassword" required type="Password" name="TboxContraseña" Class="form-control">
 								<div class="input-group-append">
 									<button id="show_password" class="btn btn-secondary"
 										type="button" onclick="mostrarPassword()">
