@@ -13,12 +13,12 @@ import Entidad.Curso;
 import Entidad.Usuario;
 
 public class UsuarioImpl {
-	private static final String read = " SELECT tipousuario FROM tpint_grupo2_lab4.usuarios where legajodocente= ? and contraseña= ? ;";
-	private static final String insert = "insert into usuarios(LegajoDocente, Email, Contraseña, TipoUsuario, Estado) "
+	private static final String read = " SELECT tipousuario FROM tpint_grupo2_lab4.usuarios where legajodocente= ? and contraseÃ±a= ? ;";
+	private static final String insert = "insert into usuarios(LegajoDocente, Email, ContraseÃ±a, TipoUsuario, Estado) "
 			+ "VALUES((SELECT MAX(Legajo) from docentes), ?, ?, ?, ?);";
-	private static final String update = "UPDATE usuarios set Email=?, Contraseña=? where LegajoDocente =? ;";
+	private static final String update = "UPDATE usuarios set Email=?, ContraseÃ±a=? where LegajoDocente =? ;";
 	private static final String delete = "UPDATE usuarios set Estado = 0 WHERE LegajoDocente = ?";
-/*	public int ValidarLogin(String legajo, String contraseña) {
+/*	public int ValidarLogin(String legajo, String contraseÃ±a) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -33,7 +33,7 @@ public class UsuarioImpl {
 		try {
 			statement = conexion.getSQLConexion().prepareStatement(read);
 			statement.setInt(1, Integer.parseInt((legajo).toString()));
-			statement.setString(2, contraseña);
+			statement.setString(2, contraseÃ±a);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				tipo = (resultSet.getInt("tipousuario"));
@@ -43,7 +43,8 @@ public class UsuarioImpl {
 		}
 		return tipo;
 	}*/
-	public int read(String legajo, String contraseña) {
+
+	public int read(String legajo, String contraseÃ±a) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -58,11 +59,12 @@ public class UsuarioImpl {
 		try {
 			statement = conexion.getSQLConexion().prepareStatement(read);
 			statement.setInt(1,Integer.parseInt((legajo).toString()));
-			statement.setString(2, contraseña.toString());
+			statement.setString(2, contraseÃ±a.toString());
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				tipo=resultSet.getInt("tipousuario");
 			}
+		  
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -78,7 +80,7 @@ public class UsuarioImpl {
 			statement = conexion.prepareStatement(insert);
 
 			statement.setString(1, usuario.getEmail());
-			statement.setString(2, usuario.getContraseña());
+			statement.setString(2, usuario.getContraseÃ±a());
 			statement.setInt(3, usuario.getTipo());
 			statement.setBoolean(4, usuario.getEstado());
 			if (statement.executeUpdate() > 0) {
@@ -105,7 +107,7 @@ public class UsuarioImpl {
 		try {
 			statement = conexion.prepareStatement(update);
 			statement.setString(1, usuario.getEmail());
-			statement.setString(2, usuario.getContraseña());
+			statement.setString(2, usuario.getContraseÃ±a());
 			statement.setInt(3, usuario.getLegajo());
 
 

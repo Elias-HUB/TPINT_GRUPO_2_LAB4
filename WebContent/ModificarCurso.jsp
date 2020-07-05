@@ -4,6 +4,7 @@
 <%@ page import="Entidad.Materia"%>
 <%@ page import="Entidad.Docente"%>
 <%@ page import="Entidad.Alumno"%>
+<%@ page import="Entidad.Curso"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,8 +17,8 @@
 	<form method="post" action="ServeletCurso">
 		<br>
 		<div>
-			<div class="form-row">
-
+			<div class="form-row" style="justify-content: center;">
+			<% Curso cursoMod = (Curso)(session.getAttribute("CursoMod")); %>
 				<!--MATERIA -->
 				<div class="form-group col-md-2">
 					<div>
@@ -32,6 +33,7 @@
 						if (listaMaterias != null) {
 					%>
 					<select id="slMateria" name="slMateria" class="custom-select">
+					<option value="<%=cursoMod.Materia.getNombre()%>" selected style="visibility:hidden"><%=cursoMod.Materia.getNombre()%></option>
 						<%
 							for (Materia materia : listaMaterias) {
 						%>
@@ -52,10 +54,12 @@
 					<div>
 						<label for="Cuatrimestre">Cuatrimestre</label>
 					</div>
+				
 					<select id="slCuatrimestre" name="slCuatrimestre"
 						class="custom-select">
+						<option value="<%=cursoMod.getCuatrimestre()%>" selected style="visibility:hidden"><%=cursoMod.getCuatrimestre()%></option>
 						<option value="1" class="dropdown-item">1</option>
-						<option value="2" class="dropdown-item">2</option>
+						<option value="2" class="dropdown-item">2</option>						
 					</select>
 				</div>
 
@@ -66,9 +70,11 @@
 						<label for="Año">Año</label>
 					</div>
 					<select id="slAnio" name="slAnio" class="custom-select">
+						<option value="<%=cursoMod.getAño()%>" selected style="visibility:hidden"><%=cursoMod.getAño()%></option>
 						<option value="2018" class="dropdown-item">2018</option>
 						<option value="2019" class="dropdown-item">2019</option>
 						<option value="2020" class="dropdown-item">2020</option>
+					
 					</select>
 				</div>
 
@@ -77,7 +83,9 @@
 					<div>
 						<label for="Turno">Turno</label>
 					</div>
+						
 							<select id="slTurno" name="slTurno" class="custom-select">
+							<option value="<%=cursoMod.getTurno()%>" selected style="visibility:hidden"><%=cursoMod.getTurno()%></option>
 								<option value="Mañana" class="dropdown-item">Mañana</option>
 								<option value="Tarde" class="dropdown-item">Tarde</option>
 								<option value="Noche" class="dropdown-item">Noche</option>
@@ -98,6 +106,8 @@
 							if (listaDocentes != null) {
 						%>
 						<select id="slDocente" name="slDocente" class="custom-select">
+						<option value="<%=cursoMod.docente.getNombre()%>" selected style="visibility:hidden">
+						<%=cursoMod.docente.getNombre()%> <%=cursoMod.docente.getApellido()%></option>
 							<%
 								for (Docente doc : listaDocentes) {
 							%>
@@ -115,9 +125,67 @@
 						</div>
 				</div>
 
-				<br>
-				<div></div>
 			</div>
-		</form>
+			
+		
+		<div class="wrapper">
+			<div id="formContent" class="table-responsive">
+				<table id="example" class="table table-striped table-bordered"
+					style="width: 100%">
+					<thead class="thead-dark">
+						<tr>
+							<th style="text-align: center">Seleccionar</th>
+							<th style="text-align: center">Legajo</th>
+							<th style="text-align: center">Apellido</th>
+							<th style="text-align: center">Nombre</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							ArrayList<Alumno> lista = null;
+						    ArrayList<Alumno> listaAlumnosXcurso = null;
+							
+						    if (request.getAttribute("ListaAlumnosTodos") != null) {
+								lista = (ArrayList<Alumno>) request.getAttribute("ListaAlumnosTodos");
+						    }
+								if (request.getAttribute("ListaAlumnosCurso") != null) {
+								 listaAlumnosXcurso = (ArrayList<Alumno>) request.getAttribute("ListaAlumnosCurso");
+							}
+
+							if (lista != null) {
+								for (Alumno alumno : lista) {
+						%>
+						<tr>
+							<th><input type="checkbox" id="cboxAlumno" name="cboxAlumno"
+							value="<%=alumno.getLegajo()%>" 
+							<%
+								for (Alumno  alumnoInscripto : listaAlumnosXcurso)
+								{
+									if(alumnoInscripto.getLegajo()==alumno.getLegajo())
+									{
+										%>  checked
+										 <% 
+								 	}
+								}
+							
+							%>
+						    ></th>
+							<th><%=alumno.getLegajo()%></th>
+							<th><%=alumno.getApellido()%></th>
+							<th><%=alumno.getNombre()%></th>
+						</tr>
+						<%
+							}
+							}
+						%>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<br>
+		<button type="submit" class="btn btn-block btn-outline-info"
+			id="btnModificarCurso" name="btnModificarCurso">Modificar Curso</button>
+			</form>
 </body>
 </html>

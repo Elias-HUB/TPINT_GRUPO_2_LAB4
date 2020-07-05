@@ -46,6 +46,7 @@
 <button type="submit" class="btn btn-block btn-outline-info"
                id="btnAgregarCurso" name="btnAgregarCurso" style="margin-bottom: 10px;">Agregar Curso</button>
 </form>
+<form method="get" action="ServeletCurso">
 	<div class="wrapper">
 		<div id="formContent" class="table-responsive">
 
@@ -59,7 +60,6 @@
 						<th style="text-align: center">Año</th>
 						<th style="text-align: center">Turno</th>
 						<th style="text-align: center">Docente</th>
-						<th style="text-align: center">Estado</th>
 						<th style="text-align: center">Acciones</th>
 					</tr>
 				</thead>
@@ -78,43 +78,50 @@
 							for (Curso curso : lista) {
 					%>
 					<tr>
-
-						<th><%=curso.getId()%></th>
-						<th><%=curso.Materia.getNombre()%></th>
-						<th><%=curso.getCuatrimestre()%></th>
-						<th><%=curso.getAño()%></th>
-						<th><%=curso.getTurno()%></th>
-						<th><%=curso.docente.getNombre()%> <%=curso.docente.getApellido()%></th>
-						<th><%=curso.getEstado()%></th>
-						<th style="width: 250px;">
-					<div class="form row">
-					
-						<form method="get" action="ServletAlumno" >
-						<a href="ServletAlumno?ParamAlumnoXCursoAdmin=<%=curso.getId()%>" class="btn btn-outline-primary">
-						<img src="Imagenes/Ver.png" Width="22px" data-toggle="tooltip"
-									data-placement="bottom" title="Ver alumnos" alt="x" />
-						</a>
-						</form>
-						<form method="post" action="ServeletCurso">
-							<button type="submit" class="btn btn-outline-warning" id="btnModificarCurso" name="btnModificarCurso">
-								<img src="Imagenes/Editar.png" Width="22px" alt="x"
-									data-toggle="tooltip" data-placement="bottom"
-									title="Modificar Curso" />
-							</button>
-							</form>
-						</div>
+				
+						<th><%=curso.getId()%>
+				    	<input id=txtidCurso name="txtidCurso" value="<%=curso.getId()%>" style="visibility:hidden" >
 						</th>
+						<th style="width: 250px;"><%=curso.Materia.getNombre()%></th>
+						<th style="width: 250px;"><%=curso.getCuatrimestre()%></th>
+						<th style="width: 250px;"><%=curso.getAño()%></th>
+						<th style="width: 250px;"><%=curso.getTurno()%></th>
+						<th style="width: 250px;"><%=curso.docente.getNombre()%> <%=curso.docente.getApellido()%></th>
+						<th style="width: 250px;">
+
+												
+						<a href="ServletAlumno?ParamAlumnoXCursoAdmin=<%=curso.getId()%>" class="btn btn-outline-primary">
+						<img src="Imagenes/Ver.png" Width="22px" data-toggle="tooltip" data-placement="bottom" title="Ver alumnos" alt="x" />
+						</a>
+											
+						
+						
+
+							<a href="ServeletCurso?ParamModificarCurso=<%=curso.getId()%>"
+							class="btn btn-outline-warning" id="btnModificarCurso" name="btnModificarCurso">
+								<img src="Imagenes/Editar.png" Width="22px" data-toggle="tooltip" 
+									title="Modificar Curso" /></a>
+							
+
+						<button type="submit" id="BtnEliminar" name="BtnEliminar"
+								class="btn btn-outline-danger">
+								<img src="Imagenes/Eliminar.png" Width="22px" alt="x"
+									data-toggle="tooltip" data-placement="bottom"
+									title="Eliminar Alumno" />
+							</button>
+						</th>
+						
 					</tr>
 					
 						<%
 							}
 							}
 						%>
-					
+				
 				</tbody>
 			</table>
 		</div>
 	</div>
-	
+		</form>
 </body>
 </html>
