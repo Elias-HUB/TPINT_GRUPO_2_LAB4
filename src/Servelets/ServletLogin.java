@@ -108,7 +108,6 @@ public class ServletLogin extends HttpServlet {
 			{
 				int aux = Integer.parseInt(request.getParameter("LogoHead").toString());
 				if (aux==2) {
-					CursoDaoImpl cDao = new CursoDaoImpl();
 					int legajoD = (int) session.getAttribute("Legajo");
 					List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajoD);
 					request.setAttribute("ListaCursos", listaCursos);

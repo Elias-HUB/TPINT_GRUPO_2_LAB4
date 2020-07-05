@@ -112,7 +112,7 @@ public class ServeletCurso extends HttpServlet {
 			curso.docente.setLegajo(Integer.parseInt(request.getParameter("slDocente").toString()));
 			curso.Materia  = new Materia();
 			curso.Materia.setIdMateria(Integer.parseInt(request.getParameter("slMateria").toString()));
-			curso.setAÃ±o(Integer.parseInt(request.getParameter("slAnio").toString()));
+			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
 			curso.setTurno((request.getParameter("slTurno").toString()));
 			curso.setEstado("1");
 			cursoImpl.insert(curso);
@@ -155,7 +155,7 @@ public class ServeletCurso extends HttpServlet {
 			curso.docente.setLegajo(Integer.parseInt(request.getParameter("slDocente").toString()));
 			curso.Materia  = new Materia();
 			curso.Materia.setIdMateria(Integer.parseInt(request.getParameter("slMateria").toString()));
-			curso.setAÃ±o(Integer.parseInt(request.getParameter("slAnio").toString()));
+			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
 			curso.setTurno((request.getParameter("slTurno").toString()));
 			cursoImpl.update(curso,IDcursoMod);
 			/*	AlumnosXCurso = request.getParameterValues("cboxAlumno");
