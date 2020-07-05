@@ -10,12 +10,13 @@
 <link rel="stylesheet" href="JS/Funciones.js">
 
 </head>
+
+<body>
 <% 
 		session = request.getSession();
 		session.setAttribute("Legajo",null);
 
 %>
-<body>
 	<div class="Cabecera">
 		<div style="height: 100px;">
 			<div class="snap-pm-user"
@@ -42,21 +43,26 @@
 				</div>
 
 				<!-- Login -->
-				<input type="text" class="fadeIn second" name="TxtLegajo" placeholder="Legajo"
+				<input type="text" class="fadeIn second" required pattern="[0-9]+" title="Ingrese el legajo"
+				name="TxtLegajo" placeholder="Legajo"
 					id="TxtLegajo">
-					 <input type="text"	class="fadeIn third pass" name="TxtContrasenia" placeholder="Contraseña"
+					 <input type="text"	class="fadeIn third pass" required name="TxtContrasenia" placeholder="Contraseña"
 					id="TxtContrasenia">
 				<div>
 		<button type="submit" class="btn btn-info" id="btnIngresar" name="btnIngresar" style="margin-bottom: 10px;">Ingreso</button>
 
 
-					<!-- Ayuda -->
+				<% 	  /* <!-- Ayuda -->
 					<div id="formFooter">
 						<a class="fadeIn five underlineHover" href="...">Ayuda</a>
 					</div>
+					*/
+			%>
 				</div>
 			</div>
 		</div>
 	</form>
+	
+<script src="JS/Funciones.js"></script>	
 </body>
 </html>

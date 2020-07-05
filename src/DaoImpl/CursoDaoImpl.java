@@ -20,6 +20,9 @@ public class CursoDaoImpl implements CursoDao{
 	private static final String readall = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria";
 	private static final String readCursosXDocente = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria where c.legajoDocente=?";
 	private static final String insertAlumnosPorCurso = "insert into AlumnosPorCurso(IdCurso, LegajoAlumnno, EstadoCurso, Estado) VALUES (?, ? , 'Cursando',true)";
+	private static final String readCurso = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria where c.idCurso= ?";
+	private static final String update = "update cursos set idMateria= ?  , Cuatrimestre= ?, Año= ?  , Turno= ? , LegajoDocente= ?  where IdCurso= ? ;";
+	
 	@Override
 	public boolean insert(Curso curso) {
 		PreparedStatement statement;
@@ -79,9 +82,27 @@ public class CursoDaoImpl implements CursoDao{
 	}
 
 	@Override
-	public boolean update(Curso curso, String aux) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(Curso curso, String CursoMod) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isupdateExitoso = false;
+		try {
+			statement = conexion.prepareStatement(update);
+			statement.setInt(1, curso.Materia.getIdMateria());
+			statement.setInt(2, curso.getCuatrimestre());
+			statement.setInt(3, curso.getAño());
+			statement.setString(4, curso.getTurno());
+			statement.setInt(5, curso.docente.getLegajo());
+			statement.setString(6, CursoMod);
+
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				isupdateExitoso = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isupdateExitoso;
 	}
 
 	@Override
@@ -251,4 +272,30 @@ public class CursoDaoImpl implements CursoDao{
 
     }
 
+	
+	public Curso BuscarCurso(int idCurso)
+	{
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		Curso curso = new Curso();
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(readCurso);
+			statement.setInt(1,idCurso);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				curso= (GetCurso(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return curso;
+	}
 }

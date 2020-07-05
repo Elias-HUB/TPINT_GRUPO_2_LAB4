@@ -20,11 +20,11 @@
 <!-- 				<a class="aHead" href="...">Perfil</a> -  -->
 				<a class="aHead" href="ServletAlumno?Param=1">Alumnos</a> - <a class="aHead" href="ServletDocente?Param=2">Profesores</a>
 				 - <a class="aHead" href="ServeletCurso?Param=1">Cursos</a> - <a class="aHead" href="...">Reportes</a> - <a class="aHead"
-					id="snap-pm-logout" href="...">Salir</a>
+					id="snap-pm-logout" href="Login.jsp">Salir</a>
 			</div>
 		</div>
 		<div class="topcorner">
-			<a class="aHead" href='...'> <img src="Imagenes/Cabecera.png" width="300px"
+			<a class="aHead" href='ServletLogin?LogoHead=1'> <img src="Imagenes/Cabecera.png" width="300px"
 				alt="Logo">
 			</a>
 		</div>
