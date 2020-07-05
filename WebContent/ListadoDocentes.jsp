@@ -15,6 +15,11 @@
 
 </head>
 <body>
+<%
+		session = request.getSession();
+		if(session.getAttribute("Legajo") == null) {
+		request.getRequestDispatcher("Login.jsp").forward(request, response);}
+%>
 	<div class="wrapper">
 		<div id="formContent" class="table-responsive">
 
