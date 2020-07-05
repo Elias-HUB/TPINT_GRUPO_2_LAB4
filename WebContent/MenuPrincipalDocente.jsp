@@ -31,7 +31,7 @@
                         <h5 class="card-title"> <%=curso.getAño()%> <%=curso.getCuatrimestre()%>C</h5>
                         <p class="card-text"><%=curso.getTurno()%></p>
                         <p class="card-text"><%=curso.docente.getNombre()%> <%=curso.docente.getApellido()%></p>
-                  <a href="ServletAlumno?ParamAlumnoXCursoDocente=<%=curso.getId()%>" class="btn btn-lg btn-info">Alumnos</a>
+                  <a href="ServletNota?ParamAlumnoXCursoDocente=<%=curso.getId()%>" class="btn btn-lg btn-info">Alumnos</a>
                     </div>
                    <div class="card-footer bg-transparent"> 
 					<input id="txtID" name="txtID" value="<%=curso.getId()%>" style="visibility:hidden" ></div>

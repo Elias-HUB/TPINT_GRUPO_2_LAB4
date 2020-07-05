@@ -111,8 +111,7 @@ public class ServletLogin extends HttpServlet {
 					request.setAttribute("ListaCursos", listaCursos);
 					request.getRequestDispatcher("MenuPrincipalDocente.jsp").forward(request, response);
 				}
-			}
-			
+			}			
 		}
 	}
 
