@@ -63,24 +63,7 @@ public class ServletAlumno extends HttpServlet {
 			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao1.readAlumnosXCurso(curso);
 			request.setAttribute("ListaAlumnos", listaAlumnos);
 			request.getRequestDispatcher("AlumnosPorCursoAdmin.jsp").forward(request, response);
-		}
-		if(request.getParameter("ParamAlumnoXCursoDocente")!=null)
-		{
-			AlumnoDaoImpl aDao2 = new AlumnoDaoImpl();
-			String Curso = request.getParameter("ParamAlumnoXCursoDocente").toString();
-			int curso = Integer.parseInt(Curso);
-			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao2.readAlumnosXCurso(curso);
-			NotaDaoImpl cal = new NotaDaoImpl();			
-			List <Calificacion> listaCalificaciones = null;			
-			/*for (Alumno alumno : listaAlumnos) {
-				Calificacion calificacion = new Calificacion();
-				calificacion = cal.readNotasXAlumno(curso, alumno.getLegajo());
-				listaCalificaciones.add(calificacion);
-			}*/
-			request.setAttribute("ListaCalificaciones", listaCalificaciones);
-			request.setAttribute("ListaAlumnos", listaAlumnos);
-			request.getRequestDispatcher("AlumnosPorCursoDocente.jsp").forward(request, response);
-		}
+		}		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -42,7 +42,7 @@ public class ServeletCurso extends HttpServlet {
 				List<Curso> listaCursos = (ArrayList<Curso>) cDao.readAll();
 				request.setAttribute("ListaCursosAdmin", listaCursos);
 				request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
-			} }
+			}
 	// LISTAR LOS CURSOS PARA UN DOCENTE LOGUEADO
 		else if (ParamListar.equals("2")) {
 				CursoDaoImpl cDao = new CursoDaoImpl();
@@ -52,6 +52,7 @@ public class ServeletCurso extends HttpServlet {
 				request.setAttribute("ListaCursosDocente", listaCursos);
 				request.getRequestDispatcher("ListadoCursosDocente.jsp").forward(request, response);
 			}
+		}
 
 		}
 
