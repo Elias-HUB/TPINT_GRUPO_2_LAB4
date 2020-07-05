@@ -16,10 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import DaoImpl.DocenteDaoImpl;
 import DaoImpl.LocalidadDaoImpl;
 import DaoImpl.ProvinciaDaoImpl;
+import DaoImpl.UsuarioImpl;
 import Entidad.Docente;
 import Entidad.Domicilio;
 import Entidad.Localidad;
 import Entidad.Provincia;
+import Entidad.Usuario;
 
 @WebServlet("/ServletDocente")
 public class ServletDocente extends HttpServlet {
@@ -55,13 +57,15 @@ public class ServletDocente extends HttpServlet {
 		DocenteDaoImpl dDao = new DocenteDaoImpl();
 		ProvinciaDaoImpl pDao = new ProvinciaDaoImpl();
 		LocalidadDaoImpl lDao = new LocalidadDaoImpl();
+		UsuarioImpl uDao= new UsuarioImpl();
 
 		
 		if (request.getParameter("BtnEliminar") != null) {
 			String algo = request.getParameter("LegajoDocente");
 			int Legajo = Integer.parseInt(request.getParameter("LegajoDocente"));
+			
 			dDao.delete(Legajo);		
-					
+			uDao.delete(Legajo);		
 			List <Docente> listaDocentesEliminar = (ArrayList<Docente>)dDao.readAll();
 			List<Provincia> listaProvinciaEliminar = (ArrayList<Provincia>) pDao.readAll();
 			List<Localidad> listaLocalidadEliminar = (ArrayList<Localidad>) lDao.ListarLocalidades();			
@@ -75,6 +79,7 @@ public class ServletDocente extends HttpServlet {
 		//ANALIZAR CONTRASEÑA Y USUARIO
 		if (request.getParameter("BtnActualizar") != null) {
 			Docente docente = new Docente();
+			Usuario usuario = new Usuario();
 			docente.setLegajo(Integer.parseInt(request.getParameter("TboxLegajoM")));
 			docente.setNombre(request.getParameter("TboxNombreM"));
 			docente.setApellido(request.getParameter("TboxApellidoM"));
@@ -105,8 +110,12 @@ public class ServletDocente extends HttpServlet {
 
 			docente.domicilio.setLocalidad(localidad);
 			docente.domicilio.setProvincia(provincia);
+			usuario.setLegajo(Integer.parseInt(request.getParameter("TboxLegajoM")));
+			usuario.setEmail(request.getParameter("TboxEmailM"));
+			usuario.setContraseña(request.getParameter("TboxContraseña"));
 
 			dDao.update(docente);
+			uDao.update(usuario);
 			List <Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
 			List<Provincia> listaProvincia = (ArrayList<Provincia>) pDao.readAll();
 			List<Localidad> listaLocalidad = (ArrayList<Localidad>) lDao.ListarLocalidades();			
@@ -120,6 +129,7 @@ public class ServletDocente extends HttpServlet {
 		//ANALIZAR CONTRASEÑA Y USUARIO
 		if (request.getParameter("BtnAgregar") != null) {
 			Docente docente = new Docente();
+			Usuario usuario = new Usuario();
 			docente.setDni(Integer.parseInt(request.getParameter("TboxDniA").toString()));
 			docente.setNombre(request.getParameter("TboxNombreA"));
 			docente.setApellido(request.getParameter("TboxApellidoA"));
@@ -150,8 +160,14 @@ public class ServletDocente extends HttpServlet {
 			docente.domicilio.setProvincia(provincia);
 
 			docente.setEstado(true);
+			dDao.insert(docente);			
 
-			dDao.insert(docente);
+			usuario.setEmail(request.getParameter("TboxEmailA"));
+			usuario.setContraseña(request.getParameter("TboxContraseñaA"));
+			usuario.setTipo(2);
+			usuario.setEstado(true);
+			
+			uDao.insert(usuario);
 			List <Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
 			List<Provincia> listaProvincia = (ArrayList<Provincia>) pDao.readAll();
 			List<Localidad> listaLocalidad = (ArrayList<Localidad>) lDao.ListarLocalidades();			

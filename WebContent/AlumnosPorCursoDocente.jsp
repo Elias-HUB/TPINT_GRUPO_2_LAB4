@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-   <%@ page import="java.util.ArrayList"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page import="Entidad.Alumno"%>
 <%@ page import="Entidad.Calificacion"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,77 +13,128 @@
 <link rel="stylesheet" href="Css/JTable.css">
 </head>
 <body>
-
-	<div class="wrapper">
-	<button type="submit" class="btn btn-block btn-outline-info" id="btnCalificar" name="btnCalificar">Guardar Notas</button>
+	<form action="ServletNota" method="post">
+		<div class="wrapper">
+			<button type="submit" class="btn btn-block btn-outline-info"
+				id="btnCalificar" name="btnCalificar">Guardar Notas</button>
 			<br>
-		<div id="formContent" class="table-responsive">
-		
-			<table id="example" class="table table-striped table-bordered"
-				style="width: 100%">
-				<thead class="thead-dark">
-					<tr>
-						<th style="text-align: center">Legajo</th>
-						<th style="text-align: center">Alumno</th>
-						<th style="text-align: center">Documento</th>
-						<th>Par.1</th>
-						<th>Par.2</th>
-						<th>Recu.1</th>
-						<th>Recu.2</th>
-						<th>Nota Final</th>
-						<th>Estado</th>
-						<th style="text-align: center">Email</th>
-						
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-					<%
-						ArrayList<Alumno> lista = null;
-						if (request.getAttribute("ListaAlumnos") != null) {
-							lista = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
-						}
-						
-						if (lista != null) {
-							for (Alumno alumno : lista) {
-								
-								
-					%>
-						<th style="width: 80px;"><%=alumno.getLegajo()%> <input type="hidden"
-							name="LegajoAlumno" value="<%=alumno.getLegajo()%>"></th>
-						<th><%=alumno.getApellido()%> <%=alumno.getNombre()%></th>
-						<th><%=alumno.getDni()%></th>
-						<th><input type="text" value="10"
-							style="width: 60px; heigth: 50px" min="1" max="10" /></th>
-						<th><input type="number" value="10"
-							style="width: 60px; heigth: 50px" min="1" max="10" /></th>
-						<th><input type="number" placeholder="-"
-							style="width: 60px; heigth: 50px" min="1" max="10" /></th>
-						<th><input type="number" placeholder="-"
-							style="width: 60px; heigth: 50px" min="1" max="10" /></th>
-						<th><input type="number" value="10"
-							style="width: 60px; heigth: 50px" min="1" max="10" /></th>
-						<th>
-							<div class="col">
-								<select id="slEstado" name="slEstado" class="custom-select">
-									<option value="-1" class="dropdown-item">Cursando</option>
-									<option value="1" class="dropdown-item">Promocion</option>
-									<option value="2" class="dropdown-item">Regular</option>
-									<option value="2" class="dropdown-item">Libre</option>
-								</select>
-							</div>
-						<th><%=alumno.getEmail()%></th>
-						
-					</tr>
-					<%
-						}
-						}
-					%>
-				</tbody>
-			</table>
-		</div>
-	
-	</div>
+			<div id="formContent" class="table-responsive">
 
+				<table id="example" class="table table-striped table-bordered"
+					style="width: 100%">
+					<thead class="thead-dark">
+						<tr style="text-align: center">
+							<th style="text-align: center">Legajo</th>
+							<th style="text-align: center">Alumno</th>
+							<th style="text-align: center">Documento</th>
+							<th>Par.1</th>
+							<th>Par.2</th>
+							<th>Recu.1</th>
+							<th>Recu.2</th>
+							<th>Nota Final</th>
+							<th>Estado</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							ArrayList<Calificacion> lista = null;
+							if (request.getAttribute("ListaCalificaciones") != null) {
+								lista = (ArrayList<Calificacion>) request.getAttribute("ListaCalificaciones");
+							}
+							if (lista != null) {
+								for (Calificacion calificacion : lista) {
+						%>
+						<tr>
+							<th style="width: 80px;"><%=calificacion.getAlumno().getLegajo()%>
+								<input type="hidden" name="CalificacionAlumno"
+								value="<%=calificacion.getAlumno().getLegajo()%>"></th>
+							<th><%=calificacion.getAlumno().getApellido()%> <%=calificacion.getAlumno().getNombre()%></th>
+							<th><%=calificacion.getAlumno().getDni()%></th>
+
+							<%if (calificacion.getParcial1() == 0) {%>
+							<th><input class="form-control" type="number" value=""
+								placeholder="-" style="width: 60px; heigth: 50px" min="1"
+								max="10" name="CalificacionAlumno"  id="CalificacionAlumno"/></th>
+							<%} else {%>
+							<th><input class="form-control" type="number"
+								value="<%=calificacion.getParcial1()%>" placeholder="-"
+								style="width: 60px; heigth: 50px" min="1" max="10" name="CalificacionAlumno"  id="CalificacionAlumno"/></th>
+							<%}%>
+
+							<%if (calificacion.getParcial2() == 0) {%>
+							<th><input class="form-control" type="number" value=""
+								placeholder="-" style="width: 60px; heigth: 50px" min="1"
+								max="10" name="parcial2"  id="parcial2"/></th>
+							<%} else {%>
+							<th><input class="form-control" type="number"
+								value="<%=calificacion.getParcial2()%>" placeholder="-"
+								style="width: 60px; heigth: 50px" min="1" max="10" name="CalificacionAlumno"  id="CalificacionAlumno"/></th>
+							<%}%>
+
+							<%if (calificacion.getRecu1() == 0) {%>
+							<th><input class="form-control" type="number" value=""
+								placeholder="-" style="width: 60px; heigth: 50px" min="1"
+								max="10" name="CalificacionAlumno"  id="CalificacionAlumno"/></th>
+							<%} else {%>
+							<th><input class="form-control" type="number"
+								value="<%=calificacion.getRecu1()%>" placeholder="-"
+								style="width: 60px; heigth: 50px" min="1" max="10" name="CalificacionAlumno"  id="CalificacionAlumno"/></th>
+							<%}%>
+
+							<%if (calificacion.getRecu2() == 0) {%>
+							<th><input class="form-control" type="number" value=""
+								placeholder="-" style="width: 60px; heigth: 50px" min="1"
+								max="10" name="CalificacionAlumno"  id="CalificacionAlumno"/></th>
+							<%} else {%>
+							<th><input class="form-control" type="number"
+								value="<%=calificacion.getRecu2()%>" placeholder="-"
+								style="width: 60px; heigth: 50px" min="1" max="10" name="CalificacionAlumno"  id="CalificacionAlumno"/></th>
+							<%}%>
+
+							<%if (calificacion.getNotafinal() == 0) {%>
+							<th><input class="form-control" type="number" value=""
+								placeholder="-" style="width: 60px; heigth: 50px" min="1"
+								max="10" name="CalificacionAlumno"  id="CalificacionAlumno"/></th>
+							<%} else {%>
+							<th><input class="form-control" type="number"
+								value="<%=calificacion.getNotafinal()%>" placeholder="-"
+								style="width: 60px; heigth: 50px" min="1" max="10" name="CalificacionAlumno"  id="CalificacionAlumno"/></th>
+							<%}%>
+
+							<th>
+								<div class="col">
+									<select id="slEstado" name="CalificacionAlumno" class="custom-select">
+										<option value="<%=calificacion.getEstado()%>" selected
+											style="visibility: hidden"><%=calificacion.getEstado()%></option>
+										<option value="Cursando" class="dropdown-item">Cursando</option>
+										<option value="Promocionado" class="dropdown-item">Promocionado</option>
+										<option value="Regular" class="dropdown-item">Regular</option>
+										<option value="Libre" class="dropdown-item">Libre</option>
+									</select>
+								</div>
+							</th>
+						</tr>
+						<%
+							}
+							}
+						%>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</form>
+	
+	<script type="text/javascript">
+	function cargarNotas(){
+		var table = $('#example').DataTable();
+		table.rows().invalidate();
+		var data = table.rows().data();
+		$.post("ServletNota",{"Notas": data}, function(responseJson) {
+
+		});
+		
+	}
+	</script>
+	<script src="JS/DataTableListAlumnosDocenteCONFIG.js"></script>
 </body>
 </html>

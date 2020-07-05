@@ -104,7 +104,17 @@ public class ServletLogin extends HttpServlet {
 				request.setAttribute("LoginInvalido","LoginInvalido");
 				request.getRequestDispatcher("Login.jsp").forward(request, response);
 			}
-			
+			if(request.getParameter("LogoHead")!=null)
+			{
+				int aux = Integer.parseInt(request.getParameter("LogoHead").toString());
+				if (aux==2) {
+					CursoDaoImpl cDao = new CursoDaoImpl();
+					int legajoD = (int) session.getAttribute("Legajo");
+					List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajoD);
+					request.setAttribute("ListaCursos", listaCursos);
+					request.getRequestDispatcher("MenuPrincipalDocente.jsp").forward(request, response);
+				}
+			}
 		}
 	}
 

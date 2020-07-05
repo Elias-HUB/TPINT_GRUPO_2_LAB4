@@ -35,6 +35,7 @@ public class ServeletCurso extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String ParamListar = request.getParameter("Param");
+    
 	//LISTAR TODOS LOS CURSOS PARA EL ADMIN
 		if (request.getParameter("Param") != null) {
 			if (ParamListar.equals("1")) {
@@ -42,7 +43,8 @@ public class ServeletCurso extends HttpServlet {
 				List<Curso> listaCursos = (ArrayList<Curso>) cDao.readAll();
 				request.setAttribute("ListaCursosAdmin", listaCursos);
 				request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
-			} 
+			}
+      
 	// LISTAR LOS CURSOS PARA UN DOCENTE LOGUEADO
 		else if (ParamListar.equals("2")) {
 				CursoDaoImpl cDao = new CursoDaoImpl();
@@ -53,6 +55,7 @@ public class ServeletCurso extends HttpServlet {
 				request.getRequestDispatcher("ListadoCursosDocente.jsp").forward(request, response);
 			}
 		}
+
 		//BOTON PARA ABRIR LA MODIFICACION DE UN CURSO
 			if(request.getParameter("ParamModificarCurso")!=null)
 				{
@@ -76,12 +79,14 @@ public class ServeletCurso extends HttpServlet {
 					request.setAttribute("ListaMaterias", listaMaterias);
 					request.getRequestDispatcher("ModificarCurso.jsp").forward(request, response);
 				}
+
 		}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 // BOTON PARA QUE SE ABRA LA PANTALLA DAR DE ALTA UN CURSO Y ELEGIR ALUMNOS
 		HttpSession session = request.getSession();
+    
 		if(request.getParameter("btnAgregarCurso") != null)
 		{
 			MateriaDaoImpl mDao = new MateriaDaoImpl();
@@ -95,6 +100,7 @@ public class ServeletCurso extends HttpServlet {
 			request.setAttribute("ListaMaterias", listaMaterias);
 			request.getRequestDispatcher("AltaCurso.jsp").forward(request, response);
 		}
+    
 // BOTON PARA QUE SE GUARDE EN LA BD EL CURSO NUEVO
 		if(request.getParameter("btnGuardarCurso") != null)
 	    {
@@ -106,7 +112,7 @@ public class ServeletCurso extends HttpServlet {
 			curso.docente.setLegajo(Integer.parseInt(request.getParameter("slDocente").toString()));
 			curso.Materia  = new Materia();
 			curso.Materia.setIdMateria(Integer.parseInt(request.getParameter("slMateria").toString()));
-			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
+			curso.setAÃ±o(Integer.parseInt(request.getParameter("slAnio").toString()));
 			curso.setTurno((request.getParameter("slTurno").toString()));
 			curso.setEstado("1");
 			cursoImpl.insert(curso);
@@ -120,6 +126,7 @@ public class ServeletCurso extends HttpServlet {
 			request.setAttribute("ListaCursosAdmin", listaCursos);
 			request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
 		}
+    
 		//BOTON PARA FILTRO DEL MENU PRINCIPAL
 		if(request.getParameter("btnBuscar")!=null)
 		{
@@ -135,6 +142,7 @@ public class ServeletCurso extends HttpServlet {
 			request.setAttribute("ListaDocentes",listaDocentes);
 			request.getRequestDispatcher("MenuPrincipalAdmin.jsp").forward(request, response);
 		}
+    
 		// BOTON PARA GUARDAR LA MODIFICACION DE UN CURSO 
 		if(request.getParameter("btnModificarCurso") != null)
 		{
@@ -147,7 +155,7 @@ public class ServeletCurso extends HttpServlet {
 			curso.docente.setLegajo(Integer.parseInt(request.getParameter("slDocente").toString()));
 			curso.Materia  = new Materia();
 			curso.Materia.setIdMateria(Integer.parseInt(request.getParameter("slMateria").toString()));
-			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
+			curso.setAÃ±o(Integer.parseInt(request.getParameter("slAnio").toString()));
 			curso.setTurno((request.getParameter("slTurno").toString()));
 			cursoImpl.update(curso,IDcursoMod);
 			/*	AlumnosXCurso = request.getParameterValues("cboxAlumno");

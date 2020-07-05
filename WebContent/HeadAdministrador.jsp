@@ -10,26 +10,26 @@
 	<div style="height: 100px;">
 		<div class="snap-pm-user" style="margin-left: 20px">
 			<%
-			session = request.getSession();
-			String Nombre = session.getAttribute("NombreHead").toString();
-			String Apellido = session.getAttribute("ApellidoHead").toString();			
+				session = request.getSession();
+				String Nombre = session.getAttribute("NombreHead").toString();
+				String Apellido = session.getAttribute("ApellidoHead").toString();
 			%>
-							<h1><%=Nombre%> <%=Apellido%></h1>
-				    
+			<h1><%=Nombre%>
+				<%=Apellido%></h1>
+
 			<div style="margin-left: 20px; margin-top: 10px;">
-<!-- 				<a class="aHead" href="...">Perfil</a> -  -->
-				<a class="aHead" href="ServletAlumno?Param=1">Alumnos</a> - <a class="aHead" href="ServletDocente?Param=2">Profesores</a>
-				 - <a class="aHead" href="ServeletCurso?Param=1">Cursos</a> - <a class="aHead" href="...">Reportes</a> - <a class="aHead"
-					id="snap-pm-logout" href="Login.jsp">Salir</a>
-			</div>
+				    <a class="aHead" href="ServletAlumno?Param=1">Alumnos</a> - 
+            <a class="aHead" href="ServletDocente?Param=2">Profesores</a> - 
+            <a class="aHead" href="ServeletCurso?Param=1">Cursos</a> - 
+            <a class="aHead" href="ServeletReporte?Param=1">Reportes</a> -
+            <a class="aHead" id="snap-pm-logout" href="Login.jsp">Salir</a>
+			 </div>
 		</div>
 		<div class="topcorner">
-			<a class="aHead" href='ServletLogin?LogoHead=1'> <img src="Imagenes/Cabecera.png" width="300px"
-				alt="Logo">
-			</a>
+			<a class="aHead" href='ServletLogin?LogoHead=1'> <img src="Imagenes/Cabecera.png" width="300px"	alt="Logo">	</a>
 		</div>
-		
+
 	</div>
 </div>
-	
+
 </html>
