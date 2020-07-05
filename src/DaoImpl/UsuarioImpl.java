@@ -17,6 +17,7 @@ public class UsuarioImpl {
 	private static final String insert = "insert into usuarios(LegajoDocente, Email, Contraseña, TipoUsuario, Estado) "
 			+ "VALUES((SELECT MAX(Legajo) from docentes), ?, ?, ?, ?);";
 	private static final String update = "UPDATE usuarios set Email=?, Contraseña=? where LegajoDocente =? ;";
+	private static final String delete = "UPDATE usuarios set Estado = 0 WHERE LegajoDocente = ?";
 /*	public int ValidarLogin(String legajo, String contraseña) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -117,5 +118,22 @@ public class UsuarioImpl {
 		}
 		return isupdateExitoso;
 	}
+	public boolean delete(int Legajo) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isdeleteExitoso = false;
+		try {
+			statement = conexion.prepareStatement(delete);
+			statement.setInt(1, Legajo);
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				isdeleteExitoso = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return isdeleteExitoso;
+	}
+
 
 }

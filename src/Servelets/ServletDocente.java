@@ -63,8 +63,9 @@ public class ServletDocente extends HttpServlet {
 		if (request.getParameter("BtnEliminar") != null) {
 			String algo = request.getParameter("LegajoDocente");
 			int Legajo = Integer.parseInt(request.getParameter("LegajoDocente"));
+			
 			dDao.delete(Legajo);		
-					
+			uDao.delete(Legajo);		
 			List <Docente> listaDocentesEliminar = (ArrayList<Docente>)dDao.readAll();
 			List<Provincia> listaProvinciaEliminar = (ArrayList<Provincia>) pDao.readAll();
 			List<Localidad> listaLocalidadEliminar = (ArrayList<Localidad>) lDao.ListarLocalidades();			
