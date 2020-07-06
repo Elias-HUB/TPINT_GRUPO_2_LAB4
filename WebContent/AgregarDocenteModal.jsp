@@ -81,16 +81,16 @@
 						<div class="col-md-3">
 							<label>Contraseña</label>
 							<div class="input-group">
-								<input ID="txtPassword" required type="Password" name="TboxContraseñaA" Class="form-control">
+								<input ID="txtPasswordA" required type="Password" name="TboxContraseñaA" Class="form-control">
 								<div class="input-group-append">
 									<button id="show_password" class="btn btn-secondary"
-										type="button" onclick="mostrarPassword()">
+										type="button" onclick="mostrarPasswordA()">
 										<span class="fa fa-eye-slash icon"></span>
 									</button>
 								</div>
 							</div>
-
 						</div>
+						
 					</div>
 
 					<div class="form-row ">
