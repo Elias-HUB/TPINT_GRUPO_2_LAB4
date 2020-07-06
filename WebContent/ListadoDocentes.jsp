@@ -7,7 +7,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<!-- Toast -->
+<link rel="stylesheet" href="@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
+<script src="sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
+<!-- Head -->
 <jsp:include page="HeadAdministrador.jsp"></jsp:include>
 <jsp:include page="LibreriasJtable.jsp"></jsp:include>
 
@@ -75,7 +80,7 @@
 									title="Modificar Alumno" />
 							</button>
 
-							<button type="submit" id="BtnEliminar" name="BtnEliminar"
+							<button type="button" id="<%=doc.getLegajo()%>" onClick="modalEliminar(this)" name="BtnEliminar"
 								class="btn btn-outline-danger">
 								<img src="Imagenes/Eliminar.png" Width="22px" alt="x"
 									data-toggle="tooltip" data-placement="bottom"
@@ -99,6 +104,103 @@
 
 	<script src="JS/DataTableListadoDocentesCONFIG.js"></script>
 	<script src="JS/DataTableListadoDocentes.js"></script>
+
+	<script type="text/javascript">
+	<%
+	if(request.getAttribute("SweetAlert")!=null)
+	{
+		String Resultado = request.getAttribute("SweetAlert").toString();
+		%>mostrarToast("<%=Resultado%>")<%
+	}
+	%>
+
+
+	function mostrarToast(ToastR){
+		const Toast = Swal.mixin({
+			  toast: true,
+			  position: 'top',
+			  showConfirmButton: false,
+			  timer: 3000,
+			  timerProgressBar: true,
+			  onOpen: (toast) => {
+				    toast.addEventListener('mouseenter', Swal.stopTimer)
+				    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  }
+			});
+		if(ToastR == "Cargado"){	
+			Toast.fire({			
+			  icon: 'success',
+			  title: 'El docente se agregó de manera correcta.'
+			})
+		} else if(ToastR == "Eliminado"){	
+			Toast.fire({			
+			  icon: 'success',
+			  title: 'El docente se eliminó de manera correcta.'
+			})
+		} else if(ToastR == "Modificado"){	
+			Toast.fire({			
+				  icon: 'success',
+				  title: 'El docente se modificó de manera correcta.'
+				})
+			} else{	
+				Toast.fire({			
+					  icon: 'error',
+					  title: 'Hubo un problema. Comunicarse con el área técnica.'
+					})
+				}
+	}
+	
+	
+	function modalEliminar(btn){
+		const Toast = Swal.mixin({
+			  toast: true,
+			  position: 'top',
+			  showConfirmButton: false,
+			  timer: 3000,
+			  timerProgressBar: true,
+			  onOpen: (toast) => {
+				    toast.addEventListener('mouseenter', Swal.stopTimer)
+				    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  }
+			});
+		var LegajoDocente = btn.id;
+		Swal.fire({
+			icon: 'warning',
+			title:"¿Desea dar de baja este docente?",			
+			showCancelButton: true,
+			confirmButtonColor: "#c82333",
+		  cancelButtonText: "Cancelar",
+		  confirmButtonText: "Dar de baja",
+		  reverseButtons: true
+		}).then((result) => {
+			if(result.value){
+				   $.ajax({
+						url: 'ServletDocente',
+						type: 'POST',
+						dataType : "json",
+						data : {
+							LegajoDocente: LegajoDocente
+						},						
+						success: function(LegajoDocente){
+							if(LegajoDocente == "Exitoso"){
+								Toast.fire({			
+									  icon: 'success',
+									  title: 'El docente se está dando de baja...'
+									}).then((result) => {
+										location.reload();
+								})
+							}else{
+								Toast.fire({			
+									  icon: 'error',
+									  title: 'Hubo un problema. Comunicarse con el área técnica.'
+									})
+						}
+						}
+					});
+				}
+			})
+	}
+	</script>
 
 </body>
 </html>
