@@ -1,7 +1,6 @@
 $(document)
 		.ready(
-				function() {
-
+				function() {					
 					$('#example')
 							.DataTable(
 									{
@@ -74,5 +73,4 @@ $(document)
 													columns : 5
 												}, ]
 									});
-					
 				});
