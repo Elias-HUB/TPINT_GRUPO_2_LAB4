@@ -10,6 +10,11 @@
 <jsp:include page="HeadAdministrador.jsp"></jsp:include>
 </head>
 <body>
+<%
+		session = request.getSession();
+		if(session.getAttribute("Legajo") == null) {
+		request.getRequestDispatcher("Login.jsp").forward(request, response);}
+%>
 	<form method="post" action="ServeletCurso">
 		<div class="form-row">
 			<!--FILTRO MATERIA -->
