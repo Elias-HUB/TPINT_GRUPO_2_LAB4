@@ -29,7 +29,7 @@ public class ServletLogin extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// LISTAR CUANDO HACEN CLICK EN LA IMAGEN
 		if(request.getParameter("LogoHead")!=null)
 		{
 			int aux = Integer.parseInt(request.getParameter("LogoHead").toString());
@@ -59,7 +59,7 @@ public class ServletLogin extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		CursoDaoImpl cDao = new CursoDaoImpl();
 		if( request.getParameter("btnIngresar")!=null)
 		{
 		 	UsuarioImpl usuarioImpl = new UsuarioImpl();
@@ -68,15 +68,19 @@ public class ServletLogin extends HttpServlet {
 			String legajo = request.getParameter("TxtLegajo").toString();
 			String contrasenia = request.getParameter("TxtContrasenia").toString();
 			HttpSession session = request.getSession(true);
-			session.setAttribute("Legajo",legajo);
+			
 			int validador =usuarioImpl.read(legajo,contrasenia);
-			docente = docImpl.Buscar(legajo);
-			session.setAttribute("NombreHead",docente.getNombre().toString());
-			session.setAttribute("ApellidoHead",docente.getApellido().toString());
+			
+			if(validador==1 || validador==2)
+			{
+				session.setAttribute("Legajo",legajo);
+				docente = docImpl.Buscar(legajo);
+				session.setAttribute("NombreHead",docente.getNombre().toString());
+				session.setAttribute("ApellidoHead",docente.getApellido().toString());
+			}
 			
 			if (validador==1){
 				
-						CursoDaoImpl cDao = new CursoDaoImpl();
 						List<Curso> listaCursos = (ArrayList<Curso>) cDao.readAll();
 						MateriaDaoImpl mDao = new MateriaDaoImpl();
 						List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
@@ -89,7 +93,6 @@ public class ServletLogin extends HttpServlet {
 					} 
 			else if (validador==2) {
 				
-						CursoDaoImpl cDao = new CursoDaoImpl();
 						int legajoD = Integer.parseInt(request.getParameter("TxtLegajo").toString());
 						List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajoD);
 
@@ -98,20 +101,19 @@ public class ServletLogin extends HttpServlet {
 						request.getRequestDispatcher("MenuPrincipalDocente.jsp").forward(request, response);
 					}
 			else {
+				request.setAttribute("LoginInvalido","LoginInvalido");
 				request.getRequestDispatcher("Login.jsp").forward(request, response);
 			}
-			
 			if(request.getParameter("LogoHead")!=null)
 			{
 				int aux = Integer.parseInt(request.getParameter("LogoHead").toString());
 				if (aux==2) {
-					CursoDaoImpl cDao = new CursoDaoImpl();
 					int legajoD = (int) session.getAttribute("Legajo");
 					List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajoD);
 					request.setAttribute("ListaCursos", listaCursos);
 					request.getRequestDispatcher("MenuPrincipalDocente.jsp").forward(request, response);
 				}
-			}			
+			}
 		}
 	}
 

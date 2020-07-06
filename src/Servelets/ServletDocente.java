@@ -62,7 +62,7 @@ public class ServletDocente extends HttpServlet {
 		LocalidadDaoImpl lDao = new LocalidadDaoImpl();
 		UsuarioImpl uDao= new UsuarioImpl();
 
-		//ANALIZAR CONTRASEÑA Y USUARIO
+		//ANALIZAR CONTRASEÃ‘A Y USUARIO
 		if (request.getParameter("BtnActualizar") != null) {
 			Docente docente = new Docente();
 			Usuario usuario = new Usuario();
@@ -98,7 +98,7 @@ public class ServletDocente extends HttpServlet {
 			docente.domicilio.setProvincia(provincia);
 			usuario.setLegajo(Integer.parseInt(request.getParameter("TboxLegajoM")));
 			usuario.setEmail(request.getParameter("TboxEmailM"));
-			usuario.setContraseña(request.getParameter("TboxContraseña"));
+			usuario.setContraseÃ±a(request.getParameter("TboxContraseÃ±a"));
 
 			boolean Update;
 			Update =dDao.update(docente);
@@ -166,7 +166,7 @@ public class ServletDocente extends HttpServlet {
 			}
 
 			usuario.setEmail(request.getParameter("TboxEmailA"));
-			usuario.setContraseña(request.getParameter("TboxContraseñaA"));
+			usuario.setContraseÃ±a(request.getParameter("TboxContraseÃ±aA"));
 			usuario.setTipo(2);
 			usuario.setEstado(true);
 			
