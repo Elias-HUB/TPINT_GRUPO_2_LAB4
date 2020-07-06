@@ -15,6 +15,17 @@ function mostrarPassword(){
 		cambio.type = "password";
 		$('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
 	}
+}
+
+function mostrarPasswordA(){
+	var cambio = document.getElementById("txtPasswordA");
+	if(cambio.type == "password"){
+		cambio.type = "text";
+		$('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+	}else{
+		cambio.type = "password";
+		$('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+	}
 } 
 
 
