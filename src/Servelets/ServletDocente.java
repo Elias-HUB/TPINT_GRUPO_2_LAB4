@@ -98,7 +98,7 @@ public class ServletDocente extends HttpServlet {
 			docente.domicilio.setProvincia(provincia);
 			usuario.setLegajo(Integer.parseInt(request.getParameter("TboxLegajoM")));
 			usuario.setEmail(request.getParameter("TboxEmailM"));
-			usuario.setContraseÃ±a(request.getParameter("TboxContraseÃ±a"));
+			usuario.setContraseña(request.getParameter("TboxContraseña"));
 
 			boolean Update;
 			Update =dDao.update(docente);
@@ -166,7 +166,7 @@ public class ServletDocente extends HttpServlet {
 			}
 
 			usuario.setEmail(request.getParameter("TboxEmailA"));
-			usuario.setContraseÃ±a(request.getParameter("TboxContraseÃ±aA"));
+			usuario.setContraseña(request.getParameter("TboxContraseña"));
 			usuario.setTipo(2);
 			usuario.setEstado(true);
 			
