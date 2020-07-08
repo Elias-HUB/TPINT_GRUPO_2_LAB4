@@ -27,16 +27,7 @@
 %>
 	<div class="wrapper">
 		<div id="formContent" class="table-responsive">
-<div class="btn-group">
-			<button type="button" class="btn btn-block btn-outline-info"
-				onclick="ModalDocenteAgregar()" style="margin-bottom: 10px;">Agregar Docente</button>
-</div>				
-<div class="btn-group">		
-<form action="ServletDocente" method="post">	
-			<button type="submit" class="btn btn-block btn-outline-info"
-				id="btnRecuperarDocente" name="btnRecuperarDocente" style="margin-bottom: 10px;">Recuperar Docente</button>
-</form>
-</div>
+
 			<table id="example" class="table table-striped table-bordered"
 				style="width: 100%">
 				<thead class="thead-dark">
@@ -53,8 +44,8 @@
 					<%
 						ArrayList<Docente> lista = null;
 
-						if (request.getAttribute("ListaDocentes") != null) {
-							lista = (ArrayList<Docente>) request.getAttribute("ListaDocentes");
+						if (request.getAttribute("listaDocenteRecup") != null) {
+							lista = (ArrayList<Docente>) request.getAttribute("listaDocenteRecup");
 						}
 						if (lista != null) {
 							for (Docente doc : lista) {
@@ -88,14 +79,10 @@
 								<img src="Imagenes/Editar.png" Width="22px" alt="x"
 									data-toggle="tooltip" data-placement="bottom"
 									title="Modificar Alumno" />
-							</button>
-
-							<button type="button" id="<%=doc.getLegajo()%>" onClick="modalEliminar(this)" name="BtnEliminar"
-								class="btn btn-outline-danger">
-								<img src="Imagenes/Eliminar.png" Width="22px" alt="x"
-									data-toggle="tooltip" data-placement="bottom"
-									title="Eliminar Alumno" />
-							</button>
+							</button>		
+										
+							<a href="ServletDocente?ParamRecuperarDocente=<%=doc.getLegajo()%>"
+								class="btn btn-outline-primary">Recuperar</a>
 						</th>
 						</form>
 					</tr>
