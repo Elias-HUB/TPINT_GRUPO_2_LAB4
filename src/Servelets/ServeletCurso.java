@@ -114,7 +114,7 @@ public class ServeletCurso extends HttpServlet {
 			curso.docente.setLegajo(Integer.parseInt(request.getParameter("slDocente").toString()));
 			curso.Materia = new Materia();
 			curso.Materia.setIdMateria(Integer.parseInt(request.getParameter("slMateria").toString()));
-			curso.setAÃ±o(Integer.parseInt(request.getParameter("slAnio").toString()));
+			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
 			curso.setTurno((request.getParameter("slTurno").toString()));
 			curso.setEstado("1");
 			cursoImpl.insert(curso);
@@ -133,9 +133,8 @@ public class ServeletCurso extends HttpServlet {
 		//BOTON PARA FILTRO DEL MENU PRINCIPAL
 		if(request.getParameter("btnBuscar")!=null)
 		{
-			
+			CursoDaoImpl cDao = new CursoDaoImpl();
 			int legajo= (Integer.parseInt(request.getParameter("slDocente").toString()));
-			List<Curso> listaCursos = (ArrayList<Curso>) cursoImpl.readCursosXDocente(legajo);
 			MateriaDaoImpl mDao = new MateriaDaoImpl();
 			List<Materia> listaMaterias = (ArrayList<Materia>) mDao.readAll();
 			DocenteDaoImpl dDao = new DocenteDaoImpl();
@@ -162,12 +161,12 @@ public class ServeletCurso extends HttpServlet {
 			if (Cuatrimestre.equals("0")) {
 				Mensaje += "Cuatrimestre: Todos - ";
 			} else {
-				Mensaje += (Cuatrimestre + "Â° Cuatrimestre - ");
+				Mensaje += (Cuatrimestre + "Año Cuatrimestre - ");
 			}
 			if (Anio.equals("0")) {
-				Mensaje += "AÃ±o: Todos - ";
+				Mensaje += "Año: Todos - ";
 			} else {
-				Mensaje += ("AÃ±o: " + Anio + " - ");
+				Mensaje += ("Año: " + Anio + " - ");
 			}
 			if (Turno.equals("0")) {
 				Mensaje += "Turno: Todos - ";
@@ -197,7 +196,7 @@ public class ServeletCurso extends HttpServlet {
 			curso.docente.setLegajo(Integer.parseInt(request.getParameter("slDocente").toString()));
 			curso.Materia = new Materia();
 			curso.Materia.setIdMateria(Integer.parseInt(request.getParameter("slMateria").toString()));
-			curso.setAÃ±o(Integer.parseInt(request.getParameter("slAnio").toString()));
+			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
 			curso.setTurno((request.getParameter("slTurno").toString()));
 			cursoImpl.update(curso,IDcursoMod);
 			AlumnosXCurso = request.getParameterValues("cboxAlumno");
