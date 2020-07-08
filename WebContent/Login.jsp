@@ -49,7 +49,7 @@
 					 <input type="text"	class="fadeIn third pass" required name="TxtContrasenia" placeholder="Contraseña"
 					id="TxtContrasenia">
 				<div>
-		<button type="submit" class="btn btn-info" id="btnIngresar" name="btnIngresar" style="margin-bottom: 10px;">Ingreso</button>
+		<button type="submit" class="btn btn-info fadeIn third pass" id="btnIngresar" name="btnIngresar" style="margin-bottom: 10px;">Ingreso</button>
 
 
 				<% 	  /* <!-- Ayuda -->

@@ -39,7 +39,7 @@ if(session.getAttribute("Legajo") == null) {
 				Alumno</button>
 			<table id="example" class="table table-striped table-bordered"
 				style="width: 100%">
-				<thead class="thead-dark">
+				<thead>
 					<tr>
 						<th style="text-align: center">Legajo</th>
 						<th style="text-align: center">Apellido</th>
@@ -197,7 +197,7 @@ if(session.getAttribute("Legajo") == null) {
 									  icon: 'success',
 									  title: 'El alumno se está dando de baja...'
 									}).then((result) => {
-										location.reload();
+										window.location = "../WebContent/ListadoAlumnosDocente.jsp";										
 								})
 							}
 						}
