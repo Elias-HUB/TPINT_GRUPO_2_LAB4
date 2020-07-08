@@ -1,7 +1,7 @@
 package Entidad;
 
 public class Calificacion {
-	private Alumno alumno; 
+	public Alumno alumno; 
 	private int idCurso;
 	private int parcial1; 
 	private int parcial2;

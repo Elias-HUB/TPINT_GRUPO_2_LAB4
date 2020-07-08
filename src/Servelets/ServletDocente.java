@@ -16,13 +16,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import DaoImpl.AlumnoDaoImpl;
 import DaoImpl.DocenteDaoImpl;
 import DaoImpl.LocalidadDaoImpl;
+import DaoImpl.MateriaDaoImpl;
 import DaoImpl.ProvinciaDaoImpl;
 import DaoImpl.UsuarioImpl;
+import Entidad.Alumno;
 import Entidad.Docente;
 import Entidad.Domicilio;
 import Entidad.Localidad;
+import Entidad.Materia;
 import Entidad.Provincia;
 import Entidad.Usuario;
 
@@ -53,6 +57,26 @@ public class ServletDocente extends HttpServlet {
 			request.setAttribute("ListaLocalidad", listaLocalidad);
 			request.getRequestDispatcher("ListadoDocentes.jsp").forward( request, response);
 		}
+		if(request.getParameter("ParamRecuperarDocente") != null)
+		{
+			String StringlegajoRecupero = request.getParameter("ParamRecuperarDocente");
+			int legajoRecupero = Integer.parseInt(StringlegajoRecupero);
+			DocenteDaoImpl rDao= new DocenteDaoImpl();
+			UsuarioImpl urDao = new UsuarioImpl();
+			boolean recover1 = rDao.recover(legajoRecupero);
+			boolean recover2= urDao.recover(legajoRecupero);
+			
+			if(recover1 == true && recover2 == true) {
+				request.setAttribute("SweetAlert", "Cargado");
+			}
+			else {
+				request.setAttribute("SweetAlert", "Error");
+			}
+			
+			List<Docente> listaDocenteRecup = (ArrayList<Docente>)rDao.readrecover();
+			request.setAttribute("listaDocenteRecup", listaDocenteRecup);
+			request.getRequestDispatcher("RecuperarDocentes.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,7 +86,7 @@ public class ServletDocente extends HttpServlet {
 		LocalidadDaoImpl lDao = new LocalidadDaoImpl();
 		UsuarioImpl uDao= new UsuarioImpl();
 
-		//ANALIZAR CONTRASEÃ‘A Y USUARIO
+		//ANALIZAR CONTRASEÑA Y USUARIO
 		if (request.getParameter("BtnActualizar") != null) {
 			Docente docente = new Docente();
 			Usuario usuario = new Usuario();
@@ -119,7 +143,15 @@ public class ServletDocente extends HttpServlet {
 			request.setAttribute("ListaProvincia", listaProvincia);
 			request.setAttribute("ListaLocalidad", listaLocalidad);
 			request.getRequestDispatcher("ListadoDocentes.jsp").forward( request, response);
+		}		
+		if(request.getParameter("btnRecuperarDocente") != null)
+		{
+			DocenteDaoImpl rDao= new DocenteDaoImpl();
+			List<Docente> listaDocenteRecup = (ArrayList<Docente>)rDao.readrecover();
+			request.setAttribute("listaDocenteRecup", listaDocenteRecup);
+			request.getRequestDispatcher("RecuperarDocentes.jsp").forward(request, response);
 		}
+		
 
 		if (request.getParameter("BtnAgregar") != null) {
 			Docente docente = new Docente();

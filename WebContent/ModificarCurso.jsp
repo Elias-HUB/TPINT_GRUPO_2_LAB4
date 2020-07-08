@@ -33,7 +33,7 @@
 						if (listaMaterias != null) {
 					%>
 					<select id="slMateria" name="slMateria" class="custom-select">
-					<option value="<%=cursoMod.Materia.getNombre()%>" selected style="visibility:hidden"><%=cursoMod.Materia.getNombre()%></option>
+					<option value="<%=cursoMod.Materia.getIdMateria()%>" selected style="visibility:hidden"><%=cursoMod.Materia.getNombre()%></option>
 						<%
 							for (Materia materia : listaMaterias) {
 						%>
@@ -106,7 +106,7 @@
 							if (listaDocentes != null) {
 						%>
 						<select id="slDocente" name="slDocente" class="custom-select">
-						<option value="<%=cursoMod.docente.getNombre()%>" selected style="visibility:hidden">
+						<option value="<%=cursoMod.docente.getLegajo()%>" selected style="visibility:hidden">
 						<%=cursoMod.docente.getNombre()%> <%=cursoMod.docente.getApellido()%></option>
 							<%
 								for (Docente doc : listaDocentes) {

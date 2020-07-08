@@ -27,16 +27,7 @@
 %>
 	<div class="wrapper">
 		<div id="formContent" class="table-responsive">
-<div class="btn-group">
-			<button type="button" class="btn btn-block btn-outline-info"
-				onclick="ModalDocenteAgregar()" style="margin-bottom: 10px;">Agregar Docente</button>
-</div>				
-<div class="btn-group">		
-<form action="ServletDocente" method="post">	
-			<button type="submit" class="btn btn-block btn-outline-info"
-				id="btnRecuperarDocente" name="btnRecuperarDocente" style="margin-bottom: 10px;">Recuperar Docente</button>
-</form>
-</div>
+
 			<table id="example" class="table table-striped table-bordered"
 				style="width: 100%">
 				<thead class="thead-dark">
@@ -53,8 +44,8 @@
 					<%
 						ArrayList<Docente> lista = null;
 
-						if (request.getAttribute("ListaDocentes") != null) {
-							lista = (ArrayList<Docente>) request.getAttribute("ListaDocentes");
+						if (request.getAttribute("listaDocenteRecup") != null) {
+							lista = (ArrayList<Docente>) request.getAttribute("listaDocenteRecup");
 						}
 						if (lista != null) {
 							for (Docente doc : lista) {
@@ -81,21 +72,11 @@
 								<img src="Imagenes/Ver.png" Width="22px" data-toggle="tooltip"
 									data-placement="bottom" title="ver Alumno" alt="x" />
 							</button>
-
-							<button type="button"
-								onclick="ModalModificarCargaDatos(<%=datos%>)"
-								class="btn btn-outline-warning">
-								<img src="Imagenes/Editar.png" Width="22px" alt="x"
-									data-toggle="tooltip" data-placement="bottom"
-									title="Modificar Alumno" />
-							</button>
-
-							<button type="button" id="<%=doc.getLegajo()%>" onClick="modalEliminar(this)" name="BtnEliminar"
-								class="btn btn-outline-danger">
-								<img src="Imagenes/Eliminar.png" Width="22px" alt="x"
-									data-toggle="tooltip" data-placement="bottom"
-									title="Eliminar Alumno" />
-							</button>
+		
+										
+							<a href="ServletDocente?ParamRecuperarDocente=<%=doc.getLegajo()%>"
+								class="btn btn-outline-primary"><img src="Imagenes/revertir.png" Width="22px" data-toggle="tooltip"
+									data-placement="bottom" title="Recuperar" alt="x" /></a>
 						</th>
 						</form>
 					</tr>
@@ -109,9 +90,6 @@
 	</div>
 
 	<jsp:include page="VerDocenteModal.jsp"></jsp:include>
-	<jsp:include page="ModificarDocenteModal.jsp"></jsp:include>
-	<jsp:include page="AgregarDocenteModal.jsp"></jsp:include>
-
 	<script src="JS/DataTableListadoDocentesCONFIG.js"></script>
 	<script src="JS/DataTableListadoDocentes.js"></script>
 
@@ -120,7 +98,6 @@
 	if(request.getAttribute("SweetAlert")!=null)
 	{
 		String Resultado = request.getAttribute("SweetAlert").toString();
-		request.setAttribute("SweetAlert", null);
 		%>mostrarToast("<%=Resultado%>")<%
 	}
 	%>
@@ -141,7 +118,7 @@
 		if(ToastR == "Cargado"){	
 			Toast.fire({			
 			  icon: 'success',
-			  title: 'El docente se agregó de manera correcta.'
+			  title: 'El docente se recuperó de manera correcta.'
 			})
 		} else if(ToastR == "Eliminado"){	
 			Toast.fire({			
@@ -196,10 +173,10 @@
 							if(LegajoDocente == "Exitoso"){
 								Toast.fire({			
 									  icon: 'success',
-									  title: 'El alumno se está dando de baja...'
+									  title: 'El docente se está dando de baja...'
 									}).then((result) => {
-										location.replace('ServletDocente?Param=2');
-									})
+										location.reload();
+								})
 							}else{
 								Toast.fire({			
 									  icon: 'error',

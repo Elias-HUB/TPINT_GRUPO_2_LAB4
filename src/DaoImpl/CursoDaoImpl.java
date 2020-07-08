@@ -16,16 +16,17 @@ import Entidad.Materia;
 import Entidad.Persona;
 
 public class CursoDaoImpl implements CursoDao {
-	private static final String insert = "insert into cursos (IdMateria, Cuatrimestre, Año, Turno, LegajoDocente, Estado) VALUES(?, ?, ?, ?, ?, ?)";
-	private static final String readall = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria";
-	private static final String readCursosXDocente = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria where c.legajoDocente=?";
+	private static final String insert = "insert into cursos (IdMateria, Cuatrimestre, AÃ±o, Turno, LegajoDocente, Estado) VALUES(?, ?, ?, ?, ?, ?)";
+	private static final String readall = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,AÃ±o,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria";
+	private static final String readCursosXDocente = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,AÃ±o,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria where c.legajoDocente=?";
 	private static final String insertAlumnosPorCurso = "insert into AlumnosPorCurso(IdCurso, LegajoAlumnno, EstadoCurso, Estado) VALUES (?, ? , 'Cursando',true)";
-	private static final String readCurso = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria where c.idCurso= ?";
-	private static final String update = "update cursos set idMateria= ?  , Cuatrimestre= ?, Año= ?  , Turno= ? , LegajoDocente= ?  where IdCurso= ? ;";
+	private static final String readCurso = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,AÃ±o,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria where c.idCurso= ?";
+	private static final String update = "update cursos set idMateria= ?  , Cuatrimestre= ?, AÃ±o= ?  , Turno= ? , LegajoDocente= ?  where IdCurso= ? ;";
 	private static final String ListReporteEstadoCurso = "call ReporteEstadoCurso( ? , ? , ?);";
 	private static final String ListReporteAprobadoPorMateria = "call ReporteAprobadoPorMateria( ? , ? , ?);";
 	private static final String ListReporteAlumnosPorMateria = "call ReporteAlumnosPorMateria( ? , ? , ?);";
-	private static final String readMenuAdmin = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo  inner join Materias m on m.IdMateria=c.IdMateria  where c.legajoDocente like ? and m.IdMateria like ? and Cuatrimestre like ? and Año like ? and Turno like ?";
+	private static final String readMenuAdmin = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,AÃ±o,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo  inner join Materias m on m.IdMateria=c.IdMateria  where c.legajoDocente like ? and m.IdMateria like ? and Cuatrimestre like ? and AÃ±o like ? and Turno like ?";
+	private static final String deleteAlumnoXCurso = "update AlumnosPorCurso set estado = 0 where LegajoAlumnno= ? and idcurso= ? ;";
 
 	@Override
 	public boolean insert(Curso curso) {
@@ -36,7 +37,7 @@ public class CursoDaoImpl implements CursoDao {
 			statement = conexion.prepareStatement(insert);
 			statement.setInt(1, curso.Materia.getIdMateria());
 			statement.setInt(2, curso.getCuatrimestre());
-			statement.setInt(3, curso.getAño());
+			statement.setInt(3, curso.getAÃ±o());
 			statement.setString(4, curso.getTurno());
 			statement.setInt(5, curso.docente.getLegajo());
 			statement.setBoolean(6, true);
@@ -94,7 +95,7 @@ public class CursoDaoImpl implements CursoDao {
 			statement = conexion.prepareStatement(update);
 			statement.setInt(1, curso.Materia.getIdMateria());
 			statement.setInt(2, curso.getCuatrimestre());
-			statement.setInt(3, curso.getAño());
+			statement.setInt(3, curso.getAÃ±o());
 			statement.setString(4, curso.getTurno());
 			statement.setInt(5, curso.docente.getLegajo());
 			statement.setString(6, CursoMod);
@@ -173,7 +174,7 @@ public class CursoDaoImpl implements CursoDao {
 		mat.setNombre(resultSet.getString("NombreMateria"));
 		curso.setMateria(mat);
 		curso.setCuatrimestre(resultSet.getInt("Cuatrimestre"));
-		curso.setAño(resultSet.getInt("Año"));
+		curso.setAÃ±o(resultSet.getInt("AÃ±o"));
 		curso.setTurno(resultSet.getString("Turno"));
 		Docente doc = new Docente();
 		doc.setLegajo(resultSet.getInt("Legajo"));
@@ -428,6 +429,7 @@ public class CursoDaoImpl implements CursoDao {
 		return tabla;
 	}
 
+
 	@Override
 	public List<Curso> readMenuAdmin(String Legajo, String Materia, String Cuatrimestre, String Anio, String turno) {
 		try {
@@ -476,5 +478,25 @@ public class CursoDaoImpl implements CursoDao {
 			e.printStackTrace();
 		}
 		return Cursos;
+
+	
+	public boolean deleteAlumnoXCurso(int legajo, int idcurso)
+	{
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isdeleteExitoso = false;
+		try {
+			statement = conexion.prepareStatement(deleteAlumnoXCurso);
+			statement.setInt(1, legajo);
+			statement.setInt(2, idcurso);
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				isdeleteExitoso = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return isdeleteExitoso;
+
 	}
 }

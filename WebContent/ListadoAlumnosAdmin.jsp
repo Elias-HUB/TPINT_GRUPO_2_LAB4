@@ -33,10 +33,18 @@ if(session.getAttribute("Legajo") == null) {
 		<div id="formContent" class="table-responsive">
 
 
-
+<div class="btn-group">
 			<button type="button" class="btn btn-block btn-outline-info"
 				onclick="ModalAlumnoAgregar()" style="margin-bottom: 10px;">Agregar
 				Alumno</button>
+</div>				
+			<div class="btn-group">		
+<form action="ServletAlumno" method="post">	
+			<button type="submit" class="btn btn-block btn-outline-info"
+				id="btnRecuperarAlumno" name="btnRecuperarAlumno" style="margin-bottom: 10px;">Recuperar Alumno</button>
+</form>
+</div>
+				
 			<table id="example" class="table table-striped table-bordered"
 				style="width: 100%">
 				<thead>
@@ -142,22 +150,22 @@ if(session.getAttribute("Legajo") == null) {
 		if(ToastR == "Cargado"){	
 			Toast.fire({			
 			  icon: 'success',
-			  title: 'El alumno se agregÛ de manera correcta.'
+			  title: 'El alumno se agreg√≥ de manera correcta.'
 			})
 		} else if(ToastR == "Eliminado"){	
 			Toast.fire({			
 			  icon: 'success',
-			  title: 'El alumno se eliminÛ de manera correcta.'
+			  title: 'El alumno se elimin√≥ de manera correcta.'
 			})
 		} else if(ToastR == "Modificado"){	
 			Toast.fire({			
 				  icon: 'success',
-				  title: 'El alumno se modificÛ de manera correcta.'
+				  title: 'El alumno se modific√≥ de manera correcta.'
 				})
 			} else{	
 				Toast.fire({			
 					  icon: 'error',
-					  title: 'Hubo un problema. Comunicarse con el ·rea tÈcnica.'
+					  title: 'Hubo un problema. Comunicarse con el √°rea t√©cnica.'
 					})
 				}
 	}
@@ -178,7 +186,7 @@ if(session.getAttribute("Legajo") == null) {
 		var LegajoAlumno = btn.id;
 		Swal.fire({
 			icon: 'warning',
-			title:"øDesea dar de baja este alumno?",			
+			title:"¬øDesea dar de baja este alumno?",			
 			showCancelButton: true,
 			confirmButtonColor: "#c82333",
 		  cancelButtonText: "Cancelar",
@@ -197,10 +205,15 @@ if(session.getAttribute("Legajo") == null) {
 							if(LegajoAlumno == "Exitoso"){
 								Toast.fire({			
 									  icon: 'success',
-									  title: 'El alumno se est· dando de baja...'
+									  title: 'El alumno se est√° dando de baja...'
 									}).then((result) => {
 										location.replace('ServletAlumno?Param=1');
 								})
+							}else{
+								Toast.fire({			
+									  icon: 'error',
+									  title: 'Hubo un problema. Comunicarse con el √°rea t√©cnica.'
+									})
 							}
 						}
 					});
