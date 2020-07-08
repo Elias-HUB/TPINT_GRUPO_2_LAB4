@@ -9,6 +9,7 @@ public interface CursoDao {
 	public boolean delete(Curso curso);
 	public boolean update(Curso curso, String aux);
 	public List<Curso> readAll();
+	public List<Curso> readMenuAdmin(String Legajo, String Materia, String Cuatrimestre, String Anio, String turno);
 	public String ReporteEstadoCurso(String Materia, String Cuatrimestre, String Anio);
 	public String ReporteAprobadoPorMateria (String Materia, String Cuatrimestre, String Anio);
 	public String ReporteAlumnosPorMateria (String Materia, String Cuatrimestre, String Anio);	

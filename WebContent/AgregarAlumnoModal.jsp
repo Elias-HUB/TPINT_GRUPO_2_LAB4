@@ -3,7 +3,7 @@
 <%@ page import="Entidad.Localidad"%>
 
 <!-- Modal -->
-<div class="modal fade bd-example-modal-xl" id="ModalAlumnoAgregar"
+<div class="modal fade bd-example-modal-xl zoomIn" id="ModalAlumnoAgregar"
 	tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog  modal-xl" role="document">

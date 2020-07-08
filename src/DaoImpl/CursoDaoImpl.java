@@ -16,16 +16,18 @@ import Entidad.Materia;
 import Entidad.Persona;
 
 public class CursoDaoImpl implements CursoDao {
-	private static final String insert = "insert into cursos (IdMateria, Cuatrimestre, A�o, Turno, LegajoDocente, Estado) VALUES(?, ?, ?, ?, ?, ?)";
-	private static final String readall = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,A�o,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria";
-	private static final String readCursosXDocente = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,A�o,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria where c.legajoDocente=?";
+	private static final String insert = "insert into cursos (IdMateria, Cuatrimestre, Año, Turno, LegajoDocente, Estado) VALUES(?, ?, ?, ?, ?, ?)";
+	private static final String readall = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria";
+	private static final String readCursosXDocente = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria where c.legajoDocente=?";
 	private static final String insertAlumnosPorCurso = "insert into AlumnosPorCurso(IdCurso, LegajoAlumnno, EstadoCurso, Estado) VALUES (?, ? , 'Cursando',true)";
-	private static final String readCurso = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,A�o,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria where c.idCurso= ?";
-	private static final String update = "update cursos set idMateria= ?  , Cuatrimestre= ?, A�o= ?  , Turno= ? , LegajoDocente= ?  where IdCurso= ? ;";
+	private static final String readCurso = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria where c.idCurso= ?";
+	private static final String update = "update cursos set idMateria= ?  , Cuatrimestre= ?, Año= ?  , Turno= ? , LegajoDocente= ?  where IdCurso= ? ;";
 	private static final String ListReporteEstadoCurso = "call ReporteEstadoCurso( ? , ? , ?);";
 	private static final String ListReporteAprobadoPorMateria = "call ReporteAprobadoPorMateria( ? , ? , ?);";
 	private static final String ListReporteAlumnosPorMateria = "call ReporteAlumnosPorMateria( ? , ? , ?);";
+	private static final String readMenuAdmin = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo  inner join Materias m on m.IdMateria=c.IdMateria  where c.legajoDocente like ? and m.IdMateria like ? and Cuatrimestre like ? and Año like ? and Turno like ?";
 	private static final String deleteAlumnoXCurso = "update AlumnosPorCurso set estado = 0 where LegajoAlumnno= ? and idcurso= ? ;";
+
 	@Override
 	public boolean insert(Curso curso) {
 		PreparedStatement statement;
@@ -35,7 +37,7 @@ public class CursoDaoImpl implements CursoDao {
 			statement = conexion.prepareStatement(insert);
 			statement.setInt(1, curso.Materia.getIdMateria());
 			statement.setInt(2, curso.getCuatrimestre());
-			statement.setInt(3, curso.getA�o());
+			statement.setInt(3, curso.getAño());
 			statement.setString(4, curso.getTurno());
 			statement.setInt(5, curso.docente.getLegajo());
 			statement.setBoolean(6, true);
@@ -93,7 +95,7 @@ public class CursoDaoImpl implements CursoDao {
 			statement = conexion.prepareStatement(update);
 			statement.setInt(1, curso.Materia.getIdMateria());
 			statement.setInt(2, curso.getCuatrimestre());
-			statement.setInt(3, curso.getA�o());
+			statement.setInt(3, curso.getAño());
 			statement.setString(4, curso.getTurno());
 			statement.setInt(5, curso.docente.getLegajo());
 			statement.setString(6, CursoMod);
@@ -172,7 +174,7 @@ public class CursoDaoImpl implements CursoDao {
 		mat.setNombre(resultSet.getString("NombreMateria"));
 		curso.setMateria(mat);
 		curso.setCuatrimestre(resultSet.getInt("Cuatrimestre"));
-		curso.setA�o(resultSet.getInt("A�o"));
+		curso.setAño(resultSet.getInt("Año"));
 		curso.setTurno(resultSet.getString("Turno"));
 		Docente doc = new Docente();
 		doc.setLegajo(resultSet.getInt("Legajo"));
@@ -426,6 +428,57 @@ public class CursoDaoImpl implements CursoDao {
 		}
 		return tabla;
 	}
+
+
+	@Override
+	public List<Curso> readMenuAdmin(String Legajo, String Materia, String Cuatrimestre, String Anio, String turno) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		ArrayList<Curso> Cursos = new ArrayList<Curso>();
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(readMenuAdmin);
+			if (Legajo.equals("0")) {
+				statement.setString(1, "%%");
+			} else {
+				statement.setInt(1, Integer.parseInt(Legajo));								
+			}
+			if (Materia.equals("0")) {
+				statement.setString(2, "%%");
+			} else {
+				statement.setInt(2, Integer.parseInt(Materia));								
+			}
+			if (Cuatrimestre.equals("0")) {
+				statement.setString(3, "%%");
+			} else {
+				statement.setInt(3, Integer.parseInt(Cuatrimestre));				
+			}
+			if (Anio.equals("0")) {
+				statement.setString(4, "%%");				
+			} else {
+				statement.setInt(4, Integer.parseInt(Anio));
+			}
+			if (turno.equals("0")) {
+				statement.setString(5, "%%");
+			} else {
+				statement.setString(5, turno);				
+			}
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Cursos.add(GetCurso(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Cursos;
+
 	
 	public boolean deleteAlumnoXCurso(int legajo, int idcurso)
 	{
@@ -444,6 +497,6 @@ public class CursoDaoImpl implements CursoDao {
 			e.printStackTrace();
 		}
 		return isdeleteExitoso;
-		
+
 	}
 }

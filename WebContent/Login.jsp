@@ -5,10 +5,29 @@
 <head>
 
 <jsp:include page="Librerias.jsp"></jsp:include>
-<link rel="stylesheet" href="Css/Head.css">
+
 <link rel="stylesheet" href="Css/LoginCss.css">
 <link rel="stylesheet" href="JS/Funciones.js">
-
+<link rel="stylesheet" href="Css/Head.css">
+<style type="text/css">
+body{
+	width: 100%;
+	position: Relative;
+	height: 99%;
+      background: rgba(36, 199, 220, 0.5),url("Imagenes/ImagenFondo.jpg");
+      background: -webkit-linear-gradient(to right, rgba(81, 74, 157, 0.5), #24C6DC),url("Imagenes/ImagenFondo.jpg");
+      background: linear-gradient(to right, #514A9D, rgba(36, 199, 220, 0.5)),url("Imagenes/ImagenFondo.jpg");
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+}
+.Cabecera {
+    background: rgba(15, 32, 39, 0.600),url("Imagenes/ImagenFondo.jpg");
+    background: -webkit-linear-gradient(to top, #2C5364, rgba(32, 58, 67, 0.600), #0F2027),url("Imagenes/ImagenFondo.jpg");
+    background: linear-gradient(to top, #2C5364, rgba(32, 58, 67, 0.600), #0F2027),url("Imagenes/ImagenFondo.jpg");
+		color: white;
+}
+</style>
 </head>
 
 <body>

@@ -48,6 +48,8 @@ public class ServletLogin extends HttpServlet {
 				List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
 				DocenteDaoImpl dDao = new DocenteDaoImpl(); 
 				List<Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
+				String Mensaje = "Materia: Todas - Cuatrimestre: Todos - Año: Todos - Turno: Todos - Docente: Todos";
+				request.setAttribute("Mensaje", Mensaje);
 				request.setAttribute("ListaCursos", listaCursos);
 				request.setAttribute("ListaMaterias", listaMaterias);
 				request.setAttribute("ListaDocentes",listaDocentes);
