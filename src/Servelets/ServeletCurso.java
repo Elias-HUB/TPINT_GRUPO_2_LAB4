@@ -15,7 +15,9 @@ import DaoImpl.AlumnoDaoImpl;
 import DaoImpl.CursoDaoImpl;
 import DaoImpl.DocenteDaoImpl;
 import DaoImpl.MateriaDaoImpl;
+import DaoImpl.NotaDaoImpl;
 import Entidad.Alumno;
+import Entidad.Calificacion;
 import Entidad.Curso;
 import Entidad.Docente;
 import Entidad.Materia;
@@ -86,14 +88,16 @@ public class ServeletCurso extends HttpServlet {
 			throws ServletException, IOException {
 // BOTON PARA QUE SE ABRA LA PANTALLA DAR DE ALTA UN CURSO Y ELEGIR ALUMNOS
 		HttpSession session = request.getSession();
-    
+		NotaDaoImpl ndao = new NotaDaoImpl();
+		CursoDaoImpl cursoImpl = new CursoDaoImpl();
+
+		AlumnoDaoImpl aDao = new AlumnoDaoImpl();
 		if(request.getParameter("btnAgregarCurso") != null)
 		{
 			MateriaDaoImpl mDao = new MateriaDaoImpl();
 			List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
 			DocenteDaoImpl dDao = new DocenteDaoImpl(); 
 			List<Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
-			AlumnoDaoImpl aDao = new AlumnoDaoImpl();
 			List<Alumno> listaAlumnos = (ArrayList<Alumno>)aDao.readAll();
 			request.setAttribute("ListaAlumnos", listaAlumnos);
 			request.setAttribute("ListaDocentes",listaDocentes);
@@ -104,7 +108,6 @@ public class ServeletCurso extends HttpServlet {
 // BOTON PARA QUE SE GUARDE EN LA BD EL CURSO NUEVO
 		if(request.getParameter("btnGuardarCurso") != null)
 	    {
-			CursoDaoImpl cursoImpl = new CursoDaoImpl();
 			Curso curso = new Curso();		
 			String[] AlumnosXCurso; 
 			curso.setCuatrimestre(Integer.parseInt(request.getParameter("slCuatrimestre").toString()));
@@ -121,6 +124,7 @@ public class ServeletCurso extends HttpServlet {
 			for (int x=0; x<AlumnosXCurso.length;x++)
 			{
 				cursoImpl.insertAlumnosPorCurso(ultimoCurso,AlumnosXCurso[x]);
+				ndao.insert(AlumnosXCurso[x], ultimoCurso);				
 			} 
 			List<Curso> listaCursos = (ArrayList<Curso>) cursoImpl.readAll();
 			request.setAttribute("ListaCursosAdmin", listaCursos);
@@ -130,9 +134,9 @@ public class ServeletCurso extends HttpServlet {
 		//BOTON PARA FILTRO DEL MENU PRINCIPAL
 		if(request.getParameter("btnBuscar")!=null)
 		{
-			CursoDaoImpl cDao = new CursoDaoImpl();
+			
 			int legajo= (Integer.parseInt(request.getParameter("slDocente").toString()));
-			List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajo);
+			List<Curso> listaCursos = (ArrayList<Curso>) cursoImpl.readCursosXDocente(legajo);
 			MateriaDaoImpl mDao = new MateriaDaoImpl();
 			List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
 			DocenteDaoImpl dDao = new DocenteDaoImpl(); 
@@ -146,7 +150,6 @@ public class ServeletCurso extends HttpServlet {
 		// BOTON PARA GUARDAR LA MODIFICACION DE UN CURSO 
 		if(request.getParameter("btnModificarCurso") != null)
 		{
-			CursoDaoImpl cursoImpl = new CursoDaoImpl();
 			Curso curso = new Curso();
 			String IDcursoMod = session.getAttribute("CursoModificar").toString();
 			String[] AlumnosXCurso; 
@@ -158,11 +161,34 @@ public class ServeletCurso extends HttpServlet {
 			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
 			curso.setTurno((request.getParameter("slTurno").toString()));
 			cursoImpl.update(curso,IDcursoMod);
-			/*	AlumnosXCurso = request.getParameterValues("cboxAlumno");
-			for (int x=0; x<AlumnosXCurso.length;x++)
+			AlumnosXCurso = request.getParameterValues("cboxAlumno");
+			int INTcursomod = Integer.parseInt(IDcursoMod);
+			List <Alumno> InscriptosIncialmente = aDao.readAlumnosXCurso(INTcursomod);
+			for (int x=0; x<AlumnosXCurso.length ; x++)
 			{
-				cursoImpl.insertAlumnosPorCurso(ultimoCurso,AlumnosXCurso[x]);
-			} */
+				if(ndao.BuscarCalificaciones(AlumnosXCurso[x], INTcursomod)!=true)
+				{
+					cursoImpl.insertAlumnosPorCurso(INTcursomod,AlumnosXCurso[x]);
+					ndao.insert(AlumnosXCurso[x], INTcursomod);
+				}
+			}
+			for(Alumno alumnoInicial : InscriptosIncialmente)
+			{
+				boolean existeAlumno = false;
+				for (int i=0; i<AlumnosXCurso.length ; i++)
+				{
+					if(alumnoInicial.getLegajo()==Integer.parseInt(AlumnosXCurso[i]))
+					{
+						existeAlumno = true; 
+					}
+				}
+				if(existeAlumno==false)
+				{
+					cursoImpl.deleteAlumnoXCurso(alumnoInicial.getLegajo(), INTcursomod);
+					ndao.deleteCalificacion(alumnoInicial.getLegajo(), INTcursomod);
+				}
+				
+			}
 			List<Curso> listaCursos = (ArrayList<Curso>) cursoImpl.readAll();
 			request.setAttribute("ListaCursosAdmin", listaCursos);
 			request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);

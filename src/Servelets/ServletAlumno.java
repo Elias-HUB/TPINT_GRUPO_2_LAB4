@@ -21,11 +21,13 @@ import com.google.gson.Gson;
 import Dao.LocalidadDao;
 import Dao.ProvinciaDao;
 import DaoImpl.AlumnoDaoImpl;
+import DaoImpl.CursoDaoImpl;
 import DaoImpl.LocalidadDaoImpl;
 import DaoImpl.NotaDaoImpl;
 import DaoImpl.ProvinciaDaoImpl;
 import Entidad.Alumno;
 import Entidad.Calificacion;
+import Entidad.Curso;
 import Entidad.Domicilio;
 import Entidad.Localidad;
 import Entidad.Provincia;
@@ -40,7 +42,9 @@ public class ServletAlumno extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();		
+		HttpSession session = request.getSession();
+		Curso curso = new Curso();
+		CursoDaoImpl cdao= new CursoDaoImpl();
 		if(session.getAttribute("Legajo") == null) {
 			request.getRequestDispatcher("Login.jsp").forward(request, response);
 		}
@@ -61,8 +65,10 @@ public class ServletAlumno extends HttpServlet {
 		{
 			AlumnoDaoImpl aDao1 = new AlumnoDaoImpl();
 			String Curso = request.getParameter("ParamAlumnoXCursoAdmin").toString();
-			int curso = Integer.parseInt(Curso);
-			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao1.readAlumnosXCurso(curso);
+			int cursoBuscar = Integer.parseInt(Curso);
+			curso = cdao.BuscarCurso(cursoBuscar);
+			session.setAttribute("CursoAListar",curso);
+			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao1.readAlumnosXCurso(cursoBuscar);
 			request.setAttribute("ListaAlumnos", listaAlumnos);
 			request.getRequestDispatcher("AlumnosPorCursoAdmin.jsp").forward(request, response);
 		}		

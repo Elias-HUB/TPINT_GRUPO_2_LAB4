@@ -11,15 +11,44 @@ import java.util.List;
 import Dao.NotaDao;
 import Entidad.Alumno;
 import Entidad.Calificacion;
+import Entidad.Curso;
+import Entidad.Docente;
 
 public class NotaDaoImpl implements NotaDao
 {
+	private static final String insert = "insert into Calificaciones  VALUES (?,?,?,?,?,?)";
 	private static final String readNotasXCurso = "SELECT alumnos.legajo, alumnos.Nombre, alumnos.Apellido, alumnos.Dni, alumnos.email, calificaciones.Idcurso, parcialuno,parcialdos, recuperatoriouno, recuperatoriodos, alumnosporcurso.EstadoCurso, NotaFinal from calificaciones inner join alumnos on alumnos.legajo = calificaciones.legajo inner join alumnosporcurso on alumnosporcurso.idcurso = calificaciones.idcurso and alumnosporcurso.LegajoAlumnno = calificaciones.legajo where calificaciones.idcurso = ?;";
 	private static final String updateNotasXCurso = "update tpint_grupo2_lab4.calificaciones inner join alumnosporcurso on alumnosporcurso.idcurso = calificaciones.idcurso and alumnosporcurso.LegajoAlumnno = calificaciones.legajo set ParcialUno = ? , ParcialDos = ? , Recuperatoriouno = ? , Recuperatoriodos = ?, NotaFinal = ?, alumnosporcurso.EstadoCurso = ? where calificaciones.idcurso = ? and legajo = ?; ";
+	private static final String FuncionValidarNotas = "SELECT count(*) as total FROM Calificaciones cal where cal.legajo= ? and cal.idCurso= ? and estado = 1; "; 
+	private static final String delete ="update calificaciones set estado = 0 where legajo = ? and idcurso= ? "; 
 	@Override
-	public boolean insert(Calificacion calificacion) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean insert(String legajo, int idcurso) {
+			PreparedStatement statement;
+			Connection conexion = Conexion.getConexion().getSQLConexion();
+			boolean isInsertExitoso = false;
+			try {
+				statement = conexion.prepareStatement(insert);
+				statement.setInt(1, idcurso);
+				statement.setInt(2, Integer.parseInt(legajo));
+				statement.setInt(3, 0);
+				statement.setInt(4, 0);
+				statement.setInt(5, 0);
+				statement.setInt(6, 0);
+				if (statement.executeUpdate() > 0) {
+					conexion.commit();
+					isInsertExitoso = true;
+				}
+			} catch (SQLException e) {
+
+				try {
+					conexion.rollback();
+				} catch (SQLException e1) {
+
+				 isInsertExitoso = false;
+				}
+			}
+			return isInsertExitoso;
+		
 	}
 
 	@Override
@@ -96,6 +125,51 @@ public class NotaDaoImpl implements NotaDao
 		calificacion.setNotafinal(resultSet.getInt("NotaFinal"));
 		
 		return calificacion;
+		
+	}
+	
+	public boolean BuscarCalificaciones(String legajo, int idcurso)
+	{
+  		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		Conexion conexion = Conexion.getConexion();
+		int cant;
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(FuncionValidarNotas);
+			statement.setInt(1,Integer.parseInt(legajo));
+			statement.setInt(2,idcurso);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				cant=resultSet.getInt("total");
+				if(cant>0)
+				{
+					return true;
+				}
+				else return false; 
+					
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+		return false;
+	}
+	public boolean deleteCalificacion(int legajo, int idcurso)
+	{
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isdeleteExitoso = false;
+		try {
+			statement = conexion.prepareStatement(delete);
+			statement.setInt(1, legajo);
+			statement.setInt(2, idcurso);
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				isdeleteExitoso = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return isdeleteExitoso;
 		
 	}
 }
