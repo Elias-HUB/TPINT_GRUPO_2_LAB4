@@ -5,6 +5,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<!-- Toast -->
+<link rel="stylesheet" href="@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
+<script src="sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <jsp:include page="HeadAdministrador.jsp"></jsp:include>
 <jsp:include page="LibreriasJtable.jsp"></jsp:include>
@@ -89,5 +93,48 @@
 	</div>
 
 	<script src="JS/DataTableListCursosAdminCONFIG.js"></script>
+		<script type="text/javascript">
+	<%
+	if(request.getAttribute("SweetAlert")!=null)
+	{
+		String Resultado = request.getAttribute("SweetAlert").toString();
+		%>mostrarToast("<%=Resultado%>")<%
+	}
+	%>
+	function mostrarToast(ToastR){
+		const Toast = Swal.mixin({
+			  toast: true,
+			  position: 'top',
+			  showConfirmButton: false,
+			  timer: 3000,
+			  timerProgressBar: true,
+			  onOpen: (toast) => {
+				    toast.addEventListener('mouseenter', Swal.stopTimer)
+				    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  }
+			});
+		if(ToastR == "Cargado"){	
+			Toast.fire({			
+			  icon: 'success',
+			  title: 'El curso se agregó de manera correcta.'
+			})
+		} else if(ToastR == "Eliminado"){	
+			Toast.fire({			
+			  icon: 'success',
+			  title: 'El curso se eliminó de manera correcta.'
+			})
+		} else if(ToastR == "Modificado"){	
+			Toast.fire({			
+				  icon: 'success',
+				  title: 'El curso se modificó de manera correcta.'
+				})
+			} else{	
+				Toast.fire({			
+					  icon: 'error',
+					  title: 'Hubo un problema. Comunicarse con el área técnica.'
+					})
+				}
+	}
+	</script>
 </body>
 </html>
