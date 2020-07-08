@@ -187,7 +187,7 @@ public class ServletDocente extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 
 			boolean Delete;
-			Delete = dDao.delete(Integer.parseInt(LegajoDocente));	
+			Delete = dDao.delete(Integer.parseInt(LegajoDocente));		
 			Gson gson = new Gson();
 			String json = gson.toJson("Exitoso");
 			PrintWriter out = response.getWriter();

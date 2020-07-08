@@ -30,25 +30,26 @@ public class ServeletCurso extends HttpServlet {
 	public ServeletCurso() {
 		super();
 	}
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String ParamListar = request.getParameter("Param");
-    
-	//LISTAR TODOS LOS CURSOS PARA EL ADMIN
+
+		// LISTAR TODOS LOS CURSOS PARA EL ADMIN
 		if (request.getParameter("Param") != null) {
 			if (ParamListar.equals("1")) {
 				CursoDaoImpl cDao = new CursoDaoImpl();
 				List<Curso> listaCursos = (ArrayList<Curso>) cDao.readAll();
-				request.setAttribute("ListaCursosAdmin", listaCursos);
+				request.setAttribute("ListaCursosAdmin", listaCursos);				
+
 				request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
 			}
-      
-	// LISTAR LOS CURSOS PARA UN DOCENTE LOGUEADO
-		else if (ParamListar.equals("2")) {
+
+			// LISTAR LOS CURSOS PARA UN DOCENTE LOGUEADO
+			else if (ParamListar.equals("2")) {
 				CursoDaoImpl cDao = new CursoDaoImpl();
-				
+
 				int legajo = Integer.parseInt(session.getAttribute("Legajo").toString());
 				List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajo);
 				request.setAttribute("ListaCursosDocente", listaCursos);
@@ -56,61 +57,58 @@ public class ServeletCurso extends HttpServlet {
 			}
 		}
 
-		//BOTON PARA ABRIR LA MODIFICACION DE UN CURSO
-			if(request.getParameter("ParamModificarCurso")!=null)
-				{
-					MateriaDaoImpl mDao = new MateriaDaoImpl();
-					List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
-					DocenteDaoImpl dDao = new DocenteDaoImpl(); 
-					List<Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
-					AlumnoDaoImpl aDao = new AlumnoDaoImpl();
-					String aux= request.getParameter("ParamModificarCurso").toString();
-					int cursoMod = Integer.parseInt(aux);
-					session.setAttribute("CursoModificar", cursoMod);
-					CursoDaoImpl cdao = new CursoDaoImpl();
-					Curso curso = cdao.BuscarCurso(cursoMod);
-					//String doc = String.valueOf(curso.docente.get)
-					List<Alumno> listaAlumnosCurso = (ArrayList<Alumno>)aDao.readAlumnosXCurso(cursoMod);
-					List<Alumno>listaAlumnosTodos = (ArrayList<Alumno>) aDao.readAll();
-					session.setAttribute("CursoMod", curso);
-					request.setAttribute("ListaAlumnosCurso", listaAlumnosCurso);
-					request.setAttribute("ListaAlumnosTodos", listaAlumnosTodos);
-					request.setAttribute("ListaDocentes",listaDocentes);
-					request.setAttribute("ListaMaterias", listaMaterias);
-					request.getRequestDispatcher("ModificarCurso.jsp").forward(request, response);
-				}
-
+		// BOTON PARA ABRIR LA MODIFICACION DE UN CURSO
+		if (request.getParameter("ParamModificarCurso") != null) {
+			MateriaDaoImpl mDao = new MateriaDaoImpl();
+			List<Materia> listaMaterias = (ArrayList<Materia>) mDao.readAll();
+			DocenteDaoImpl dDao = new DocenteDaoImpl();
+			List<Docente> listaDocentes = (ArrayList<Docente>) dDao.readAll();
+			AlumnoDaoImpl aDao = new AlumnoDaoImpl();
+			String aux = request.getParameter("ParamModificarCurso").toString();
+			int cursoMod = Integer.parseInt(aux);
+			session.setAttribute("CursoModificar", cursoMod);
+			CursoDaoImpl cdao = new CursoDaoImpl();
+			Curso curso = cdao.BuscarCurso(cursoMod);
+			// String doc = String.valueOf(curso.docente.get)
+			List<Alumno> listaAlumnosCurso = (ArrayList<Alumno>) aDao.readAlumnosXCurso(cursoMod);
+			List<Alumno> listaAlumnosTodos = (ArrayList<Alumno>) aDao.readAll();
+			session.setAttribute("CursoMod", curso);
+			request.setAttribute("ListaAlumnosCurso", listaAlumnosCurso);
+			request.setAttribute("ListaAlumnosTodos", listaAlumnosTodos);
+			request.setAttribute("ListaDocentes", listaDocentes);
+			request.setAttribute("ListaMaterias", listaMaterias);
+			request.getRequestDispatcher("ModificarCurso.jsp").forward(request, response);
 		}
+
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-// BOTON PARA QUE SE ABRA LA PANTALLA DAR DE ALTA UN CURSO Y ELEGIR ALUMNOS
+		// BOTON PARA QUE SE ABRA LA PANTALLA DAR DE ALTA UN CURSO Y ELEGIR ALUMNOS
 		HttpSession session = request.getSession();
-    
-		if(request.getParameter("btnAgregarCurso") != null)
-		{
+
+		if (request.getParameter("btnAgregarCurso") != null) {
 			MateriaDaoImpl mDao = new MateriaDaoImpl();
-			List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
-			DocenteDaoImpl dDao = new DocenteDaoImpl(); 
-			List<Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
+			List<Materia> listaMaterias = (ArrayList<Materia>) mDao.readAll();
+			DocenteDaoImpl dDao = new DocenteDaoImpl();
+			List<Docente> listaDocentes = (ArrayList<Docente>) dDao.readAll();
 			AlumnoDaoImpl aDao = new AlumnoDaoImpl();
-			List<Alumno> listaAlumnos = (ArrayList<Alumno>)aDao.readAll();
+			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao.readAll();
 			request.setAttribute("ListaAlumnos", listaAlumnos);
-			request.setAttribute("ListaDocentes",listaDocentes);
+			request.setAttribute("ListaDocentes", listaDocentes);
 			request.setAttribute("ListaMaterias", listaMaterias);
 			request.getRequestDispatcher("AltaCurso.jsp").forward(request, response);
 		}
-    
-// BOTON PARA QUE SE GUARDE EN LA BD EL CURSO NUEVO
-		if(request.getParameter("btnGuardarCurso") != null)
-	    {
+
+		// BOTON PARA QUE SE GUARDE EN LA BD EL CURSO NUEVO
+		if (request.getParameter("btnGuardarCurso") != null) {
 			CursoDaoImpl cursoImpl = new CursoDaoImpl();
-			Curso curso = new Curso();		
-			String[] AlumnosXCurso; 
+			Curso curso = new Curso();
+			String[] AlumnosXCurso;
 			curso.setCuatrimestre(Integer.parseInt(request.getParameter("slCuatrimestre").toString()));
-			curso.docente = new Docente( );
+			curso.docente = new Docente();
 			curso.docente.setLegajo(Integer.parseInt(request.getParameter("slDocente").toString()));
-			curso.Materia  = new Materia();
+			curso.Materia = new Materia();
 			curso.Materia.setIdMateria(Integer.parseInt(request.getParameter("slMateria").toString()));
 			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
 			curso.setTurno((request.getParameter("slTurno").toString()));
@@ -118,56 +116,92 @@ public class ServeletCurso extends HttpServlet {
 			cursoImpl.insert(curso);
 			AlumnosXCurso = request.getParameterValues("cboxAlumno");
 			int ultimoCurso = cursoImpl.DevuelveUltimoCurso();
-			for (int x=0; x<AlumnosXCurso.length;x++)
-			{
-				cursoImpl.insertAlumnosPorCurso(ultimoCurso,AlumnosXCurso[x]);
-			} 
+			for (int x = 0; x < AlumnosXCurso.length; x++) {
+				cursoImpl.insertAlumnosPorCurso(ultimoCurso, AlumnosXCurso[x]);
+			}
 			List<Curso> listaCursos = (ArrayList<Curso>) cursoImpl.readAll();
 			request.setAttribute("ListaCursosAdmin", listaCursos);
 			request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
 		}
-    
-		//BOTON PARA FILTRO DEL MENU PRINCIPAL
-		if(request.getParameter("btnBuscar")!=null)
-		{
+
+		// BOTON PARA FILTRO DEL MENU PRINCIPAL
+		if (request.getParameter("btnBuscar") != null) {
 			CursoDaoImpl cDao = new CursoDaoImpl();
-			int legajo= (Integer.parseInt(request.getParameter("slDocente").toString()));
-			List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajo);
 			MateriaDaoImpl mDao = new MateriaDaoImpl();
-			List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
-			DocenteDaoImpl dDao = new DocenteDaoImpl(); 
-			List<Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
+			List<Materia> listaMaterias = (ArrayList<Materia>) mDao.readAll();
+			DocenteDaoImpl dDao = new DocenteDaoImpl();
+			List<Docente> listaDocentes = (ArrayList<Docente>) dDao.readAll();
+
+			String Materia = request.getParameter("slMateria").toString();
+			String Cuatrimestre = request.getParameter("slCuatrimestre").toString();
+			String Anio = request.getParameter("slAnio").toString();
+			String Turno = request.getParameter("slTurno").toString();
+			String Docente = request.getParameter("slDocente").toString();
+			Docente docente = new Docente();
+			docente = dDao.Buscar(Docente);
+			String Mensaje = "";
+			List<Curso> listaCursos = (ArrayList<Curso>) cDao.readMenuAdmin(Docente, Materia, Cuatrimestre, Anio,
+					Turno);
+
+			if (Materia.equals("0")) {
+				Mensaje += "Materia: Todas - ";
+			} else {
+				Materia materia = new Materia();
+				materia = mDao.ReadMateria(Integer.parseInt(Materia));
+				Mensaje += "Materia: " + materia.getNombre() + " - ";
+			}
+			if (Cuatrimestre.equals("0")) {
+				Mensaje += "Cuatrimestre: Todos - ";
+			} else {
+				Mensaje += (Cuatrimestre + "° Cuatrimestre - ");
+			}
+			if (Anio.equals("0")) {
+				Mensaje += "Año: Todos - ";
+			} else {
+				Mensaje += ("Año: " + Anio + " - ");
+			}
+			if (Turno.equals("0")) {
+				Mensaje += "Turno: Todos - ";
+			} else {
+				Mensaje += ("Turno: " + Turno + " - ");
+			}
+			if (Docente.equals("0")) {
+				Mensaje += "Docente: Todos";
+			} else {
+				Mensaje += ("Docente: " + docente.getApellido() + " " + docente.getNombre());
+			}
+
+			request.setAttribute("Mensaje", Mensaje);
 			request.setAttribute("ListaCursos", listaCursos);
 			request.setAttribute("ListaMaterias", listaMaterias);
-			request.setAttribute("ListaDocentes",listaDocentes);
+			request.setAttribute("ListaDocentes", listaDocentes);
 			request.getRequestDispatcher("MenuPrincipalAdmin.jsp").forward(request, response);
 		}
-    
-		// BOTON PARA GUARDAR LA MODIFICACION DE UN CURSO 
-		if(request.getParameter("btnModificarCurso") != null)
-		{
+
+		// BOTON PARA GUARDAR LA MODIFICACION DE UN CURSO
+		if (request.getParameter("btnModificarCurso") != null) {
 			CursoDaoImpl cursoImpl = new CursoDaoImpl();
 			Curso curso = new Curso();
 			String IDcursoMod = session.getAttribute("CursoModificar").toString();
-			String[] AlumnosXCurso; 
+			String[] AlumnosXCurso;
 			curso.setCuatrimestre(Integer.parseInt(request.getParameter("slCuatrimestre").toString()));
-			curso.docente = new Docente( );
+			curso.docente = new Docente();
 			curso.docente.setLegajo(Integer.parseInt(request.getParameter("slDocente").toString()));
-			curso.Materia  = new Materia();
+			curso.Materia = new Materia();
 			curso.Materia.setIdMateria(Integer.parseInt(request.getParameter("slMateria").toString()));
 			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
 			curso.setTurno((request.getParameter("slTurno").toString()));
-			cursoImpl.update(curso,IDcursoMod);
-			/*	AlumnosXCurso = request.getParameterValues("cboxAlumno");
-			for (int x=0; x<AlumnosXCurso.length;x++)
-			{
-				cursoImpl.insertAlumnosPorCurso(ultimoCurso,AlumnosXCurso[x]);
-			} */
+			cursoImpl.update(curso, IDcursoMod);
+			/*
+			 * AlumnosXCurso = request.getParameterValues("cboxAlumno"); for (int x=0;
+			 * x<AlumnosXCurso.length;x++) {
+			 * cursoImpl.insertAlumnosPorCurso(ultimoCurso,AlumnosXCurso[x]); }
+			 */
 			List<Curso> listaCursos = (ArrayList<Curso>) cursoImpl.readAll();
 			request.setAttribute("ListaCursosAdmin", listaCursos);
 			request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
 		}
-		
+
 	}
 
 }

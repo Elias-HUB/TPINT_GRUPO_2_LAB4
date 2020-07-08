@@ -92,19 +92,20 @@
 
 
 	<div class="wrapper fadeInDown">
-		<div id="formContent" class="table-responsive fadeIn first">
+		<div id="formContent" class="fadeInDown table-responsive fadeIn first">
 			<%
 				String Mensaje = null;
 				if (request.getAttribute("Mensaje") != null) {
 					Mensaje = request.getAttribute("Mensaje").toString();
 			%>
 			<div style="text-align: center;">
-			<h2 class="fadeIn first"><%=Mensaje%></h2>
+				<h2 class="fadeIn first"><%=Mensaje%></h2>
 			</div>
 			<%
 				}
 			%>
-			<table id="example" class="table table-striped table-bordered fadeIn third"
+			<table id="example"
+				class="table table-striped table-bordered fadeIn third"
 				style="width: 100%">
 				<thead class="thead-dark fadeIn third">
 					<tr>

@@ -120,7 +120,9 @@ if(session.getAttribute("Legajo") == null) {
 	if(request.getAttribute("SweetAlert")!=null)
 	{
 		String Resultado = request.getAttribute("SweetAlert").toString();
+		request.setAttribute("SweetAlert", null);
 		%>mostrarToast("<%=Resultado%>")<%
+		
 	}
 	%>
 
@@ -197,7 +199,7 @@ if(session.getAttribute("Legajo") == null) {
 									  icon: 'success',
 									  title: 'El alumno se está dando de baja...'
 									}).then((result) => {
-										window.location = "../WebContent/ListadoAlumnosDocente.jsp";										
+										location.replace('ServletAlumno?Param=1');
 								})
 							}
 						}
