@@ -20,11 +20,9 @@ public class AlumnoDaoImpl implements AlumnoDao {
 	private static final String delete = "UPDATE Alumnos set Estado = 0 WHERE Legajo = ?;";
 	private static final String update = "UPDATE Alumnos set Dni=?, Nombre=?, Apellido=?, FechaNacimiento=?, Direccion=?, Localidad=?, Provincia=?, Email=?, Telefono=?, Estado=? where Legajo =? ;";
 	private static final String readall = "SELECT alumnos.Legajo, alumnos.Dni, alumnos.Nombre, alumnos.Apellido, alumnos.FechaNacimiento, alumnos.Email, alumnos.Telefono, alumnos.Estado, alumnos.Direccion, alumnos.Provincia as 'ProvinciaId', provincias.provincia as 'ProvinciaNombre', alumnos.Localidad as 'LocalidadId', localidades.localidad as 'LocalidadNombre' FROM tpint_grupo2_lab4.alumnos inner join tpint_grupo2_lab4.provincias on alumnos.Provincia = provincias.id inner join tpint_grupo2_lab4.localidades on alumnos.Localidad = localidades.id where Estado = 1;";
-  private static final String readAlumnosXCurso = "SELECT a.Legajo, a.Dni, a.Nombre, a.Apellido, a.Email FROM alumnos a inner join AlumnosPorCurso ac on a.legajo = ac.LegajoAlumnno where ac.idcurso = ? ;";
+	private static final String readAlumnosXCurso = "SELECT a.Legajo, a.Dni, a.Nombre, a.Apellido, a.Email FROM alumnos a inner join AlumnosPorCurso ac on a.legajo = ac.LegajoAlumnno where ac.idcurso = ? and ac.estado=1 ;";
 	private static final String readreporteestadoporcurso = "SELECT * FROM tpint_grupo2_lab4.cursos INNER JOIN tpint_grupo2_lab4.alumnosporcurso on alumnosporcurso.IdCurso = cursos.IdCurso where alumnosporcurso.IdCurso = cursos.IdCurso";
 
-
-	
 
 	@Override
 	public boolean insert(Alumno alumno) {

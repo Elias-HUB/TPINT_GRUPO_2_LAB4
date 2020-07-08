@@ -25,7 +25,7 @@ public class CursoDaoImpl implements CursoDao {
 	private static final String ListReporteEstadoCurso = "call ReporteEstadoCurso( ? , ? , ?);";
 	private static final String ListReporteAprobadoPorMateria = "call ReporteAprobadoPorMateria( ? , ? , ?);";
 	private static final String ListReporteAlumnosPorMateria = "call ReporteAlumnosPorMateria( ? , ? , ?);";
-
+	private static final String deleteAlumnoXCurso = "update AlumnosPorCurso set estado = 0 where LegajoAlumnno= ? and idcurso= ? ;";
 	@Override
 	public boolean insert(Curso curso) {
 		PreparedStatement statement;
@@ -425,5 +425,25 @@ public class CursoDaoImpl implements CursoDao {
 			e.printStackTrace();
 		}
 		return tabla;
+	}
+	
+	public boolean deleteAlumnoXCurso(int legajo, int idcurso)
+	{
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isdeleteExitoso = false;
+		try {
+			statement = conexion.prepareStatement(deleteAlumnoXCurso);
+			statement.setInt(1, legajo);
+			statement.setInt(2, idcurso);
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				isdeleteExitoso = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return isdeleteExitoso;
+		
 	}
 }
