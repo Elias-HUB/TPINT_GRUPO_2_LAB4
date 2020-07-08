@@ -21,6 +21,8 @@ public class DocenteDaoImpl implements DocenteDao {
 	private static final String update = "UPDATE Docentes set Dni=?, Nombre=?, Apellido=?, FechaNacimiento=?, Direccion=?, Localidad=?, Provincia=?, Email=?, Telefono=?, Estado=? where Legajo =?";
 	private static final String readall = "SELECT docentes.Legajo, docentes.Dni, docentes.Nombre, docentes.Apellido, docentes.FechaNacimiento, docentes.Email, docentes.Telefono, docentes.Estado, docentes.Direccion, docentes.Provincia as 'ProvinciaId', provincias.provincia as 'ProvinciaNombre', docentes.Localidad as 'LocalidadId', localidades.localidad as 'LocalidadNombre' FROM tpint_grupo2_lab4.docentes inner join tpint_grupo2_lab4.provincias on docentes.Provincia = provincias.id inner join tpint_grupo2_lab4.localidades on docentes.Localidad = localidades.id where Estado = 1;";
 	private static final String readUno = "SELECT Legajo, Nombre, Apellido FROM Docentes where legajo=?;"; 
+	private static final String readrecover = "SELECT docentes.Legajo, docentes.Dni, docentes.Nombre, docentes.Apellido, docentes.FechaNacimiento, docentes.Email, docentes.Telefono, docentes.Estado, docentes.Direccion, docentes.Provincia as 'ProvinciaId', provincias.provincia as 'ProvinciaNombre', docentes.Localidad as 'LocalidadId', localidades.localidad as 'LocalidadNombre' FROM tpint_grupo2_lab4.docentes inner join tpint_grupo2_lab4.provincias on docentes.Provincia = provincias.id inner join tpint_grupo2_lab4.localidades on docentes.Localidad = localidades.id where Estado = 0;";
+	private static final String recover = "UPDATE Docentes set Estado = 1 WHERE legajo = ?";
 	@Override
 	public boolean insert(Docente docente) {
 		PreparedStatement statement;
@@ -61,6 +63,23 @@ public class DocenteDaoImpl implements DocenteDao {
 		boolean isdeleteExitoso = false;
 		try {
 			statement = conexion.prepareStatement(delete);
+			statement.setInt(1, Legajo);
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				isdeleteExitoso = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return isdeleteExitoso;
+	}
+	@Override
+	public boolean recover(int Legajo) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isdeleteExitoso = false;
+		try {
+			statement = conexion.prepareStatement(recover);
 			statement.setInt(1, Legajo);
 			if (statement.executeUpdate() > 0) {
 				conexion.commit();
@@ -117,6 +136,31 @@ public class DocenteDaoImpl implements DocenteDao {
 		Conexion conexion = Conexion.getConexion();
 		try {
 			statement = conexion.getSQLConexion().prepareStatement(readall);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Docentes.add(GetDocente(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Docentes;
+	}
+	@Override
+	public List<Docente> readrecover() {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		ArrayList<Docente> Docentes = new ArrayList<Docente>();
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(readrecover);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Docentes.add(GetDocente(resultSet));
