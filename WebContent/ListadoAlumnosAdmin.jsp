@@ -205,8 +205,13 @@ if(session.getAttribute("Legajo") == null) {
 									  icon: 'success',
 									  title: 'El alumno se está dando de baja...'
 									}).then((result) => {
-										window.location = "../WebContent/ListadoAlumnosDocente.jsp";										
+										location.reload();										
 								})
+							}else{
+								Toast.fire({			
+									  icon: 'error',
+									  title: 'Hubo un problema. Comunicarse con el área técnica.'
+									})
 							}
 						}
 					});
