@@ -33,10 +33,18 @@ if(session.getAttribute("Legajo") == null) {
 		<div id="formContent" class="table-responsive">
 
 
-
+<div class="btn-group">
 			<button type="button" class="btn btn-block btn-outline-info"
 				onclick="ModalAlumnoAgregar()" style="margin-bottom: 10px;">Agregar
 				Alumno</button>
+</div>				
+			<div class="btn-group">		
+<form action="ServletAlumno" method="post">	
+			<button type="submit" class="btn btn-block btn-outline-info"
+				id="btnRecuperarAlumno" name="btnRecuperarAlumno" style="margin-bottom: 10px;">Recuperar Alumno</button>
+</form>
+</div>
+				
 			<table id="example" class="table table-striped table-bordered"
 				style="width: 100%">
 				<thead>
