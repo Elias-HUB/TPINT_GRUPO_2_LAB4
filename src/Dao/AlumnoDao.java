@@ -9,7 +9,9 @@ public interface AlumnoDao {
 	public boolean delete(int alumno_a_eliminar);
 	public boolean update(Alumno alumno_a_modificar);
 	public boolean reporteestadoporcurso(String cadena);
-	public List<Alumno> readAll();
+	public List<Alumno> readAll();	
 	public boolean recover(int Legajo);
 	public List<Alumno> readrecover();
+	public List<Alumno> readTutoria();
+	public List<Alumno> readAllTutoria();
 }

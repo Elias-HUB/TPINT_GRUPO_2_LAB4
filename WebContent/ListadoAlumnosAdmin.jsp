@@ -151,22 +151,22 @@ if(session.getAttribute("Legajo") == null) {
 		if(ToastR == "Cargado"){	
 			Toast.fire({			
 			  icon: 'success',
-			  title: 'El alumno se agregó de manera correcta.'
+			  title: 'El alumno se agrego de manera correcta.'
 			})
 		} else if(ToastR == "Eliminado"){	
 			Toast.fire({			
 			  icon: 'success',
-			  title: 'El alumno se eliminó de manera correcta.'
+			  title: 'El alumno se elimino de manera correcta.'
 			})
 		} else if(ToastR == "Modificado"){	
 			Toast.fire({			
 				  icon: 'success',
-				  title: 'El alumno se modificó de manera correcta.'
+				  title: 'El alumno se modifico de manera correcta.'
 				})
 			} else{	
 				Toast.fire({			
 					  icon: 'error',
-					  title: 'Hubo un problema. Comunicarse con el área técnica.'
+					  title: 'Hubo un problema. Comunicarse con el area tecnica.'
 					})
 				}
 	}
@@ -187,7 +187,7 @@ if(session.getAttribute("Legajo") == null) {
 		var LegajoAlumno = btn.id;
 		Swal.fire({
 			icon: 'warning',
-			title:"¿Desea dar de baja este alumno?",			
+			title:"Â¿Desea dar de baja este alumno?",			
 			showCancelButton: true,
 			confirmButtonColor: "#c82333",
 		  cancelButtonText: "Cancelar",
@@ -206,14 +206,16 @@ if(session.getAttribute("Legajo") == null) {
 							if(LegajoAlumno == "Exitoso"){
 								Toast.fire({			
 									  icon: 'success',
-									  title: 'El alumno se está dando de baja...'
+
+									  title: 'El alumno se esta dando de baja...'
 									}).then((result) => {
 										location.replace('ServletAlumno?Param=1');
 								})
 							}else{
 								Toast.fire({			
 									  icon: 'error',
-									  title: 'Hubo un problema. Comunicarse con el área técnica.'
+									  title: 'Hubo un problema. Comunicarse con el Area tecnica.'
+
 									})
 							}
 						}

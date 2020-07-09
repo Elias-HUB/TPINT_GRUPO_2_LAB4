@@ -19,7 +19,8 @@
 				    
 			<div style="margin-left: 80px; margin-top: 10px;">
 <!-- 			<a class="aHead" href="...">Perfil</a> - -->
-				<a class="aHead" href="ServeletCurso?Param=2">Mis Cursos</a> - 
+				<a class="aHead" href="ServeletCurso?Param=2">Mis Cursos</a> -
+				<a class="aHead" href="ServletTutoria?Param1=2">Tutorias</a> -  
 				<a class="aHead" id="snap-pm-logout" href="Login.jsp">Salir</a>
 			</div>
 		</div>

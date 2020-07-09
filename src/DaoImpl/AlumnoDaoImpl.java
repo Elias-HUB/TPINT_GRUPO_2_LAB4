@@ -24,8 +24,10 @@ public class AlumnoDaoImpl implements AlumnoDao {
 	private static final String readreporteestadoporcurso = "SELECT * FROM tpint_grupo2_lab4.cursos INNER JOIN tpint_grupo2_lab4.alumnosporcurso on alumnosporcurso.IdCurso = cursos.IdCurso where alumnosporcurso.IdCurso = cursos.IdCurso";
 	private static final String recover = "UPDATE Alumnos set Estado = 1 WHERE Legajo = ?;";
 	private static final String readrecover = "SELECT alumnos.Legajo, alumnos.Dni, alumnos.Nombre, alumnos.Apellido, alumnos.FechaNacimiento, alumnos.Email, alumnos.Telefono, alumnos.Estado, alumnos.Direccion, alumnos.Provincia as 'ProvinciaId', provincias.provincia as 'ProvinciaNombre', alumnos.Localidad as 'LocalidadId', localidades.localidad as 'LocalidadNombre' FROM tpint_grupo2_lab4.alumnos inner join tpint_grupo2_lab4.provincias on alumnos.Provincia = provincias.id inner join tpint_grupo2_lab4.localidades on alumnos.Localidad = localidades.id where Estado = 0;";
-
-
+	private static final String readTutoria = "SELECT alumnos.Legajo, alumnos.Dni, alumnos.Nombre, alumnos.Apellido, alumnos.Email\r\n" + 
+			"FROM tpint_grupo2_lab4.alumnos where alumnos.Legajo not in \r\n" + 
+			"( select tutorias.legajoalumno from tpint_grupo2_lab4.tutorias where tutorias.Estado = 1 );";
+	private static final String readAllTutoria = "SELECT alumnos.Legajo, alumnos.Dni, alumnos.Nombre, alumnos.Apellido, alumnos.FechaNacimiento, alumnos.Email, alumnos.Telefono, alumnos.Estado, alumnos.Direccion, alumnos.Provincia as 'ProvinciaId', provincias.provincia as 'ProvinciaNombre', alumnos.Localidad as 'LocalidadId', localidades.localidad as 'LocalidadNombre' FROM tpint_grupo2_lab4.alumnos inner join tpint_grupo2_lab4.provincias on alumnos.Provincia = provincias.id inner join tpint_grupo2_lab4.localidades on alumnos.Localidad = localidades.id";
 	@Override
 	public boolean insert(Alumno alumno) {
 		PreparedStatement statement;
@@ -125,6 +127,29 @@ public class AlumnoDaoImpl implements AlumnoDao {
 	}
 
 	@Override
+	public List<Alumno> readAllTutoria() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		ArrayList<Alumno> Alumnos = new ArrayList<Alumno>();
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(readAllTutoria);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Alumnos.add(GetAlumno(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Alumnos;
+	}
+	@Override
 	public List<Alumno> readAll() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -141,6 +166,29 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Alumnos.add(GetAlumno(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Alumnos;
+	}
+	@Override
+	public List<Alumno> readTutoria() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		ArrayList<Alumno> Alumnos = new ArrayList<Alumno>();
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(readTutoria);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Alumnos.add(GetAlumnoTutoria(resultSet));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -203,6 +251,24 @@ public class AlumnoDaoImpl implements AlumnoDao {
 		domicilio.setProvincia(provincia);
 		alumno.setDomicilio(domicilio);
 
+		return alumno;
+	}
+	private Alumno GetAlumnoTutoria(ResultSet resultSet) throws SQLException {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Alumno alumno = new Alumno();
+		alumno.setLegajo(resultSet.getInt("alumnos.Legajo"));
+		alumno.setDni(resultSet.getInt("alumnos.Dni"));
+		alumno.setNombre(resultSet.getString("alumnos.Nombre"));
+		alumno.setApellido(resultSet.getString("alumnos.Apellido"));
+		alumno.setEmail(resultSet.getString("alumnos.Email"));
+			
+		
 		return alumno;
 	}
 
