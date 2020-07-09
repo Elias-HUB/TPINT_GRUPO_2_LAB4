@@ -76,11 +76,11 @@
 									Width="22px" data-toggle="tooltip" title="Modificar Curso" /></a>
 
 
-								<button type="submit" id="BtnEliminar" name="BtnEliminar"
+								<button type="button" id="<%=curso.getId()%>" name="<%=curso.getId()%>" onClick="modalEliminar(this)"
 									class="btn btn-outline-danger">
 									<img src="Imagenes/Eliminar.png" Width="22px" alt="x"
 										data-toggle="tooltip" data-placement="bottom"
-										title="Eliminar Alumno" />
+										title="Eliminar Curso" />
 								</button></th>
 
 						</tr>
@@ -139,6 +139,55 @@
 					  title: 'Hubo un problema. Comunicarse con el área técnica.'
 					})
 				}
+	}
+	function modalEliminar(btn){
+		const Toast = Swal.mixin({
+			  toast: true,
+			  position: 'top',
+			  showConfirmButton: false,
+			  timer: 3000,
+			  timerProgressBar: true,
+			  onOpen: (toast) => {
+				    toast.addEventListener('mouseenter', Swal.stopTimer)
+				    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  }
+			});
+		var Legajocurso = btn.id;
+		Swal.fire({
+			icon: 'warning',
+			title:"¿Desea dar de baja este curso?",			
+			showCancelButton: true,
+			confirmButtonColor: "#c82333",
+		  cancelButtonText: "Cancelar",
+		  confirmButtonText: "Dar de baja",
+		  reverseButtons: true
+		}).then((result) => {
+			if(result.value){
+				   $.ajax({
+						url: 'ServeletCurso',
+						type: 'POST',
+						dataType : "json",
+						data : {
+							Legajocurso: Legajocurso
+						},						
+						success: function(Legajocurso){
+							if(Legajocurso == "Exitoso"){
+								Toast.fire({			
+									  icon: 'success',
+									  title: 'El curso se está dando de baja...'
+									}).then((result) => {
+										location.replace('ServeletCurso?Param=1');
+								})
+							}else{
+								Toast.fire({			
+									  icon: 'error',
+									  title: 'Hubo un problema. Comunicarse con el área técnica.'
+									})
+							}
+						}
+					});
+				}
+			})
 	}
 	</script>
 </body>

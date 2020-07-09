@@ -14,7 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <!-- Head -->
-<jsp:include page="HeadDocente.jsp"></jsp:include>
+<jsp:include page="HeadAdministrador.jsp"></jsp:include>
 <jsp:include page="LibreriasJtable.jsp"></jsp:include>
 
 <link rel="stylesheet" href="Css/JTable.css">
@@ -24,6 +24,7 @@
 <%
  session = request.getSession();
 if(session.getAttribute("Legajo") == null) {
+	session.setAttribute("Legajo",null);
 	request.getRequestDispatcher("Login.jsp").forward(request, response);
 }
 %>
@@ -186,7 +187,7 @@ if(session.getAttribute("Legajo") == null) {
 		var LegajoAlumno = btn.id;
 		Swal.fire({
 			icon: 'warning',
-			title:"Â¿Desea dar de baja este alumno?",			
+			title:"¿Desea dar de baja este alumno?",			
 			showCancelButton: true,
 			confirmButtonColor: "#c82333",
 		  cancelButtonText: "Cancelar",

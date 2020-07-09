@@ -135,10 +135,16 @@
 						<p class="card-text"><%=curso.getTurno()%></p>
 						<p class="card-text"><%=curso.docente.getNombre()%>
 							<%=curso.docente.getApellido()%></p>
-						<a href="ServletNota?ParamAlumnoXCursoDocente=<%=curso.getId()%>"
-							class="btn btn-lg btn-info">Alumnos</a>
+						<div class="form-row" style="justify-content: center;">
+							<a
+								href="ServletAlumno?ParamAlumnoXCursoDocente=<%=curso.getId()%>"
+								class="btn btn-lg btn-dark" style="margin-right: 5px;">Alumnos</a> <a
+								href="ServletNota?ParamAlumnoXCursoDocente=<%=curso.getId()%>"
+								class="btn btn-lg btn-dark" style="margin-left: 5px;">Calificar</a>
+						</div>
 					</div>
-					<div class="card-footer bg-transparent">
+					<div class="card-footer bg-transparent ">
+
 						<input id="txtID" name="txtID" value="<%=curso.getId()%>"
 							style="visibility: hidden">
 					</div>
