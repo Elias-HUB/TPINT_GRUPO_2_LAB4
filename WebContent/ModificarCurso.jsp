@@ -11,13 +11,30 @@
 <jsp:include page="HeadAdministrador.jsp"></jsp:include>
 <jsp:include page="LibreriasJtable.jsp"></jsp:include>
 <link rel="stylesheet" href="Css/JTable.css">
+
+<style>
+.btn-outline-info {
+	border-color: -webkit-linear-gradient(to bottom, #86fde8, #acb6e5);
+	background: #ffffff;
+	color: -webkit-linear-gradient(to bottom, #86fde8, #acb6e5);
+}
+
+.btn-outline-info:hover, .btn-outline-info:active, .btn-outline-info:visited,
+	.btn-outline-info:focus {
+	border-color: #acb6e5;
+	background: #acb6e5;
+	background: -webkit-linear-gradient(to bottom, #86fde8, #acb6e5);
+	background: linear-gradient(to bottom, #86fde8, #acb6e5);
+	color: white;
+}
+</style>
+
 </head>
-<body>
+
 <body>
 	<form method="post" action="ServeletCurso">
-		<br>
 		<div>
-			<div class="form-row" style="justify-content: center;">
+			<div class="form-row" style="justify-content: center; width: 98%;"">
 			<% Curso cursoMod = (Curso)(session.getAttribute("CursoMod")); %>
 				<!--MATERIA -->
 				<div class="form-group col-md-2">
@@ -182,10 +199,11 @@
 				</table>
 			</div>
 		</div>
-
-		<br>
+		
 		<button type="submit" class="btn btn-block btn-outline-info"
 			id="btnModificarCurso" name="btnModificarCurso">Modificar Curso</button>
 			</form>
+			
+<script src="JS/DataTableListAltaCursoCONFIG.js"></script>			
 </body>
 </html>

@@ -150,22 +150,22 @@ if(session.getAttribute("Legajo") == null) {
 		if(ToastR == "Cargado"){	
 			Toast.fire({			
 			  icon: 'success',
-			  title: 'El alumno se agregÃ³ de manera correcta.'
+			  title: 'El alumno se agregó de manera correcta.'
 			})
 		} else if(ToastR == "Eliminado"){	
 			Toast.fire({			
 			  icon: 'success',
-			  title: 'El alumno se eliminÃ³ de manera correcta.'
+			  title: 'El alumno se eliminó de manera correcta.'
 			})
 		} else if(ToastR == "Modificado"){	
 			Toast.fire({			
 				  icon: 'success',
-				  title: 'El alumno se modificÃ³ de manera correcta.'
+				  title: 'El alumno se modificó de manera correcta.'
 				})
 			} else{	
 				Toast.fire({			
 					  icon: 'error',
-					  title: 'Hubo un problema. Comunicarse con el Ã¡rea tÃ©cnica.'
+					  title: 'Hubo un problema. Comunicarse con el área técnica.'
 					})
 				}
 	}
@@ -205,14 +205,14 @@ if(session.getAttribute("Legajo") == null) {
 							if(LegajoAlumno == "Exitoso"){
 								Toast.fire({			
 									  icon: 'success',
-									  title: 'El alumno se estÃ¡ dando de baja...'
+									  title: 'El alumno se está dando de baja...'
 									}).then((result) => {
 										location.replace('ServletAlumno?Param=1');
 								})
 							}else{
 								Toast.fire({			
 									  icon: 'error',
-									  title: 'Hubo un problema. Comunicarse con el Ã¡rea tÃ©cnica.'
+									  title: 'Hubo un problema. Comunicarse con el área técnica.'
 									})
 							}
 						}

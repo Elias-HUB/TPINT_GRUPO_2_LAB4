@@ -38,7 +38,12 @@ public class ServletLogin extends HttpServlet {
 				HttpSession session = request.getSession();
 				int legajoD = Integer.parseInt(session.getAttribute("Legajo").toString());
 				List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajoD);
+				MateriaDaoImpl mDao = new MateriaDaoImpl();
+				List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
+				String Mensaje = "Materia: Todas - Cuatrimestre: Todos - Año: Todos - Turno: Todos - Docente: Todos";
+				request.setAttribute("Mensaje", Mensaje);
 				request.setAttribute("ListaCursos", listaCursos);
+				request.setAttribute("ListaMaterias", listaMaterias);
 				request.getRequestDispatcher("MenuPrincipalDocente.jsp").forward(request, response);
 			}
 			else if (aux==1) {
@@ -94,14 +99,17 @@ public class ServletLogin extends HttpServlet {
 						request.setAttribute("ListaMaterias", listaMaterias);
 						request.setAttribute("ListaDocentes",listaDocentes);
 						request.getRequestDispatcher("MenuPrincipalAdmin.jsp").forward(request, response);
-					} 
+					}
 			else if (validador==2) {
 				
 						int legajoD = Integer.parseInt(request.getParameter("TxtLegajo").toString());
 						List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajoD);
-
+						MateriaDaoImpl mDao = new MateriaDaoImpl();
+						List<Materia> listaMaterias = (ArrayList<Materia>)mDao.readAll();
+						String Mensaje = "Materia: Todas - Cuatrimestre: Todos - Año: Todos - Turno: Todos";
+						request.setAttribute("Mensaje", Mensaje);
 						request.setAttribute("ListaCursos", listaCursos);
-
+						request.setAttribute("ListaMaterias", listaMaterias);
 						request.getRequestDispatcher("MenuPrincipalDocente.jsp").forward(request, response);
 					}
 			else {

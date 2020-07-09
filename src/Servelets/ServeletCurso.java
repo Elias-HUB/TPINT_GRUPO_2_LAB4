@@ -192,6 +192,54 @@ public class ServeletCurso extends HttpServlet {
 			request.setAttribute("ListaDocentes", listaDocentes);
 			request.getRequestDispatcher("MenuPrincipalAdmin.jsp").forward(request, response);
 		}
+		
+		//BOTON PARA FILTRO DEL MENU PRINCIPAL DOCENTE
+		if(request.getParameter("btnBuscarDOCENTE")!=null)
+		{
+			CursoDaoImpl cDao = new CursoDaoImpl();
+			MateriaDaoImpl mDao = new MateriaDaoImpl();
+			List<Materia> listaMaterias = (ArrayList<Materia>) mDao.readAll();			
+
+			String Materia = request.getParameter("slMateria").toString();
+			String Cuatrimestre = request.getParameter("slCuatrimestre").toString();
+			String Anio = request.getParameter("slAnio").toString();
+			String Turno = request.getParameter("slTurno").toString();
+			String Docente = session.getAttribute("Legajo").toString();
+			
+			String Mensaje = "";
+			List<Curso> listaCursos = (ArrayList<Curso>) cDao.readMenuAdmin(Docente, Materia, Cuatrimestre, Anio,
+					Turno);
+
+			if (Materia.equals("0")) {
+				Mensaje += "Materia: Todas - ";
+			} else {
+				Materia materia = new Materia();
+				materia = mDao.ReadMateria(Integer.parseInt(Materia));
+				Mensaje += "Materia: " + materia.getNombre() + " - ";
+			}
+			if (Cuatrimestre.equals("0")) {
+				Mensaje += "Cuatrimestre: Todos - ";
+			} else {
+				Mensaje += (Cuatrimestre + "Año Cuatrimestre - ");
+			}
+			if (Anio.equals("0")) {
+				Mensaje += "Año: Todos - ";
+			} else {
+				Mensaje += ("Año: " + Anio + " - ");
+			}
+			if (Turno.equals("0")) {
+				Mensaje += "Turno: Todos";
+			} else {
+				Mensaje += ("Turno: " + Turno);
+			}
+
+			request.setAttribute("Mensaje", Mensaje);
+			request.setAttribute("ListaCursos", listaCursos);
+			request.setAttribute("ListaMaterias", listaMaterias);
+			request.getRequestDispatcher("MenuPrincipalDocente.jsp").forward(request, response);
+		}
+		
+		
 		// BOTON PARA GUARDAR LA MODIFICACION DE UN CURSO 
 		if(request.getParameter("btnModificarCurso") != null)
 		{

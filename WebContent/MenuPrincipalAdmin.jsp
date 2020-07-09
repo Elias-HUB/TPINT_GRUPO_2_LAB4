@@ -10,9 +10,7 @@
 <jsp:include page="HeadAdministrador.jsp"></jsp:include>
 
 <link rel="stylesheet" href="Css/MenuAdmin.css">
-<style type="text/css">
 
-</style>
 </head>
 <body>
 <%

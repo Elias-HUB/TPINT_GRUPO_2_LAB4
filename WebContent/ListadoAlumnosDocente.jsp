@@ -19,7 +19,8 @@
 $(document).ready(function() {
     $('#example').DataTable();
 } );
-    </script>
+</script>
+
 </head>
 <body>
 <div class="Cabecera">
