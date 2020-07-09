@@ -9,8 +9,8 @@ $(document)
 											"orderable" : false,
 											"targets" : [ 3,4,5,6,7 ]
 										} ],
-										"lengthMenu" : [ [ 5, 10, -1 ],
-												[ 5, 10, "Todos" ] ],
+										"lengthMenu" : [ [ 10, -1 ],
+												[ 10, "Todos" ] ],
 										// Para cambiar el lenguaje a espa�ol
 										language : {
 											"lengthMenu" : "Mostrar _MENU_ registros",
