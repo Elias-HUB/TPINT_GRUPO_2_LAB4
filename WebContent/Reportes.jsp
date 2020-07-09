@@ -85,7 +85,7 @@
 
 			<div class="form-group col-md-2" style="margin-top: 32px;">
 				<button type="submit" id="BtnReporte" name="BtnReporte"
-					class="btn btn-outline-dark Sombra">Generar Reporte</button>
+					class="btn btn-light Sombra">Generar Reporte</button>
 			</div>
 		</div>
 	</form>
