@@ -17,10 +17,10 @@ import Entidad.Docente;
 public class NotaDaoImpl implements NotaDao
 {
 	private static final String insert = "insert into Calificaciones  VALUES (?,?,?,?,?,?,?,?)";
-	private static final String readNotasXCurso = "SELECT alumnos.legajo, alumnos.Nombre, alumnos.Apellido, alumnos.Dni, alumnos.email, calificaciones.Idcurso, parcialuno,parcialdos, recuperatoriouno, recuperatoriodos, alumnosporcurso.EstadoCurso, NotaFinal from calificaciones inner join alumnos on alumnos.legajo = calificaciones.legajo inner join alumnosporcurso on alumnosporcurso.idcurso = calificaciones.idcurso and alumnosporcurso.LegajoAlumnno = calificaciones.legajo where calificaciones.idcurso = ?;";
+	private static final String readNotasXCurso = "SELECT alumnos.legajo, alumnos.Nombre, alumnos.Apellido, alumnos.Dni, alumnos.email, calificaciones.Idcurso, parcialuno,parcialdos, recuperatoriouno, recuperatoriodos, alumnosporcurso.EstadoCurso, NotaFinal from calificaciones inner join alumnos on alumnos.legajo = calificaciones.legajo inner join alumnosporcurso on alumnosporcurso.idcurso = calificaciones.idcurso and alumnosporcurso.LegajoAlumnno = calificaciones.legajo where calificaciones.idcurso = ? and calificaciones.estadoCalificacion = 1;";
 	private static final String updateNotasXCurso = "update tpint_grupo2_lab4.calificaciones inner join alumnosporcurso on alumnosporcurso.idcurso = calificaciones.idcurso and alumnosporcurso.LegajoAlumnno = calificaciones.legajo set ParcialUno = ? , ParcialDos = ? , Recuperatoriouno = ? , Recuperatoriodos = ?, NotaFinal = ?, alumnosporcurso.EstadoCurso = ? where calificaciones.idcurso = ? and legajo = ?; ";
-	private static final String FuncionValidarNotas = "SELECT count(*) as total FROM Calificaciones cal where cal.legajo= ? and cal.idCurso= ? and estado = 1; "; 
-	private static final String delete ="update calificaciones set estado = 0 where legajo = ? and idcurso= ? "; 
+	private static final String FuncionValidarNotas = "SELECT count(*) as total FROM Calificaciones cal where cal.legajo= ? and cal.idCurso= ? and estadoCalificacion = 1; "; 
+	private static final String delete ="update calificaciones set estadoCalificacion = 0 where legajo = ? and idcurso= ? "; 
 	@Override
 	public boolean insert(String legajo, int idcurso) {
 			PreparedStatement statement;
