@@ -41,7 +41,7 @@
 
 				<table id="example" class="table table-striped table-bordered"
 					style="width: 100%">
-					<thead class="thead-dark">
+					<thead class="">
 						<tr style="text-align: center">
 							<th style="text-align: center">Legajo</th>
 							<th style="text-align: center">Alumno</th>
