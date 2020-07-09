@@ -14,7 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <!-- Head -->
-<jsp:include page="HeadAdministrador.jsp"></jsp:include>
+<jsp:include page="HeadDocente.jsp"></jsp:include>
 <jsp:include page="LibreriasJtable.jsp"></jsp:include>
 
 <link rel="stylesheet" href="Css/JTable.css">

@@ -13,6 +13,11 @@
 <link rel="stylesheet" href="Css/ReporteCss.css">
 </head>
 <body>
+<%
+		session = request.getSession();
+		if(session.getAttribute("Legajo") == null) {
+		request.getRequestDispatcher("Login.jsp").forward(request, response);}
+%>
 
 	<form action="ServeletReporte" method="post">
 		<div class="row Centrado"
