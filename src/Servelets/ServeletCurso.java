@@ -117,7 +117,7 @@ public class ServeletCurso extends HttpServlet {
 			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
 			curso.setTurno((request.getParameter("slTurno").toString()));
 			curso.setEstado("1");
-			cursoImpl.insert(curso);
+			boolean insert= cursoImpl.insert(curso);
 			AlumnosXCurso = request.getParameterValues("cboxAlumno");
 			int ultimoCurso = cursoImpl.DevuelveUltimoCurso();
 			for (int x=0; x<AlumnosXCurso.length;x++)
@@ -128,6 +128,13 @@ public class ServeletCurso extends HttpServlet {
 
 			List<Curso> listaCursos = (ArrayList<Curso>) cursoImpl.readAll();
 			request.setAttribute("ListaCursosAdmin", listaCursos);
+			if(insert==true)
+			{
+				request.setAttribute("SweetAlert", "Cargado" );
+			}
+			else {
+				request.setAttribute("SweetAlert", "Error" );
+			}
 			request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
 		}    
 		//BOTON PARA FILTRO DEL MENU PRINCIPAL
@@ -198,7 +205,7 @@ public class ServeletCurso extends HttpServlet {
 			curso.Materia.setIdMateria(Integer.parseInt(request.getParameter("slMateria").toString()));
 			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
 			curso.setTurno((request.getParameter("slTurno").toString()));
-			cursoImpl.update(curso,IDcursoMod);
+			boolean update = cursoImpl.update(curso,IDcursoMod);
 			AlumnosXCurso = request.getParameterValues("cboxAlumno");
 			int INTcursomod = Integer.parseInt(IDcursoMod);
 			List <Alumno> InscriptosIncialmente = aDao.readAlumnosXCurso(INTcursomod);
@@ -226,6 +233,13 @@ public class ServeletCurso extends HttpServlet {
 					ndao.deleteCalificacion(alumnoInicial.getLegajo(), INTcursomod);
 				}
 				
+			}
+			if(update==true)
+			{
+				request.setAttribute("SweetAlert", "Modificado" );
+			}
+			else {
+				request.setAttribute("SweetAlert", "Error" );
 			}
 			List<Curso> listaCursos = (ArrayList<Curso>) cursoImpl.readAll();
 			request.setAttribute("ListaCursosAdmin", listaCursos);
