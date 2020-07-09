@@ -25,7 +25,9 @@ public class CursoDaoImpl implements CursoDao {
 	private static final String ListReporteEstadoCurso = "call ReporteEstadoCurso( ? , ? , ?);";
 	private static final String ListReporteAprobadoPorMateria = "call ReporteAprobadoPorMateria( ? , ? , ?);";
 	private static final String ListReporteAlumnosPorMateria = "call ReporteAlumnosPorMateria( ? , ? , ?);";
+	private static final String readMenuAdmin = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo  inner join Materias m on m.IdMateria=c.IdMateria  where c.legajoDocente like ? and m.IdMateria like ? and Cuatrimestre like ? and Año like ? and Turno like ?";
 	private static final String deleteAlumnoXCurso = "update AlumnosPorCurso set estado = 0 where LegajoAlumnno= ? and idcurso= ? ;";
+
 	@Override
 	public boolean insert(Curso curso) {
 		PreparedStatement statement;
@@ -426,6 +428,57 @@ public class CursoDaoImpl implements CursoDao {
 		}
 		return tabla;
 	}
+
+
+	@Override
+	public List<Curso> readMenuAdmin(String Legajo, String Materia, String Cuatrimestre, String Anio, String turno) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		ArrayList<Curso> Cursos = new ArrayList<Curso>();
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(readMenuAdmin);
+			if (Legajo.equals("0")) {
+				statement.setString(1, "%%");
+			} else {
+				statement.setInt(1, Integer.parseInt(Legajo));								
+			}
+			if (Materia.equals("0")) {
+				statement.setString(2, "%%");
+			} else {
+				statement.setInt(2, Integer.parseInt(Materia));								
+			}
+			if (Cuatrimestre.equals("0")) {
+				statement.setString(3, "%%");
+			} else {
+				statement.setInt(3, Integer.parseInt(Cuatrimestre));				
+			}
+			if (Anio.equals("0")) {
+				statement.setString(4, "%%");				
+			} else {
+				statement.setInt(4, Integer.parseInt(Anio));
+			}
+			if (turno.equals("0")) {
+				statement.setString(5, "%%");
+			} else {
+				statement.setString(5, turno);				
+			}
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Cursos.add(GetCurso(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Cursos;
+	}
 	
 	public boolean deleteAlumnoXCurso(int legajo, int idcurso)
 	{
@@ -444,6 +497,6 @@ public class CursoDaoImpl implements CursoDao {
 			e.printStackTrace();
 		}
 		return isdeleteExitoso;
-		
+
 	}
 }

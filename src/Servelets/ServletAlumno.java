@@ -22,12 +22,15 @@ import Dao.LocalidadDao;
 import Dao.ProvinciaDao;
 import DaoImpl.AlumnoDaoImpl;
 import DaoImpl.CursoDaoImpl;
+import DaoImpl.DocenteDaoImpl;
 import DaoImpl.LocalidadDaoImpl;
 import DaoImpl.NotaDaoImpl;
 import DaoImpl.ProvinciaDaoImpl;
+import DaoImpl.UsuarioImpl;
 import Entidad.Alumno;
 import Entidad.Calificacion;
 import Entidad.Curso;
+import Entidad.Docente;
 import Entidad.Domicilio;
 import Entidad.Localidad;
 import Entidad.Provincia;
@@ -71,7 +74,25 @@ public class ServletAlumno extends HttpServlet {
 			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao1.readAlumnosXCurso(cursoBuscar);
 			request.setAttribute("ListaAlumnos", listaAlumnos);
 			request.getRequestDispatcher("AlumnosPorCursoAdmin.jsp").forward(request, response);
-		}		
+		}
+		if(request.getParameter("ParamRecuperarAlumno") != null)
+		{
+			String StringlegajoRecupero = request.getParameter("ParamRecuperarAlumno");
+			int legajoRecupero = Integer.parseInt(StringlegajoRecupero);
+			AlumnoDaoImpl rDao= new AlumnoDaoImpl();
+			boolean recover = rDao.recover(legajoRecupero);
+			
+			if(recover == true) {
+				request.setAttribute("SweetAlert", "Cargado");
+			}
+			else {
+				request.setAttribute("SweetAlert", "Error");
+			}
+			
+			List<Alumno> ListaAlumnosRecup = (ArrayList<Alumno>)rDao.readrecover();
+			request.setAttribute("ListaAlumnosRecup", ListaAlumnosRecup);
+			request.getRequestDispatcher("RecuperarAlumnos.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -129,6 +150,13 @@ public class ServletAlumno extends HttpServlet {
 			request.setAttribute("ListaProvincia", listaProvincia);
 			request.setAttribute("ListaLocalidad", listaLocalidad);
 			request.getRequestDispatcher("ListadoAlumnosAdmin.jsp").forward(request, response);
+		}
+		if(request.getParameter("btnRecuperarAlumno") != null)
+		{
+			AlumnoDaoImpl rDao= new AlumnoDaoImpl();
+			List<Alumno> ListaAlumnosRecup = (ArrayList<Alumno>)rDao.readrecover();
+			request.setAttribute("ListaAlumnosRecup", ListaAlumnosRecup);
+			request.getRequestDispatcher("RecuperarAlumnos.jsp").forward(request, response);
 		}
 
 		if (request.getParameter("BtnAgregar") != null) {

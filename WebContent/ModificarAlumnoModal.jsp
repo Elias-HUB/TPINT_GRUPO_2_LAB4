@@ -2,7 +2,7 @@
 <%@ page import="Entidad.Provincia"%>
 <%@ page import="Entidad.Localidad"%>
 <!-- Inicio Modal -->
-<div class="modal fade bd-example-modal-xl" id="ModalAlumnoModificar"
+<div class="modal fade bd-example-modal-xl zoomIn" id="ModalAlumnoModificar"
 	tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog  modal-xl" role="document">

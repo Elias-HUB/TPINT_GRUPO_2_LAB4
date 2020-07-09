@@ -72,17 +72,11 @@
 								<img src="Imagenes/Ver.png" Width="22px" data-toggle="tooltip"
 									data-placement="bottom" title="ver Alumno" alt="x" />
 							</button>
-
-							<button type="button"
-								onclick="ModalModificarCargaDatos(<%=datos%>)"
-								class="btn btn-outline-warning">
-								<img src="Imagenes/Editar.png" Width="22px" alt="x"
-									data-toggle="tooltip" data-placement="bottom"
-									title="Modificar Alumno" />
-							</button>		
+		
 										
 							<a href="ServletDocente?ParamRecuperarDocente=<%=doc.getLegajo()%>"
-								class="btn btn-outline-primary">Recuperar</a>
+								class="btn btn-outline-primary"><img src="Imagenes/revertir.png" Width="22px" data-toggle="tooltip"
+									data-placement="bottom" title="Recuperar" alt="x" /></a>
 						</th>
 						</form>
 					</tr>
@@ -96,9 +90,6 @@
 	</div>
 
 	<jsp:include page="VerDocenteModal.jsp"></jsp:include>
-	<jsp:include page="ModificarDocenteModal.jsp"></jsp:include>
-	<jsp:include page="AgregarDocenteModal.jsp"></jsp:include>
-
 	<script src="JS/DataTableListadoDocentesCONFIG.js"></script>
 	<script src="JS/DataTableListadoDocentes.js"></script>
 
@@ -127,7 +118,7 @@
 		if(ToastR == "Cargado"){	
 			Toast.fire({			
 			  icon: 'success',
-			  title: 'El docente se agregó de manera correcta.'
+			  title: 'El docente se recuperó de manera correcta.'
 			})
 		} else if(ToastR == "Eliminado"){	
 			Toast.fire({			

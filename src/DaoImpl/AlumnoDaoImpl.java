@@ -22,6 +22,8 @@ public class AlumnoDaoImpl implements AlumnoDao {
 	private static final String readall = "SELECT alumnos.Legajo, alumnos.Dni, alumnos.Nombre, alumnos.Apellido, alumnos.FechaNacimiento, alumnos.Email, alumnos.Telefono, alumnos.Estado, alumnos.Direccion, alumnos.Provincia as 'ProvinciaId', provincias.provincia as 'ProvinciaNombre', alumnos.Localidad as 'LocalidadId', localidades.localidad as 'LocalidadNombre' FROM tpint_grupo2_lab4.alumnos inner join tpint_grupo2_lab4.provincias on alumnos.Provincia = provincias.id inner join tpint_grupo2_lab4.localidades on alumnos.Localidad = localidades.id where Estado = 1;";
 	private static final String readAlumnosXCurso = "SELECT a.Legajo, a.Dni, a.Nombre, a.Apellido, a.Email FROM alumnos a inner join AlumnosPorCurso ac on a.legajo = ac.LegajoAlumnno where ac.idcurso = ? and ac.estado=1 ;";
 	private static final String readreporteestadoporcurso = "SELECT * FROM tpint_grupo2_lab4.cursos INNER JOIN tpint_grupo2_lab4.alumnosporcurso on alumnosporcurso.IdCurso = cursos.IdCurso where alumnosporcurso.IdCurso = cursos.IdCurso";
+	private static final String recover = "UPDATE Alumnos set Estado = 1 WHERE Legajo = ?;";
+	private static final String readrecover = "SELECT alumnos.Legajo, alumnos.Dni, alumnos.Nombre, alumnos.Apellido, alumnos.FechaNacimiento, alumnos.Email, alumnos.Telefono, alumnos.Estado, alumnos.Direccion, alumnos.Provincia as 'ProvinciaId', provincias.provincia as 'ProvinciaNombre', alumnos.Localidad as 'LocalidadId', localidades.localidad as 'LocalidadNombre' FROM tpint_grupo2_lab4.alumnos inner join tpint_grupo2_lab4.provincias on alumnos.Provincia = provincias.id inner join tpint_grupo2_lab4.localidades on alumnos.Localidad = localidades.id where Estado = 0;";
 
 
 	@Override
@@ -65,6 +67,23 @@ public class AlumnoDaoImpl implements AlumnoDao {
 		boolean isdeleteExitoso = false;
 		try {
 			statement = conexion.prepareStatement(delete);
+			statement.setInt(1, Legajo);
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				isdeleteExitoso = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return isdeleteExitoso;
+	}
+	@Override
+	public boolean recover(int Legajo) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isdeleteExitoso = false;
+		try {
+			statement = conexion.prepareStatement(recover);
 			statement.setInt(1, Legajo);
 			if (statement.executeUpdate() > 0) {
 				conexion.commit();
@@ -119,6 +138,29 @@ public class AlumnoDaoImpl implements AlumnoDao {
 		Conexion conexion = Conexion.getConexion();
 		try {
 			statement = conexion.getSQLConexion().prepareStatement(readall);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Alumnos.add(GetAlumno(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Alumnos;
+	}
+	@Override
+	public List<Alumno> readrecover() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		ArrayList<Alumno> Alumnos = new ArrayList<Alumno>();
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(readrecover);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Alumnos.add(GetAlumno(resultSet));

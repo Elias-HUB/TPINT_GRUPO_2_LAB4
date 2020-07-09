@@ -8,6 +8,11 @@
 <html>
 <head>
 <jsp:include page="HeadAdministrador.jsp"></jsp:include>
+
+<link rel="stylesheet" href="Css/MenuAdmin.css">
+<style type="text/css">
+
+</style>
 </head>
 <body>
 <%
@@ -15,8 +20,10 @@
 		if(session.getAttribute("Legajo") == null) {
 		request.getRequestDispatcher("Login.jsp").forward(request, response);}
 %>
+
+
 	<form method="post" action="ServeletCurso">
-		<div class="form-row">
+		<div class="form-row" style="justify-content: center; width: 98%;">
 			<!--FILTRO MATERIA -->
 			<div class="form-group col-md-2">
 				<div>
@@ -31,7 +38,7 @@
 					if (listaMaterias != null) {
 				%>
 				<select id="slMateria" name="slMateria" class="custom-select">
-				<option value="0" class="dropdown-item">-</option>
+				<option value="0" class="dropdown-item">Todas</option>
 					<%
 						for (Materia materia : listaMaterias) {
 					%>
@@ -55,7 +62,7 @@
 				</div>
 				<select id="slCuatrimestre" name="slCuatrimestre"
 					class="custom-select">
-					<option value="0" class="dropdown-item">-</option>
+					<option value="0" class="dropdown-item">Todos</option>
 					<option value="1" class="dropdown-item">1</option>
 					<option value="2" class="dropdown-item">2</option>
 				</select>
@@ -68,7 +75,7 @@
 					<label for="Año">Año</label>
 				</div>
 				<select id="slAnio" name="slAnio" class="custom-select">
-					<option value="0" class="dropdown-item">-</option>
+					<option value="0" class="dropdown-item">Todos</option>
 					<option value="2018" class="dropdown-item">2018</option>
 					<option value="2019" class="dropdown-item">2019</option>
 					<option value="2020" class="dropdown-item">2020</option>
@@ -81,7 +88,7 @@
 					<label for="Turno">Turno</label>
 				</div>
 				<select id="slTurno" name="slTurno" class="custom-select">
-					<option value="0" class="dropdown-item">-</option>
+					<option value="0" class="dropdown-item">Todos</option>
 					<option value="Mañana" class="dropdown-item">Mañana</option>
 					<option value="Tarde" class="dropdown-item">Tarde</option>
 					<option value="Noche" class="dropdown-item">Noche</option>
@@ -103,7 +110,7 @@
 					if (listaDocentes != null) {
 				%>
 				<select id="slDocente" name="slDocente" class="custom-select">
-					<option value="0" class="dropdown-item">-</option>
+					<option value="0" class="dropdown-item">Todos</option>
 					<%
 						for (Docente doc : listaDocentes) {
 					%>
@@ -119,15 +126,27 @@
 				</select>
 
 			</div>
-			<div class="form-group col-md-2" style="margin-top: 32px;">
+			<div class="form-group col-1" style="margin-top: 32px;">
 				<button type="submit" class="btn btn-info" id="btnBuscar"
 					name="btnBuscar">Buscar</button>
 			</div>
 		</div>
-
-
 	</form>
-	<div class="row" style="margin-left: 25px; margin-right: 25px;">
+	
+				<%
+				String Mensaje = null;
+				if (request.getAttribute("Mensaje") != null) {
+					Mensaje = request.getAttribute("Mensaje").toString();
+			%>
+			<div class="zoomInDown" style="text-align: center;">
+			<h2 ><%=Mensaje%></h2>
+			</div>
+			<%
+				}
+			%>
+	
+	
+	<div class="row fadeIn" style="margin-left: 25px; margin-right: 25px;">
 
 		<%
 			ArrayList<Curso> lista = null;
@@ -141,23 +160,23 @@
 		%>
 
 		<div class="col-sm-4" style="margin-top: 25px;">
-			<div class="card">
-				<div class="card text-center border-info">
-					<div class="card-header bg-white">
+			<div class="card colores">
+				<div class="card text-center border-dark">
+					<div class="card-header">
 						<h1><%=curso.Materia.getNombre()%></h1>
 					</div>
 					<div class="card-body ">
 						<h5 class="card-title">
 							<%=curso.getAño()%>
-							<%=curso.getCuatrimestre()%>C
+							<%=curso.getCuatrimestre()%>° Cuatrimestre
 						</h5>
-						<p class="card-text"><%=curso.getTurno()%></p>
+						<p class="card-text">Turno <%=curso.getTurno()%></p>
 						<p class="card-text"><%=curso.docente.getNombre()%>
 							<%=curso.docente.getApellido()%></p>
-						<a href="ServletAlumno?ParamAlumnoXCursoAdmin=<%=curso.getId()%>" class="btn btn-lg btn-info">Alumnos</a>
+						<a href="ServletAlumno?ParamAlumnoXCursoAdmin=<%=curso.getId()%>" class="btn btn-lg btn-dark">Alumnos</a>
 					</div>
 					<div class="card-footer bg-transparent"> 
-					<input id="txtID" name="txtID" value="<%=curso.getId()%>" style="visibility:hidden" ></div>
+					<input id="txtID" name="txtID" value="<%=curso.getId()%>" style="visibility:hidden"></div>
 				</div>
 			</div>
 		</div>

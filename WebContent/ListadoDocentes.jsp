@@ -120,6 +120,7 @@
 	if(request.getAttribute("SweetAlert")!=null)
 	{
 		String Resultado = request.getAttribute("SweetAlert").toString();
+		request.setAttribute("SweetAlert", null);
 		%>mostrarToast("<%=Resultado%>")<%
 	}
 	%>
@@ -195,10 +196,10 @@
 							if(LegajoDocente == "Exitoso"){
 								Toast.fire({			
 									  icon: 'success',
-									  title: 'El docente se está dando de baja...'
+									  title: 'El alumno se está dando de baja...'
 									}).then((result) => {
-										location.reload();
-								})
+										location.replace('ServletDocente?Param=2');
+									})
 							}else{
 								Toast.fire({			
 									  icon: 'error',

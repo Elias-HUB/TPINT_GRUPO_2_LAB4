@@ -63,8 +63,18 @@ public class ServletDocente extends HttpServlet {
 			int legajoRecupero = Integer.parseInt(StringlegajoRecupero);
 			DocenteDaoImpl rDao= new DocenteDaoImpl();
 			UsuarioImpl urDao = new UsuarioImpl();
-			rDao.recover(legajoRecupero);
-			urDao.recover(legajoRecupero);
+			boolean recover1 = rDao.recover(legajoRecupero);
+			boolean recover2= urDao.recover(legajoRecupero);
+			
+			if(recover1 == true && recover2 == true) {
+				request.setAttribute("SweetAlert", "Cargado");
+			}
+			else {
+				request.setAttribute("SweetAlert", "Error");
+			}
+			
+			List<Docente> listaDocenteRecup = (ArrayList<Docente>)rDao.readrecover();
+			request.setAttribute("listaDocenteRecup", listaDocenteRecup);
 			request.getRequestDispatcher("RecuperarDocentes.jsp").forward(request, response);
 		}
 	}
@@ -209,7 +219,7 @@ public class ServletDocente extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 
 			boolean Delete;
-			Delete = dDao.delete(Integer.parseInt(LegajoDocente));	
+			Delete = dDao.delete(Integer.parseInt(LegajoDocente));		
 			Gson gson = new Gson();
 			String json = gson.toJson("Exitoso");
 			PrintWriter out = response.getWriter();
