@@ -16,7 +16,7 @@ import Entidad.Docente;
 
 public class NotaDaoImpl implements NotaDao
 {
-	private static final String insert = "insert into Calificaciones  VALUES (?,?,?,?,?,?)";
+	private static final String insert = "insert into Calificaciones  VALUES (?,?,?,?,?,?,?,?)";
 	private static final String readNotasXCurso = "SELECT alumnos.legajo, alumnos.Nombre, alumnos.Apellido, alumnos.Dni, alumnos.email, calificaciones.Idcurso, parcialuno,parcialdos, recuperatoriouno, recuperatoriodos, alumnosporcurso.EstadoCurso, NotaFinal from calificaciones inner join alumnos on alumnos.legajo = calificaciones.legajo inner join alumnosporcurso on alumnosporcurso.idcurso = calificaciones.idcurso and alumnosporcurso.LegajoAlumnno = calificaciones.legajo where calificaciones.idcurso = ?;";
 	private static final String updateNotasXCurso = "update tpint_grupo2_lab4.calificaciones inner join alumnosporcurso on alumnosporcurso.idcurso = calificaciones.idcurso and alumnosporcurso.LegajoAlumnno = calificaciones.legajo set ParcialUno = ? , ParcialDos = ? , Recuperatoriouno = ? , Recuperatoriodos = ?, NotaFinal = ?, alumnosporcurso.EstadoCurso = ? where calificaciones.idcurso = ? and legajo = ?; ";
 	private static final String FuncionValidarNotas = "SELECT count(*) as total FROM Calificaciones cal where cal.legajo= ? and cal.idCurso= ? and estado = 1; "; 
@@ -34,6 +34,8 @@ public class NotaDaoImpl implements NotaDao
 				statement.setInt(4, 0);
 				statement.setInt(5, 0);
 				statement.setInt(6, 0);
+				statement.setInt(7, 0);
+				statement.setBoolean(8,true);
 				if (statement.executeUpdate() > 0) {
 					conexion.commit();
 					isInsertExitoso = true;
