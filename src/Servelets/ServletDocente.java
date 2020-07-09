@@ -107,7 +107,7 @@ public class ServletDocente extends HttpServlet {
 			docente.setTelefono(Long.parseLong(request.getParameter("TboxTelefonoM")));
 			docente.setDni(Integer.parseInt(request.getParameter("TboxDniM")));
 			docente.setEstado(true);
-
+			docente.setContraseña(request.getParameter("TboxContraseñaA"));
 			docente.domicilio = new Domicilio();
 			docente.domicilio.setDireccion(request.getParameter("TboxDirreccionM"));
 
@@ -124,17 +124,15 @@ public class ServletDocente extends HttpServlet {
 			usuario.setEmail(request.getParameter("TboxEmailM"));
 			usuario.setContraseña(request.getParameter("TboxContraseña"));
 
-			boolean Update;
-			Update =dDao.update(docente);
+			boolean Update =dDao.update(docente);
+			uDao.update(usuario);
 			if(Update == true) {
 				request.setAttribute("SweetAlert", "Modificado");
 			}
 			else {
 				request.setAttribute("SweetAlert", "Error");
-			}
+			}						
 			
-			
-			uDao.update(usuario);
 			List <Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
 			List<Provincia> listaProvincia = (ArrayList<Provincia>) pDao.readAll();
 			List<Localidad> listaLocalidad = (ArrayList<Localidad>) lDao.ListarLocalidades();			
@@ -159,6 +157,7 @@ public class ServletDocente extends HttpServlet {
 			docente.setDni(Integer.parseInt(request.getParameter("TboxDniA").toString()));
 			docente.setNombre(request.getParameter("TboxNombreA"));
 			docente.setApellido(request.getParameter("TboxApellidoA"));
+			docente.setContraseña(request.getParameter("TboxContraseñaA"));
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 			Date parsed = null;
 			try {
@@ -187,8 +186,13 @@ public class ServletDocente extends HttpServlet {
 
 			docente.setEstado(true);
 			
-			boolean Insert;
-			Insert = dDao.insert(docente);
+			boolean Insert= dDao.insert(docente);
+			usuario.setEmail(request.getParameter("TboxEmailA"));
+			usuario.setContraseña(request.getParameter("TboxContraseñaA"));
+			usuario.setTipo(2);
+			usuario.setEstado(true);
+			
+			uDao.insert(usuario);
 			
 			if(Insert == true) {
 				request.setAttribute("SweetAlert", "Cargado");
@@ -196,13 +200,7 @@ public class ServletDocente extends HttpServlet {
 			else {
 				request.setAttribute("SweetAlert", "Error");
 			}
-
-			usuario.setEmail(request.getParameter("TboxEmailA"));
-			usuario.setContraseña(request.getParameter("TboxContraseña"));
-			usuario.setTipo(2);
-			usuario.setEstado(true);
 			
-			uDao.insert(usuario);
 			List <Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
 			List<Provincia> listaProvincia = (ArrayList<Provincia>) pDao.readAll();
 			List<Localidad> listaLocalidad = (ArrayList<Localidad>) lDao.ListarLocalidades();			
@@ -219,7 +217,8 @@ public class ServletDocente extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 
 			boolean Delete;
-			Delete = dDao.delete(Integer.parseInt(LegajoDocente));		
+			Delete = dDao.delete(Integer.parseInt(LegajoDocente));	
+			uDao.delete(Integer.parseInt(LegajoDocente));	
 			Gson gson = new Gson();
 			String json = gson.toJson("Exitoso");
 			PrintWriter out = response.getWriter();

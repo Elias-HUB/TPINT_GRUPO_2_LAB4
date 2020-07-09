@@ -21,6 +21,7 @@
 				    <a class="aHead" href="ServletAlumno?Param=1">Alumnos</a> - 
             <a class="aHead" href="ServletDocente?Param=2">Profesores</a> - 
             <a class="aHead" href="ServeletCurso?Param=1">Cursos</a> - 
+            <a class="aHead" href="ServletTutoria?Param=1">Tutorias</a> - 
             <a class="aHead" href="ServeletReporte?Param=1">Reportes</a> -
             <a class="aHead" id="snap-pm-logout" href="Login.jsp">Salir</a>
 			 </div>
