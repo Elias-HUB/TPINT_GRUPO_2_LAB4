@@ -1,6 +1,7 @@
 package Servelets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 import DaoImpl.AlumnoDaoImpl;
 import DaoImpl.CursoDaoImpl;
@@ -117,7 +120,7 @@ public class ServeletCurso extends HttpServlet {
 			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
 			curso.setTurno((request.getParameter("slTurno").toString()));
 			curso.setEstado("1");
-			cursoImpl.insert(curso);
+			boolean insert= cursoImpl.insert(curso);
 			AlumnosXCurso = request.getParameterValues("cboxAlumno");
 			int ultimoCurso = cursoImpl.DevuelveUltimoCurso();
 			for (int x=0; x<AlumnosXCurso.length;x++)
@@ -128,6 +131,13 @@ public class ServeletCurso extends HttpServlet {
 
 			List<Curso> listaCursos = (ArrayList<Curso>) cursoImpl.readAll();
 			request.setAttribute("ListaCursosAdmin", listaCursos);
+			if(insert==true)
+			{
+				request.setAttribute("SweetAlert", "Cargado" );
+			}
+			else {
+				request.setAttribute("SweetAlert", "Error" );
+			}
 			request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
 		}    
 		//BOTON PARA FILTRO DEL MENU PRINCIPAL
@@ -185,6 +195,54 @@ public class ServeletCurso extends HttpServlet {
 			request.setAttribute("ListaDocentes", listaDocentes);
 			request.getRequestDispatcher("MenuPrincipalAdmin.jsp").forward(request, response);
 		}
+		
+		//BOTON PARA FILTRO DEL MENU PRINCIPAL DOCENTE
+		if(request.getParameter("btnBuscarDOCENTE")!=null)
+		{
+			CursoDaoImpl cDao = new CursoDaoImpl();
+			MateriaDaoImpl mDao = new MateriaDaoImpl();
+			List<Materia> listaMaterias = (ArrayList<Materia>) mDao.readAll();			
+
+			String Materia = request.getParameter("slMateria").toString();
+			String Cuatrimestre = request.getParameter("slCuatrimestre").toString();
+			String Anio = request.getParameter("slAnio").toString();
+			String Turno = request.getParameter("slTurno").toString();
+			String Docente = session.getAttribute("Legajo").toString();
+			
+			String Mensaje = "";
+			List<Curso> listaCursos = (ArrayList<Curso>) cDao.readMenuAdmin(Docente, Materia, Cuatrimestre, Anio,
+					Turno);
+
+			if (Materia.equals("0")) {
+				Mensaje += "Materia: Todas - ";
+			} else {
+				Materia materia = new Materia();
+				materia = mDao.ReadMateria(Integer.parseInt(Materia));
+				Mensaje += "Materia: " + materia.getNombre() + " - ";
+			}
+			if (Cuatrimestre.equals("0")) {
+				Mensaje += "Cuatrimestre: Todos - ";
+			} else {
+				Mensaje += (Cuatrimestre + "Año Cuatrimestre - ");
+			}
+			if (Anio.equals("0")) {
+				Mensaje += "Año: Todos - ";
+			} else {
+				Mensaje += ("Año: " + Anio + " - ");
+			}
+			if (Turno.equals("0")) {
+				Mensaje += "Turno: Todos";
+			} else {
+				Mensaje += ("Turno: " + Turno);
+			}
+
+			request.setAttribute("Mensaje", Mensaje);
+			request.setAttribute("ListaCursos", listaCursos);
+			request.setAttribute("ListaMaterias", listaMaterias);
+			request.getRequestDispatcher("MenuPrincipalDocente.jsp").forward(request, response);
+		}
+		
+		
 		// BOTON PARA GUARDAR LA MODIFICACION DE UN CURSO 
 		if(request.getParameter("btnModificarCurso") != null)
 		{
@@ -198,7 +256,7 @@ public class ServeletCurso extends HttpServlet {
 			curso.Materia.setIdMateria(Integer.parseInt(request.getParameter("slMateria").toString()));
 			curso.setAño(Integer.parseInt(request.getParameter("slAnio").toString()));
 			curso.setTurno((request.getParameter("slTurno").toString()));
-			cursoImpl.update(curso,IDcursoMod);
+			boolean update = cursoImpl.update(curso,IDcursoMod);
 			AlumnosXCurso = request.getParameterValues("cboxAlumno");
 			int INTcursomod = Integer.parseInt(IDcursoMod);
 			List <Alumno> InscriptosIncialmente = aDao.readAlumnosXCurso(INTcursomod);
@@ -227,9 +285,38 @@ public class ServeletCurso extends HttpServlet {
 				}
 				
 			}
+			if(update==true)
+			{
+				request.setAttribute("SweetAlert", "Modificado" );
+			}
+			else {
+				request.setAttribute("SweetAlert", "Error" );
+			}
 			List<Curso> listaCursos = (ArrayList<Curso>) cursoImpl.readAll();
 			request.setAttribute("ListaCursosAdmin", listaCursos);
 			request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
+		}
+		
+		
+		String Legajocurso = request.getParameter("Legajocurso");
+		if (Legajocurso != null) {
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+
+			boolean Delete;
+			Delete = cursoImpl.delete(Integer.parseInt(Legajocurso));		
+			
+//			if(Delete == true) {
+//				request.setAttribute("SweetAlert", "Eliminado");
+//			}
+//			else {
+//				request.setAttribute("SweetAlert", "Error");
+//			}			
+			Gson gson = new Gson();
+			String json = gson.toJson("Exitoso");
+			PrintWriter out = response.getWriter();
+			out.print(json);
+			out.flush();
 		}
 
 	}

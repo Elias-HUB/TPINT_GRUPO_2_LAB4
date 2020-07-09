@@ -3,13 +3,13 @@
 <%@ page import="Entidad.Localidad"%>
 
 <!-- Modal -->
-<div class="modal fade bd-example-modal-xl" id="ModalDocenteAgregar"
+<div class="modal fade bd-example-modal-xl zoomIn" id="ModalDocenteAgregar"
 	tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog  modal-xl" role="document">
 		<form action="ServletDocente" method="post">
 			<div class="modal-content">
-				<div class="modal-header bg-secondary text-white">
+				<div class="modal-header Cabecera text-white">
 					<h5 class="modal-title" id="exampleModalLabel">Agregar Nuevo
 						Docente</h5>
 					<button type="button" class="close" data-dismiss="modal"

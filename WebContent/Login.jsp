@@ -71,12 +71,10 @@ body{
 		<button type="submit" class="btn btn-info fadeIn third pass" id="btnIngresar" name="btnIngresar" style="margin-bottom: 10px;">Ingreso</button>
 
 
-				<% 	  /* <!-- Ayuda -->
+	
 					<div id="formFooter">
-						<a class="fadeIn five underlineHover" href="...">Ayuda</a>
+<!-- 						<a class="fadeIn five underlineHover" href="...">Ayuda</a> -->
 					</div>
-					*/
-			%>
 				</div>
 			</div>
 		</div>

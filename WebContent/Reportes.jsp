@@ -13,6 +13,11 @@
 <link rel="stylesheet" href="Css/ReporteCss.css">
 </head>
 <body>
+<%
+		session = request.getSession();
+		if(session.getAttribute("Legajo") == null) {
+		request.getRequestDispatcher("Login.jsp").forward(request, response);}
+%>
 
 	<form action="ServeletReporte" method="post">
 		<div class="row Centrado"
@@ -85,7 +90,7 @@
 
 			<div class="form-group col-md-2" style="margin-top: 32px;">
 				<button type="submit" id="BtnReporte" name="BtnReporte"
-					class="btn btn-outline-dark Sombra">Generar Reporte</button>
+					class="btn btn-light Sombra">Generar Reporte</button>
 			</div>
 		</div>
 	</form>
@@ -107,7 +112,7 @@
 			<table id="example"
 				class="table table-striped table-bordered fadeIn third"
 				style="width: 100%">
-				<thead class="thead-dark fadeIn third">
+				<thead class="fadeIn third">
 					<tr>
 
 						<!--TablaReporteAlumnosPorMateria -->

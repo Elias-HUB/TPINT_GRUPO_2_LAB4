@@ -24,6 +24,7 @@
 <%
  session = request.getSession();
 if(session.getAttribute("Legajo") == null) {
+	session.setAttribute("Legajo",null);
 	request.getRequestDispatcher("Login.jsp").forward(request, response);
 }
 %>
@@ -47,7 +48,7 @@ if(session.getAttribute("Legajo") == null) {
 				
 			<table id="example" class="table table-striped table-bordered"
 				style="width: 100%">
-				<thead>
+				<thead class="">
 					<tr>
 						<th style="text-align: center">Legajo</th>
 						<th style="text-align: center">Apellido</th>
@@ -205,6 +206,7 @@ if(session.getAttribute("Legajo") == null) {
 							if(LegajoAlumno == "Exitoso"){
 								Toast.fire({			
 									  icon: 'success',
+
 									  title: 'El alumno se esta dando de baja...'
 									}).then((result) => {
 										location.replace('ServletAlumno?Param=1');
@@ -213,6 +215,7 @@ if(session.getAttribute("Legajo") == null) {
 								Toast.fire({			
 									  icon: 'error',
 									  title: 'Hubo un problema. Comunicarse con el Area tecnica.'
+
 									})
 							}
 						}

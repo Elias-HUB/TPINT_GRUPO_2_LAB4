@@ -6,11 +6,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+<!-- Toast -->
+<link rel="stylesheet" href="@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
+<script src="sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <jsp:include page="HeadDocente.jsp"></jsp:include>
 <jsp:include page="LibreriasJtable.jsp"></jsp:include>
 
 <link rel="stylesheet" href="Css/JTable.css">
+<style>
+.btn-outline-info {
+	border-color: -webkit-linear-gradient(to bottom, #86fde8, #acb6e5);
+	background: #ffffff;
+	color: -webkit-linear-gradient(to bottom, #86fde8, #acb6e5);
+}
+
+.btn-outline-info:hover, .btn-outline-info:active, .btn-outline-info:visited,
+	.btn-outline-info:focus {
+	border-color: #acb6e5;
+	background: #acb6e5;
+	background: -webkit-linear-gradient(to bottom, #86fde8, #acb6e5);
+	background: linear-gradient(to bottom, #86fde8, #acb6e5);
+	color: white;
+}
+</style>
 </head>
 <body>
 	<form action="ServletNota" method="post">
@@ -136,5 +155,42 @@
 	}
 	</script>
 	<script src="JS/DataTableListAlumnosDocenteCONFIG.js"></script>
+	
+	<script type="text/javascript">
+	<%
+	if(request.getAttribute("SweetAlert")!=null)
+	{
+		String Resultado = request.getAttribute("SweetAlert").toString();
+		request.setAttribute("SweetAlert", null);
+		%>mostrarToast("<%=Resultado%>")<%
+		
+	}
+	%>
+
+		function mostrarToast(ToastR){
+		const Toast = Swal.mixin({
+			  toast: true,
+			  position: 'top',
+			  showConfirmButton: false,
+			  timer: 3000,
+			  timerProgressBar: true,
+			  onOpen: (toast) => {
+				    toast.addEventListener('mouseenter', Swal.stopTimer)
+				    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  }
+			});
+		if(ToastR == "Cargado"){	
+			Toast.fire({			
+			  icon: 'success',
+			  title: 'Las notas se cargaron de manera correcta.'
+			})
+		}  else{	
+				Toast.fire({			
+					  icon: 'error',
+					  title: 'Hubo un problema. Comunicarse con el área técnica.'
+					})
+				}
+	}
+		</script>
 </body>
 </html>
