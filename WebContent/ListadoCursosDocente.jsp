@@ -6,39 +6,10 @@
 
 <html>
 <head>
-
-</head>
 <jsp:include page="HeadDocente.jsp"></jsp:include>
 <jsp:include page="LibreriasJtable.jsp"></jsp:include>
 
 <link rel="stylesheet" href="Css/JTable.css">
-<script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$('#example')
-								.DataTable(
-										{
-											//Para cambiar el lenguaje a español
-											"language" : {
-												"lengthMenu" : "Mostrar _MENU_ registros",
-												"zeroRecords" : "No se encontraron resultados",
-												"info" : "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-												"infoEmpty" : "Mostrando registros del 0 al 0 de un total de 0 registros",
-												"infoFilteres" : "(filtrado de un total de _MAX_ registros)",
-												"sSearch" : "Buscar:",
-												"oPaginate" : {
-													"sFirst" : "Primero",
-													"sLast" : "Ultimo",
-													"sNext" : "Siguiente",
-													"sPrevious" : "Anterior"
-												},
-												"sProcessing" : "Procesando...",
-											}
-
-										});
-					});
-</script>
 </head>
 <body>
 
@@ -50,14 +21,11 @@
 				style="width: 100%">
 				<thead>
 					<tr>
-						<th style="text-align: center">Curso</th>
 						<th style="text-align: center">Materia</th>
-						<th style="text-align: center">Cuatrimestre</th>
+						<th style="text-align: center; width: 60px;">Cuatrimestre</th>
 						<th style="text-align: center">Año</th>
 						<th style="text-align: center">Turno</th>
-						<th style="text-align: center">Docente</th>
-						<th style="text-align: center">Estado</th>
-						<th style="text-align: center">Acciones</th>
+						<th style="text-align: center">Inscriptos</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -76,14 +44,22 @@
 					%>
 					<tr>
 
-						<th><%=curso.getId()%></th>
 						<th><%=curso.Materia.getNombre()%></th>
 						<th><%=curso.getCuatrimestre()%></th>
 						<th><%=curso.getAño()%></th>
 						<th><%=curso.getTurno()%></th>
-						<th><%=curso.docente.getNombre()%> <%=curso.docente.getApellido()%></th>
-						<th><%=curso.getEstado()%></th>
-						<th style="width: 250px;">
+						<th style="text-align: center">
+						<a	href="ServletAlumno?ParamAlumnoXCursoDocente=<%=curso.getId()%>"
+								class="btn btn-outline-primary"> <img src="Imagenes/Ver.png"
+									Width="22px" data-toggle="tooltip" data-placement="bottom"
+									title="Ver alumnos" alt="x"/> </a>
+						<a style="width: 60px; heigth: 50px" href="ServletNota?ParamAlumnoXCursoDocente=<%=curso.getId()%>" 
+						class="btn btn-outline-primary">
+						<img src="Imagenes/prueba.png" Width="22px" data-toggle="tooltip"
+							data-placement="bottom" title="Calificar" alt="x" />
+						</a>	
+						
+						</th>
 					</tr>
 						<%
 							}
@@ -94,5 +70,6 @@
 			</table>
 		</div>
 	</div>
+<script src="JS/DataTableListCursosDocenteCONFIG.js"></script>
 </body>
 </html>
