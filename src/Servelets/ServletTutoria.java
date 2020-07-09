@@ -90,7 +90,7 @@ public class ServletTutoria extends HttpServlet {
 			}
 			List <Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
 			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao.readTutoria();
-			List<Alumno> listaAlumnosTodos = (ArrayList<Alumno>) aDao.readAll();
+			List<Alumno> listaAlumnosTodos = (ArrayList<Alumno>) aDao.readAllTutoria();
 			List<Tutoria> listaTutoria = (ArrayList<Tutoria>) tDao.readAll();
 			request.setAttribute("ListaDocentes",listaDocentes );
 			request.setAttribute("ListaAlumnos", listaAlumnos);

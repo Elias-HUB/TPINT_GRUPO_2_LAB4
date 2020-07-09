@@ -43,8 +43,8 @@
 							<th style="text-align: center">Nombre</th>
 							<th style="text-align: center">Apellido</th>
 							<th style="text-align: center">Email</th>
-							<th style="text-align: center">Observaciones</th>
-							<th style="text-align: center">Acciones</th>
+							<th style="text-align: center">Telefono</th>
+
 						</tr>
 					</thead>
 					<tbody>
@@ -72,17 +72,10 @@
 										<th><%=alu.getNombre()%></th>
 										<th><%=alu.getApellido()%></th>
 										<th><%=alu.getEmail()%></th>
+										<th><%=alu.getTelefono()%></th>
 									<%}
 								} %>
-								<th><%=tut.getObservaciones()%></th>
-								
-								<th style="width: 250px;">
-									<!-- Button trigger modal --> 
-									<a href="ServletTutoria?ParamLegajoDocente=<%=tut.getLegajoDocente()%>&ParamLegajoAlumno=<%=tut.getLegajoAlumno()%>"
-								    class="btn btn-outline-primary"><img src="Imagenes/Eliminar.png" Width="22px" data-toggle="tooltip"
-									data-placement="bottom" title="Eliminar" alt="x" /></a>
-
-								</th>
+																
 							</form>
 						</tr>
 						<%
@@ -94,7 +87,7 @@
 			</div>
 		</div>
 		
-		<script src="JS/DataTableTutoriaAdminCONFIG.js"></script>		
+		<script src="JS/DataTableTutoriaDocCONFIG.js"></script>		
 
 <script type="text/javascript">
 	<%
