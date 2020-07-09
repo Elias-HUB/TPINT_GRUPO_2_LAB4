@@ -127,7 +127,7 @@ public class ServletTutoria extends HttpServlet {
 					request.setAttribute("SweetAlert", "Error");
 				}
 			}
-			if (tDao.ExisteBaja( LegajoDoc, LegajoAlumno)>0) 
+			else if (tDao.ExisteBaja( LegajoDoc, LegajoAlumno)>0 && tDao.ExisteAlta(LegajoDoc, LegajoAlumno) == 0) 
 			{
 				boolean Update = tDao.update(LegajoDoc, LegajoAlumno);
 				if(Update == true) {
@@ -137,7 +137,7 @@ public class ServletTutoria extends HttpServlet {
 					request.setAttribute("SweetAlert", "Error");
 				}
 			}
-			if (tDao.ExisteAlta(LegajoDoc, LegajoAlumno)>0) 
+			else if (tDao.ExisteAlta(LegajoDoc, LegajoAlumno)>0 && tDao.ExisteBaja( LegajoDoc, LegajoAlumno)==0) 
 			{
 				request.setAttribute("SweetAlert", "Existe");
 			}
