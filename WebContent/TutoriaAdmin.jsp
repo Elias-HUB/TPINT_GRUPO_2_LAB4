@@ -208,10 +208,10 @@
 			  icon: 'success',
 			  title: 'La asignación de tutor eliminó de manera correcta.'
 			})
-		} else if(ToastR == "Modificado"){	
+		} else if(ToastR == "Existe"){	
 			Toast.fire({			
 				  icon: 'success',
-				  title: 'El docente se modificó de manera correcta.'
+				  title: 'La asignacion ya existe.'
 				})
 			} else{	
 				Toast.fire({			
