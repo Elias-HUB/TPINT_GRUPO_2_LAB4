@@ -26,7 +26,7 @@
 	<br>
 	<div>
 	<form action="ServletTutoria" method="post">
-		<div class="form-row" style="justify-content: center;">
+		<div class="form-row" style="justify-content: center; width: 100%;">
 
 			<!--DOCENTE -->
 			<div class="form-group col-md-2">
@@ -45,9 +45,7 @@
 					<%
 						for (Docente doc : listaDocentes) {
 					%>
-					<option value=<%=doc.getLegajo()%> class="dropdown-item"><%=doc.getLegajo()%>
-						<%=doc.getNombre()%>
-						<%=doc.getApellido()%></option>
+					<option value=<%=doc.getLegajo()%> class="dropdown-item"><%=doc.getNombre()%>						<%=doc.getApellido()%></option>
 
 					<%
 						}
@@ -76,8 +74,7 @@
 					<%
 						for (Alumno alu : listaAlumnos) {
 					%>
-					<option value=<%=alu.getLegajo()%> class="dropdown-item"><%=alu.getLegajo()%>
-						<%=alu.getNombre()%><%=alu.getApellido()%>
+					<option value=<%=alu.getLegajo()%> class="dropdown-item"><%=alu.getNombre()%> <%=alu.getApellido()%>
 					</option>
 
 					<%
@@ -211,7 +208,7 @@
 		} else if(ToastR == "Existe"){	
 			Toast.fire({			
 				  icon: 'success',
-				  title: 'La asignacion ya existe.'
+				  title: 'La asignación de tutor se creó manera correcta.'
 				})
 			} else{	
 				Toast.fire({			

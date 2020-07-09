@@ -123,7 +123,7 @@
 						%>
 
 						<th style="text-align: center">Materia</th>
-						<th style="text-align: center">Porcentaje</th>
+						<th style="text-align: center">Cantidad de Alumnos</th>
 					</tr>
 				</thead>
 				<tbody class="fadeIn fourth">

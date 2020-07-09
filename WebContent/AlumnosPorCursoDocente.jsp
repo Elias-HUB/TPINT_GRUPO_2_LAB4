@@ -82,8 +82,8 @@
 
 							<%if (calificacion.getParcial2() == 0) {%>
 							<th><input class="form-control" type="number" value=""
-								placeholder="-" style="width: 60px; heigth: 50px" min="1"
-								max="10" name="parcial2"  id="parcial2"/></th>
+								placeholder="-" style="width: 60px; heigth: 50px" min="1" 
+								max="10" name="CalificacionAlumno"   id="CalificacionAlumno"/></th>
 							<%} else {%>
 							<th><input class="form-control" type="number"
 								value="<%=calificacion.getParcial2()%>" placeholder="-"

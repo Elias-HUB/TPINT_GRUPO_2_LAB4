@@ -196,7 +196,7 @@
 							if(LegajoDocente == "Exitoso"){
 								Toast.fire({			
 									  icon: 'success',
-									  title: 'El alumno se está dando de baja...'
+									  title: 'El docente se está dando de baja...'
 									}).then((result) => {
 										location.replace('ServletDocente?Param=2');
 									})

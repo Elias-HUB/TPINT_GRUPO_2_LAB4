@@ -176,6 +176,6 @@
 		</div>
 	</form>
 
-<!-- 	<script src="JS/DataTableListAltaCursoCONFIG.js"></script> -->
+	<script src="JS/DataTableListAltaCursoCONFIG.js"></script>
 </body>
 </html>
