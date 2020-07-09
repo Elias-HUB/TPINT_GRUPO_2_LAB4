@@ -13,14 +13,17 @@ import Entidad.Docente;
 import Entidad.Localidad;
 import Entidad.Tutoria;
 import Entidad.Alumno;
+import Entidad.Curso;
 
 public class TutoriaDaoImpl implements TutoriaDao {
 
 	private static final String insert = "insert into Tutorias(LegajoDocente, LegajoAlumno, Observaciones, Estado) VALUES(?, ?, ?, ?)";
-	private static final String update = "UPDATE Tutorias set Observaciones=? where LegajoDocente =? and LegajoAlumno= ?";
+	private static final String update = "UPDATE Tutorias set Estado=1 where LegajoDocente =? and LegajoAlumno= ?";
 	private static final String delete = "UPDATE Tutorias set Estado = 0 WHERE LegajoDocente = ? and LegajoAlumno= ?";	
 	private static final String readall = "SELECT tutorias.LegajoDocente, tutorias.LegajoAlumno, tutorias.Observaciones FROM tpint_grupo2_lab4.tutorias where Estado = 1;";
 	private static final String readAllDoc = "SELECT tutorias.LegajoDocente, tutorias.LegajoAlumno, tutorias.Observaciones FROM tpint_grupo2_lab4.tutorias where Estado = 1 and tutorias.LegajoDocente = ? order by tutorias.LegajoAlumno asc;"; 
+	private static final String ExisteAlta = "SELECT count(*) as total FROM tutorias where LegajoDocente= ? and LegajoAlumno= ? and estado= 1" ;
+	private static final String ExisteBaja= "SELECT count(*) as total FROM tutorias where LegajoDocente= ? and LegajoAlumno= ? and estado= 0" ;
 
 	@Override
 	public boolean insert(Tutoria tutoria) {
@@ -69,15 +72,14 @@ public class TutoriaDaoImpl implements TutoriaDao {
 		return isdeleteExitoso;
 	}
 	@Override
-	public boolean update(String observaciones, int legajodocente, int legajoalumno) {
+	public boolean update(int legajodocente, int legajoalumno) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isupdateExitoso = false;
 		try {
-			statement = conexion.prepareStatement(update);
-			statement.setString(1, observaciones);
-			statement.setInt(2, legajodocente);
-			statement.setInt(3, legajoalumno);
+			statement = conexion.prepareStatement(update);			
+			statement.setInt(1, legajodocente);
+			statement.setInt(2, legajoalumno);
 
 			if (statement.executeUpdate() > 0) {
 				conexion.commit();
@@ -156,5 +158,40 @@ public class TutoriaDaoImpl implements TutoriaDao {
 		}
 		return tutoria;
 	}
-
+	public int ExisteAlta(int LegajoDoc, int LegajoAlumno)
+	{
+  		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		int cant = 0;
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(ExisteAlta);
+			statement.setInt(1,LegajoDoc);
+			statement.setInt(2,LegajoAlumno);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				cant=resultSet.getInt("total");		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+		return cant; 
+	}
+	public int ExisteBaja(int LegajoDoc, int LegajoAlumno)
+	{
+  		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		int cant = 0;
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(ExisteBaja);
+			statement.setInt(1,LegajoDoc);
+			statement.setInt(2,LegajoAlumno);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				cant=resultSet.getInt("total");		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+		return cant; 
+	}
 }

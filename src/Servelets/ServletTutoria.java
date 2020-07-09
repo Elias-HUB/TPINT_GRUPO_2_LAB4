@@ -109,20 +109,38 @@ public class ServletTutoria extends HttpServlet {
 
 		if (request.getParameter("BtnAsignarTutor") != null) {
 			
-			tutoria.setLegajoDocente(Integer.parseInt(request.getParameter("slDocente").toString()));
-			tutoria.setLegajoAlumno(Integer.parseInt(request.getParameter("slAlumno").toString()));
+			int LegajoDoc=Integer.parseInt(request.getParameter("slDocente").toString());
+			int LegajoAlumno=Integer.parseInt(request.getParameter("slAlumno").toString());
+			tutoria.setLegajoDocente(LegajoDoc);
+			tutoria.setLegajoAlumno(LegajoAlumno);
 			tutoria.setObservaciones("");
 			tutoria.setEstado(true);
 			
-			boolean Insert = tDao.insert(tutoria);
-			
-			if(Insert == true) {
-				request.setAttribute("SweetAlert", "Cargado");
+			if (tDao.ExisteAlta(LegajoDoc, LegajoAlumno) == 0 && tDao.ExisteBaja( LegajoDoc, LegajoAlumno)==0) 
+			{
+				boolean Insert = tDao.insert(tutoria);
+				
+				if(Insert == true) {
+					request.setAttribute("SweetAlert", "Cargado");
+				}
+				else {
+					request.setAttribute("SweetAlert", "Error");
+				}
 			}
-			else {
-				request.setAttribute("SweetAlert", "Error");
+			if (tDao.ExisteBaja( LegajoDoc, LegajoAlumno)>0) 
+			{
+				boolean Update = tDao.update(LegajoDoc, LegajoAlumno);
+				if(Update == true) {
+					request.setAttribute("SweetAlert", "Cargado");
+				}
+				else {
+					request.setAttribute("SweetAlert", "Error");
+				}
 			}
-			
+			if (tDao.ExisteAlta(LegajoDoc, LegajoAlumno)>0) 
+			{
+				request.setAttribute("SweetAlert", "Existe");
+			}
 			List <Docente> listaDocentes = (ArrayList<Docente>)dDao.readAll();
 			List<Alumno> listaAlumnos = (ArrayList<Alumno>) aDao.readTutoria();
 			List<Alumno> listaAlumnosTodos = (ArrayList<Alumno>) aDao.readAllTutoria();
