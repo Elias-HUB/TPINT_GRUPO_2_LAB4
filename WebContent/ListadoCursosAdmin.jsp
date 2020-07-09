@@ -16,7 +16,11 @@
 <link rel="stylesheet" href="Css/JTable.css">
 </head>
 <body>
-
+<%
+		session = request.getSession();
+		if(session.getAttribute("Legajo") == null) {
+		request.getRequestDispatcher("Login.jsp").forward(request, response);}
+%>
 	<div class="wrapper">
 		<div id="formContent" class="table-responsive">
 			<form method="post" action="ServeletCurso">
@@ -99,6 +103,7 @@
 	{
 		String Resultado = request.getAttribute("SweetAlert").toString();
 		%>mostrarToast("<%=Resultado%>")<%
+		request.setAttribute("SweetAlert",null);
 	}
 	%>
 	function mostrarToast(ToastR){
