@@ -106,6 +106,7 @@ public class ServletNota extends HttpServlet {
 			
 			List<Calificacion> ListaCalificaciones = (ArrayList<Calificacion>) nDao.readNotasXAlumno(Integer.parseInt(session.getAttribute("CursoNotas").toString()));			
 			request.setAttribute("ListaCalificaciones", ListaCalificaciones);
+			request.setAttribute("SweetAlert","Cargado");
 			request.getRequestDispatcher("AlumnosPorCursoDocente.jsp").forward(request, response);
 		}
 

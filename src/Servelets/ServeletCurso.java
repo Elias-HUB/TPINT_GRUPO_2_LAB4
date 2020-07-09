@@ -1,6 +1,7 @@
 package Servelets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 import DaoImpl.AlumnoDaoImpl;
 import DaoImpl.CursoDaoImpl;
@@ -292,6 +295,28 @@ public class ServeletCurso extends HttpServlet {
 			List<Curso> listaCursos = (ArrayList<Curso>) cursoImpl.readAll();
 			request.setAttribute("ListaCursosAdmin", listaCursos);
 			request.getRequestDispatcher("ListadoCursosAdmin.jsp").forward(request, response);
+		}
+		
+		
+		String Legajocurso = request.getParameter("Legajocurso");
+		if (Legajocurso != null) {
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+
+			boolean Delete;
+			Delete = cursoImpl.delete(Integer.parseInt(Legajocurso));		
+			
+//			if(Delete == true) {
+//				request.setAttribute("SweetAlert", "Eliminado");
+//			}
+//			else {
+//				request.setAttribute("SweetAlert", "Error");
+//			}			
+			Gson gson = new Gson();
+			String json = gson.toJson("Exitoso");
+			PrintWriter out = response.getWriter();
+			out.print(json);
+			out.flush();
 		}
 
 	}
