@@ -5,7 +5,10 @@
 <head>
 
 <jsp:include page="Librerias.jsp"></jsp:include>
-
+<!-- Toast -->
+<link rel="stylesheet" href="@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
+<script src="sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <link rel="stylesheet" href="Css/LoginCss.css">
 <link rel="stylesheet" href="JS/Funciones.js">
 <link rel="stylesheet" href="Css/Head.css">
@@ -69,17 +72,95 @@ body{
 					id="TxtContrasenia">
 				<div>
 		<button type="submit" class="btn btn-info fadeIn third pass" id="btnIngresar" name="btnIngresar" style="margin-bottom: 10px;">Ingreso</button>
-
-
-	
 					<div id="formFooter">
-<!-- 						<a class="fadeIn five underlineHover" href="...">Ayuda</a> -->
 					</div>
+
 				</div>
 			</div>
 		</div>
 	</form>
 	
 <script src="JS/Funciones.js"></script>	
+
+	<script type="text/javascript">
+	<%
+	if(request.getAttribute("LoginInvalido")!=null)
+	{
+		String Resultado = request.getAttribute("LoginInvalido").toString();
+		request.setAttribute("LoginInvalido", null);
+		%>mostrarToast("<%=Resultado%>")<%
+		
+	}
+	%>
+
+		function mostrarToast(ToastR){
+		const Toast = Swal.mixin({
+			  toast: true,
+			  position: 'bottom',
+			  showConfirmButton: false,
+			  timer: 3000,
+			  timerProgressBar: true,
+			  onOpen: (toast) => {
+				    toast.addEventListener('mouseenter', Swal.stopTimer)
+				    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  }
+			});
+		if(ToastR == "LoginInvalido"){	
+			Toast.fire({			
+			  icon: 'error',
+			  title: 'Usuario/Contraseña incorrectos.'
+			})
+		}
+	}
+		function modalEliminar(btn){
+			const Toast = Swal.mixin({
+				  toast: true,
+				  position: 'top',
+				  showConfirmButton: false,
+				  timer: 3000,
+				  timerProgressBar: true,
+				  onOpen: (toast) => {
+					    toast.addEventListener('mouseenter', Swal.stopTimer)
+					    toast.addEventListener('mouseleave', Swal.resumeTimer)
+				  }
+				});
+			var LegajoCurso = btn.id;
+			Swal.fire({
+				icon: 'warning',
+				title:"¿Desea dar de baja este alumno?",			
+				showCancelButton: true,
+				confirmButtonColor: "#c82333",
+			  cancelButtonText: "Cancelar",
+			  confirmButtonText: "Dar de baja",
+			  reverseButtons: true
+			}).then((result) => {
+				if(result.value){
+					   $.ajax({
+							url: 'ServeletCurso',
+							type: 'POST',
+							dataType : "json",
+							data : {
+								LegajoCurso: LegajoCurso
+							},						
+							success: function(LegajoCurso){
+								if(LegajoCurso == "Exitoso"){
+									Toast.fire({			
+										  icon: 'success',
+										  title: 'El alumno se está dando de baja...'
+										}).then((result) => {
+											location.replace('ServletAlumno?Param=1');
+									})
+								}else{
+									Toast.fire({			
+										  icon: 'error',
+										  title: 'Hubo un problema. Comunicarse con el área técnica.'
+										})
+								}
+							}
+						});
+					}
+				})
+		}
+		</script>
 </body>
 </html>
