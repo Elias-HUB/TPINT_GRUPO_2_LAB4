@@ -79,7 +79,7 @@ body{
 			</div>
 		</div>
 	</form>
-	
+
 <script src="JS/Funciones.js"></script>	
 
 	<script type="text/javascript">
