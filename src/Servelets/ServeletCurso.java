@@ -40,11 +40,10 @@ public class ServeletCurso extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String ParamListar = request.getParameter("Param");
-
+		CursoDaoImpl cDao = new CursoDaoImpl();
 		// LISTAR TODOS LOS CURSOS PARA EL ADMIN
 		if (request.getParameter("Param") != null) {
 			if (ParamListar.equals("1")) {
-				CursoDaoImpl cDao = new CursoDaoImpl();
 				List<Curso> listaCursos = (ArrayList<Curso>) cDao.readAll();
 				request.setAttribute("ListaCursosAdmin", listaCursos);				
 
@@ -53,8 +52,6 @@ public class ServeletCurso extends HttpServlet {
 
 			// LISTAR LOS CURSOS PARA UN DOCENTE LOGUEADO
 			else if (ParamListar.equals("2")) {
-				CursoDaoImpl cDao = new CursoDaoImpl();
-
 				int legajo = Integer.parseInt(session.getAttribute("Legajo").toString());
 				List<Curso> listaCursos = (ArrayList<Curso>) cDao.readCursosXDocente(legajo);
 				request.setAttribute("ListaCursosDocente", listaCursos);
@@ -84,7 +81,19 @@ public class ServeletCurso extends HttpServlet {
 			request.setAttribute("ListaMaterias", listaMaterias);
 			request.getRequestDispatcher("ModificarCurso.jsp").forward(request, response);
 		}
-
+			//PARAMETRO PARA RECUPERAR CURSO
+		
+		if(request.getParameter("ParamRecuperar")!=null)
+		{
+			String IDRecupero = request.getParameter("ParamRecuperar");
+			int intRecupero = Integer.parseInt(IDRecupero); 
+			cDao.Recuperar(intRecupero);
+			request.setAttribute("SweetAlert", "Recuperado" );
+			List<Curso> listaCursos = (ArrayList<Curso>) cDao.readBajas();
+			request.setAttribute("ListaCursosRecuperar", listaCursos);
+			request.setAttribute("Mensaje", "Recuperado");
+			request.getRequestDispatcher("RecuperarCurso.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -318,7 +327,13 @@ public class ServeletCurso extends HttpServlet {
 			out.print(json);
 			out.flush();
 		}
-
+		if(request.getParameter("btnRecuperarCurso")!=null)
+		{
+			CursoDaoImpl cDao = new CursoDaoImpl();
+			List<Curso> listaCursos = (ArrayList<Curso>) cDao.readBajas();
+			request.setAttribute("ListaCursosRecuperar", listaCursos);				
+			request.getRequestDispatcher("RecuperarCurso.jsp").forward(request, response);
+		}
 	}
 
 }

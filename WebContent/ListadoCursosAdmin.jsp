@@ -27,6 +27,9 @@
 				<button type="submit" class="btn btn-block btn-outline-info"
 					id="btnAgregarCurso" name="btnAgregarCurso"
 					style="margin-bottom: 10px;">Agregar Curso</button>
+				<button type="submit" class="btn btn-block btn-outline-info"
+					id="btnRecuperarCurso" name="btnRecuperarCurso"
+					style="margin-bottom: 10px;">Recuperar Curso</button>
 			</form>
 			<form method="get" action="ServeletCurso">
 				<table id="example" class="table table-striped table-bordered"

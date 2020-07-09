@@ -28,6 +28,9 @@ public class CursoDaoImpl implements CursoDao {
 	private static final String readMenuAdmin = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo  inner join Materias m on m.IdMateria=c.IdMateria  where c.estado=1 and c.legajoDocente like ? and m.IdMateria like ? and Cuatrimestre like ? and Año like ? and Turno like ?";
 	private static final String deleteAlumnoXCurso = "update AlumnosPorCurso set estado = 0 where LegajoAlumnno= ? and idcurso= ? ;";
 	private static final String delete = "update cursos set estado=0 where idcurso= ? ";
+	private static final String readBajas = "Select IdCurso,m.IdMateria, m.Nombre as NombreMateria,Cuatrimestre,Año,Turno,d.Legajo,d.Nombre, d.Apellido,c.Estado from cursos c inner join Docentes d on c.LegajoDocente = d.Legajo inner join Materias m on m.IdMateria=c.IdMateria where c.estado=0 ";
+	private static final String Recuperar = "update cursos set estado = 1  where IdCurso= ? ;";
+
 	@Override
 	public boolean insert(Curso curso) {
 		PreparedStatement statement;
@@ -515,5 +518,47 @@ public class CursoDaoImpl implements CursoDao {
 			e.printStackTrace();
 		}
 		return isdeleteExitoso;
+	}
+	
+	public List<Curso> readBajas()
+	{
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		ArrayList<Curso> Cursos = new ArrayList<Curso>();
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(readBajas);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Cursos.add(GetCurso(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Cursos;
+	}
+	public boolean Recuperar(int idCurso) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isupdateExitoso = false;
+		try {
+			statement = conexion.prepareStatement(Recuperar);
+			statement.setInt(1,idCurso);
+
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				isupdateExitoso = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isupdateExitoso;
 	}
 }

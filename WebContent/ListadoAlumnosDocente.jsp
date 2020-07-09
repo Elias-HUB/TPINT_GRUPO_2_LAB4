@@ -26,8 +26,7 @@
 			<h2 class="fadeIn first"><%=curso.Materia.getNombre()%> - 
 			Cuatrimestre: <%=curso.getCuatrimestre()%> - 
 			Año: <%=curso.getAño()%> - 
-			Turno: <%=curso.getTurno()%> - 
-			Docente: <%=curso.docente.getNombre()%> <%=curso.docente.getApellido()%>
+			Turno: <%=curso.getTurno()%> 
 			</h2>
 			</div>
 			<%
