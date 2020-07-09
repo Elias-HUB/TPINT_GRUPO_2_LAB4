@@ -112,7 +112,7 @@
 			<table id="example"
 				class="table table-striped table-bordered fadeIn third"
 				style="width: 100%">
-				<thead class="thead-dark fadeIn third">
+				<thead class="fadeIn third">
 					<tr>
 
 						<!--TablaReporteAlumnosPorMateria -->

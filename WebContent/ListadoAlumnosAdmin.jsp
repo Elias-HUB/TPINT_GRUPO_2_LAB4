@@ -47,7 +47,7 @@ if(session.getAttribute("Legajo") == null) {
 				
 			<table id="example" class="table table-striped table-bordered"
 				style="width: 100%">
-				<thead>
+				<thead class="">
 					<tr>
 						<th style="text-align: center">Legajo</th>
 						<th style="text-align: center">Apellido</th>
