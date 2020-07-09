@@ -25,7 +25,7 @@
 			<h2>Alumnos Inscriptos</h2>
 			<h2 class="fadeIn first"><%=curso.Materia.getNombre()%> - 
 			Cuatrimestre: <%=curso.getCuatrimestre()%> - 
-			Año: <%=curso.getAño()%> - 
+			AÃ±o: <%=curso.getAÃ±o()%> - 
 			Turno: <%=curso.getTurno()%> - 
 			Docente: <%=curso.docente.getNombre()%> <%=curso.docente.getApellido()%>
 			</h2>

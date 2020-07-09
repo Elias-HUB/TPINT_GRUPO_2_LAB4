@@ -11,6 +11,22 @@
 <jsp:include page="LibreriasJtable.jsp"></jsp:include>
 
 <link rel="stylesheet" href="Css/JTable.css">
+<style>
+.btn-outline-info {
+	border-color: -webkit-linear-gradient(to bottom, #86fde8, #acb6e5);
+	background: #ffffff;
+	color: -webkit-linear-gradient(to bottom, #86fde8, #acb6e5);
+}
+
+.btn-outline-info:hover, .btn-outline-info:active, .btn-outline-info:visited,
+	.btn-outline-info:focus {
+	border-color: #acb6e5;
+	background: #acb6e5;
+	background: -webkit-linear-gradient(to bottom, #86fde8, #acb6e5);
+	background: linear-gradient(to bottom, #86fde8, #acb6e5);
+	color: white;
+}
+</style>
 </head>
 <body>
 	<form action="ServletNota" method="post">
